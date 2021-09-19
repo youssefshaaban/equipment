@@ -1,3 +1,4 @@
+import 'package:equipment/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
                       fontFamily: 'Lato',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginPage(),
     );
   }
 }
