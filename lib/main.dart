@@ -1,4 +1,8 @@
+import 'package:equipment/HexColor.dart';
+import 'package:equipment/pages/equipments_page.dart';
+import 'package:equipment/pages/equipments_page_list.dart';
 import 'package:equipment/pages/login_page.dart';
+import 'package:equipment/utils/CustomColor.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primarySwatch: MaterialColor(HexColor.fromHex("#25476a").value,getSwatch(HexColor.fromHex("#25476a"))),
           accentColor: Colors.amber,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
                       fontFamily: 'Lato',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
-      home: LoginPage(),
+      home: EquipmentPage(),
     );
   }
 }
