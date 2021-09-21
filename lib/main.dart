@@ -1,4 +1,4 @@
-import 'package:equipment/HexColor.dart';
+import 'package:equipment/utils/HexColor.dart';
 import 'package:equipment/pages/equipments_page.dart';
 import 'package:equipment/pages/equipments_page_list.dart';
 import 'package:equipment/pages/login_page.dart';

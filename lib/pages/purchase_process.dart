@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:equipment/pages/widgets/widgets.dart';
+import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
