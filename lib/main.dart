@@ -1,3 +1,4 @@
+import 'package:equipment/pages/covenint_details.dart';
 import 'package:equipment/pages/login_page.dart';
 import 'package:flutter/material.dart';
 

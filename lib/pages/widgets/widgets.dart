@@ -51,3 +51,43 @@ customSnackBar(BuildContext context, {String msg = ""}) {
 
   return ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
+
+Widget customCard(double height,double width){
+ return
+   Container(
+
+     width: width,
+     height: height,
+     child: Card(
+       elevation: 6,
+       shape: RoundedRectangleBorder(
+         borderRadius: BorderRadius.circular(15.0),
+       ),
+       borderOnForeground: true,
+       color: Colors.grey,
+     ),
+   );
+}
+
+Widget customCard1({double? height,double? width,Function()? onTap,
+Widget? widget,double? circular,Color? color,double? elevation,double? borderWidth}){
+  return
+    Container(
+
+      width: width ??50,
+      height: height ??50,
+      child: InkWell(
+        onTap:onTap ?? null,
+        child: Card(
+          elevation: elevation ?? 0,
+          shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.black, width: borderWidth?? 0),
+            borderRadius: BorderRadius.circular(circular??10),
+          ),
+          borderOnForeground: true,
+          color: color?? Colors.grey,
+          child:Center(child:widget) ?? null,
+        ),
+      ),
+    );
+}
