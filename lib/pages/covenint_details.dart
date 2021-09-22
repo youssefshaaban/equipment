@@ -1,5 +1,6 @@
 
-import 'package:equipment/pages/widgets/widgets.dart';
+
+import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CovenantDetails extends StatefulWidget {

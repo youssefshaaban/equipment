@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:equipment/pages/widgets/widgets.dart';
+import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
@@ -22,41 +22,68 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   TextEditingController dateController = TextEditingController();
   TextEditingController costController = TextEditingController();
   TextEditingController desctController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+  List<File> images=[];
+
   File? _image1;
-  File? _image2;
-  File? _image3;
   final imagePicker = ImagePicker();
 
-  Future showSheet(BuildContext context, String title) {
+  Future showSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
         return Container(
-          height: 150,
-          color: Colors.white,
+          height: 180,
+          color: Colors.grey,
           child: Center(
-              child: Row(
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.camera_alt,
-                  color: Colors.black,
-                  size: 70,
-                ),
-                onPressed: () {
-                  getCameraImage(title);
+              InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  getCameraImage();
                 },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        getCameraImage();
+                      },
+                    ),
+                    const SizedBox(width: 5,),
+                    Text('Pick With Camera',style: TextStyle(color: Colors.white),)
+                  ],
+                ),
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.photo,
-                  color: Colors.green,
-                  size: 70,
-                ),
-                onPressed: () {
-                  getGalleryImage(title);
+              const SizedBox(height:20),
+              InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  getGalleryImage();
                 },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.photo,
+                        color: Colors.white,
+                        size:40,
+                      ),
+                      onPressed: () {
+                        getGalleryImage();
+                      },
+                    ),
+                    Text('Pick from gallery',style:TextStyle(color:Colors.white))
+                  ],
+                ),
               ),
             ],
           )),
@@ -65,30 +92,23 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
     );
   }
 
-  Future getCameraImage(String title) async {
+  Future getCameraImage() async {
     final image = await imagePicker.pickImage(source: ImageSource.camera);
+    _image1 = File(image!.path);
     setState(() {
-      if (title == 'photo1') {
-        _image1 = File(image!.path);
-      } else if (title == 'photo2') {
-        _image2 = File(image!.path);
-      } else if (title == 'photo3') {
-        _image3 = File(image!.path);
-      }
+      images.add(_image1!);
     });
+    print(images.length);
+
   }
 
-  Future getGalleryImage(String title) async {
+  Future getGalleryImage() async {
     final image = await imagePicker.pickImage(source: ImageSource.gallery);
+    _image1 = File(image!.path);
     setState(() {
-      if (title == 'photo1') {
-        _image1 = File(image!.path);
-      } else if (title == 'photo2') {
-        _image2 = File(image!.path);
-      } else if (title == 'photo3') {
-        _image3 = File(image!.path);
-      }
+      images.add(_image1!);
     });
+    print(images.length);
   }
 
   @override
@@ -98,21 +118,101 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
     return Scaffold(
       appBar: AppBar(
         title: Text('add a purchase process'),
+        actions: [
+          TextButton(onPressed: (){
+            bool valid=isDataValid();
+            if(valid){
+              _saveData();
+            }
+          }, child: Text('Save',style: TextStyle(color: Colors.white),))
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(20),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  createText(
-                    "Add a purchase process",
-                    20,
+                  customEditText(
+                    height: 50,
+                    width: deviceWidth ,
+                    keyboardType: TextInputType.number,
+                    hint: 'Cost',
+                    label: 'Cost',
+                    circular: 5,
+                    controller: costController,
                   ),
                   const SizedBox(height: 20),
-                  Row(children: <Widget>[
-                    createText('Process Number:', 15),
+                  customEditText(
+                      height: 140,
+                      width: deviceWidth ,
+                      hint: 'Description',
+                      //label: 'Description',
+                      circular: 5,
+                      controller: desctController,
+                      maxLines: 60),
+                  const SizedBox(height: 20),
+                  customEditText(
+                      height: 50,
+                      width: deviceWidth,
+                      keyboardType: TextInputType.number,
+                      circular: 5,
+                      hint: 'Amount',
+                      label: 'Amount',
+                      controller: amountController,
+                      maxLines: 60),
+                  const SizedBox(height: 20,),
+                  if(images.isNotEmpty)
+                    ElevatedButton(onPressed: (){
+                      showSheet(context);
+                    }, child: Text('Add photo',style: TextStyle(color: Colors.white),)),
+
+                  const SizedBox(height: 20,),
+                  images.isEmpty?
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey,
+                      ),
+                      height: 250,
+                      width: MediaQuery.of(context).size.width*.8,
+                      child: Icon(Icons.camera_alt,size:60,color: Colors.black,),
+                    ),
+
+                    onTap: ()=> showSheet(context),
+                  ):
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height:200,
+                    child:
+                    ListView.builder(
+                    scrollDirection: Axis.horizontal,itemCount: images.length,itemBuilder: (context,index){
+                     return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              Container(
+                              height: 200,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Card(child: Image.file(images[index],fit: BoxFit.cover,)),
+                            ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: IconButton(onPressed: ()=>_deletePhoto(index),
+                                    icon: Icon(Icons.delete,size: 30,color:Colors.red)),
+                              )
+                            ],
+                          ),
+
+                      );
+                    }),
+                  )
+                  /* Row(children: <Widget>[
                     const SizedBox(width: 5),
                     customEditText(
                         height: 50,
@@ -139,41 +239,20 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                       color: Colors.black,
                       size: 25,
                     )
-                  ]),
-                  const SizedBox(height: 20),
-                  Row(children: <Widget>[
-                    createText('Cost:', 15),
-                    const SizedBox(width: 77),
-                    customEditText(
-                      height: 50,
-                      width: deviceWidth * .3,
-                      keyboardType: TextInputType.number,
-                      hint: 'Cost',
-                      controller: costController,
-                    ),
-                  ]),
-                  const SizedBox(height: 21),
-                  Row(children: <Widget>[
-                    createText('Description:', 15),
-                    const SizedBox(width: 32),
-                    customEditText(
-                        height: 120,
-                        width: deviceWidth * .5,
-                        hint: 'Description',
-                        controller: desctController,
-                        maxLines: 60),
-                  ]),
-                  const SizedBox(height: 20),
-                  Icon(Icons.camera_alt, color: Colors.black, size: 80),
-                  const SizedBox(height: 20),
-                  Row(
+                  ]),*/
+
+
+
+
+
+               /*   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Column(
                           children: [
                             InkWell(
                                 onTap: () {
-                                  showSheet(context, 'photo1');
+                                  showSheet(context);
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
@@ -200,7 +279,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                           children: [
                             InkWell(
                                 onTap: () {
-                                  showSheet(context, 'photo2');
+                                  showSheet(context);
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
@@ -247,23 +326,10 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                             createText('pill photo 3', 10)
                           ],
                         ),
-                      ])
+                      ])*/
                 ]),
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 30,
-        ),
-        backgroundColor: Colors.black,
-        onPressed: () {
-          bool valid = isDataValid();
-          if (valid) _saveData();
-        },
       ),
     );
   }
@@ -285,5 +351,11 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
 
   void _saveData() {
     customSnackBar(context, msg: "Data Saved successfully");
+  }
+
+  _deletePhoto(int index) {
+    setState(() {
+      images.removeAt(index);
+    });
   }
 }

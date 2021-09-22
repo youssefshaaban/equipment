@@ -5,7 +5,7 @@ Widget createText(String title,double size){
   return Text(title,style:TextStyle(fontSize:size,color:Colors.black,fontWeight: FontWeight.bold));
 }
 
-Widget customEditText({String? hint , TextEditingController? controller ,
+Widget customEditText({double? circular,String? label,String? hint , TextEditingController? controller ,
   bool? isTextArea ,double? height  ,bool? isEnabled , TextInputType? keyboardType,int? maxLines,double? width} ){
   return  Container(
     height:height,
@@ -14,12 +14,13 @@ Widget customEditText({String? hint , TextEditingController? controller ,
       keyboardType: keyboardType ?? TextInputType.multiline,
       controller: controller,
       enabled: isEnabled ?? true,
-
+      textAlign:TextAlign.start,
       decoration: InputDecoration(
         hintText: hint,
+        labelText: label,
         hintStyle: TextStyle(fontSize: 14,),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(circular??0),
         ),
       ),
       maxLines:maxLines?? 5,
@@ -86,7 +87,7 @@ Widget? widget,double? circular,Color? color,double? elevation,double? borderWid
           ),
           borderOnForeground: true,
           color: color?? Colors.grey,
-          child:Center(child:widget) ?? null,
+          child:Center(child:widget ?? null),
         ),
       ),
     );
