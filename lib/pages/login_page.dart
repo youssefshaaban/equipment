@@ -13,7 +13,7 @@ class _LoginState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sample App'),
+        title: Text('Driver'),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),

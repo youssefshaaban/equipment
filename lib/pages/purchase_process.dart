@@ -105,12 +105,8 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
             padding: const EdgeInsets.all(15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  createText(
-                    "Add a purchase process",
-                    20,
-                  ),
-                  const SizedBox(height: 20),
                   Row(children: <Widget>[
                     createText('Process Number:', 15),
                     const SizedBox(width: 5),
@@ -120,26 +116,31 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                         keyboardType: TextInputType.number,
                         hint: 'process number',
                         controller: processNumberController,
-                        isEnabled: false)
+                        isEnabled: true)
                   ]),
                   const SizedBox(height: 20),
-                  Row(children: <Widget>[
+                  Row(
+                      children: <Widget>[
                     createText('Date:', 15),
                     const SizedBox(width: 77),
-                    customEditText(
-                        height: 50,
-                        width: deviceWidth * .3,
-                        keyboardType: TextInputType.datetime,
-                        hint: 'Date',
-                        controller: dateController,
-                        isEnabled: false),
+                    Expanded(
+                      child: customEditText(
+                          height: 50,
+                          width: deviceWidth * .3,
+                          keyboardType: TextInputType.datetime,
+                          hint: 'Date',
+                          controller: dateController,
+                          isEnabled: false),
+                    ),
                     const SizedBox(width: 5),
                     Icon(
                       Icons.date_range,
                       color: Colors.black,
                       size: 25,
                     )
-                  ]),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  ),
                   const SizedBox(height: 20),
                   Row(children: <Widget>[
                     createText('Cost:', 15),
@@ -251,19 +252,6 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                 ]),
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 30,
-        ),
-        backgroundColor: Colors.black,
-        onPressed: () {
-          bool valid = isDataValid();
-          if (valid) _saveData();
-        },
       ),
     );
   }
