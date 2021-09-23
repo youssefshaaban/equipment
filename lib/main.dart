@@ -1,3 +1,4 @@
+import 'package:equipment/pages/covenint_details.dart';
 import 'package:equipment/pages/purchase_process.dart';
 import 'package:equipment/utils/HexColor.dart';
 import 'package:equipment/pages/equipments_page.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
                       fontFamily: 'Lato',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
-      home: PurchaseProcess(),
+      home: LoginPage(),
     );
   }
 }

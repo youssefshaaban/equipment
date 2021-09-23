@@ -7,26 +7,22 @@ Widget createText(String title,double size){
 
 Widget customEditText({double? circular,String? label,String? hint , TextEditingController? controller ,
   bool? isTextArea ,double? height  ,bool? isEnabled , TextInputType? keyboardType,int? maxLines,double? width} ){
-  return  Container(
-    height:height,
-    width: width,
-    child: TextFormField(
-      keyboardType: keyboardType ?? TextInputType.multiline,
-      controller: controller,
-      enabled: isEnabled ?? true,
-      textAlign:TextAlign.start,
-      decoration: InputDecoration(
-        hintText: hint,
-        labelText: label,
-        hintStyle: TextStyle(fontSize: 14,),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(circular??0),
+    return TextField(
+        keyboardType: keyboardType ?? TextInputType.multiline,
+        controller: controller,
+        enabled: isEnabled ?? true,
+        decoration: InputDecoration(
+          hintText: hint,
+          labelText: label,
+          hintStyle: TextStyle(fontSize: 14,),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(circular??0),
+          ),
         ),
-      ),
-      maxLines:maxLines?? 5,
-    ),
-  );
+        maxLines:maxLines?? 5,
+    );
 }
+
 
 
 customSnackBar(BuildContext context, {String msg = ""}) {
@@ -91,4 +87,23 @@ Widget? widget,double? circular,Color? color,double? elevation,double? borderWid
         ),
       ),
     );
+}
+
+Widget customEditText1({String? hint , TextEditingController? controller , bool? isTextArea , bool? isEnabled , TextInputType? keyboardType} ) {
+  return Container(
+    height: isTextArea != null ? 120 : 50,
+    child: TextFormField(
+      keyboardType: keyboardType ?? TextInputType.multiline,
+      controller: controller,
+      enabled: isEnabled ?? true,
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(fontSize: 14),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      maxLines: isTextArea != null ? 20 : 1,
+    ),
+  );
 }
