@@ -34,7 +34,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
       builder: (context) {
         return Container(
           height: 180,
-          color: Colors.grey,
+          color: Colors.white,
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
