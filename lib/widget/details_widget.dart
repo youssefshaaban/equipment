@@ -7,7 +7,9 @@ class DetailsWidget extends StatelessWidget {
 
   final Details details;
 
-  const DetailsWidget({Key? key,required this.details}) : super(key: key);
+  DetailsWidget({Key? key,required this.details}) : super(key: key);
+  
+  final List<NetworkImage> networkImage=[];
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +75,28 @@ class DetailsWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height:10),
+                if(networkImage.isEmpty)
+                    Container(
+                      height:100,
+                      width:100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color:Colors.grey
+                      ),
+                      child: Image(image: AssetImage('assets/images/bg_no_image.png'),fit: BoxFit.cover,),
+                    )/*:
+                ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                    itemCount: networkImage.length,
+                    itemBuilder: (context,index){
+                  return Container(
+                    height: 100,
+                    width: 100,
+                    child: FadeInImage(placeholder: AssetImage(assetName), image: NetworkImage(networkImage[index]));,
+                  );
+                })*/
+                
               ],
             ),
           ],

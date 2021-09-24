@@ -4,8 +4,7 @@ import 'package:equipment/widget/details_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustodyDetails extends StatelessWidget {
-
-
+  static const routeName='/custodyDetailsRouteName';
 
   final List<Details> detailsList1 = detailsList;
 

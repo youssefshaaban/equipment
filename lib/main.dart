@@ -1,11 +1,11 @@
-import 'package:equipment/pages/covenint_details.dart';
-import 'package:equipment/pages/purchase_process.dart';
-import 'package:equipment/utils/HexColor.dart';
-import 'package:equipment/pages/equipments_page.dart';
-import 'package:equipment/pages/equipments_page_list.dart';
+
+import 'package:equipment/model/tabs_screen.dart';
+import 'package:equipment/pages/custody_details.dart';
 import 'package:equipment/pages/login_page.dart';
+import 'package:equipment/utils/HexColor.dart';
 import 'package:equipment/utils/CustomColor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,7 +39,29 @@ class MyApp extends StatelessWidget {
                       fontFamily: 'Lato',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
+      supportedLocales: [
+        Locale('en','US'),
+        Locale('ar','AR'),
+      ],
+      localizationsDelegates: [
+       // AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale,supportedLocales){
+        for(var supportedLocale in supportedLocales){
+          if(supportedLocale.languageCode==locale!.languageCode &&
+              supportedLocale.countryCode==locale.countryCode){
+            return supportedLocale;
+          }
+          return supportedLocales.first;
+        }
+    },
       home: LoginPage(),
+      routes: {
+        TabsScreen.routeName:(_)=> TabsScreen(),
+        CustodyDetails.routeName:(_)=>CustodyDetails(),
+      },
     );
   }
 }
