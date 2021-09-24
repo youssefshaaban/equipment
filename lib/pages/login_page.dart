@@ -1,3 +1,4 @@
+import 'package:equipment/model/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -59,11 +60,16 @@ class _LoginState extends State<LoginPage> {
                   onPressed: () {
                     print(nameController.text);
                     print(passwordController.text);
+                    _loginProcess();
                   },
                 ))
           ],
         ),
       ),
     );
+  }
+
+  void _loginProcess() {
+    Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
   }
 }

@@ -114,6 +114,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   @override
   Widget build(BuildContext context) {
     var deviceWidth = MediaQuery.of(context).size.width;
+    var deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -134,34 +135,31 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  customEditText(
-                    height: 50,
-                    width: deviceWidth ,
+
+                  customEditText1(
                     keyboardType: TextInputType.number,
+                    //hint: 'Cost',
                     hint: 'Cost',
-                    label: 'Cost',
-                    circular: 5,
                     controller: costController,
                   ),
                   const SizedBox(height: 20),
-                  customEditText(
-                      height: 140,
-                      width: deviceWidth ,
-                      hint: 'Description',
-                      //label: 'Description',
-                      circular: 5,
-                      controller: desctController,
-                      maxLines: 60),
+                  Container(
+                    height: 140,
+                    child: customEditText1(
+                        //hint: 'Description',
+                      isTextArea:true,
+                        hint: 'Description',
+                        controller: desctController,
+                        ),
+                  ),
                   const SizedBox(height: 20),
-                  customEditText(
-                      height: 50,
-                      width: deviceWidth,
+                  customEditText1
+                    (
                       keyboardType: TextInputType.number,
-                      circular: 5,
+                      //hint: 'Amount',
                       hint: 'Amount',
-                      label: 'Amount',
                       controller: amountController,
-                      maxLines: 60),
+                  ),
                   const SizedBox(height: 20,),
                   if(images.isNotEmpty)
                     ElevatedButton(onPressed: (){
