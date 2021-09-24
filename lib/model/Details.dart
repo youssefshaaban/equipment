@@ -7,10 +7,7 @@ class Details{
   DateTime? date;
   double? cost;
   String? description;
-
   Details({this.custodyNumber,this.date,this.cost, this.description});
-
-
 }
 
 final List<Details> detailsList=

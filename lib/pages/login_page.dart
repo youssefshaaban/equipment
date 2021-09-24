@@ -1,4 +1,4 @@
-import 'package:equipment/model/tabs_screen.dart';
+import 'package:equipment/widget/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,13 +20,24 @@ class _LoginState extends State<LoginPage> {
         padding: EdgeInsets.all(20),
         child: ListView(
           children: [
+            Container(
+              height: 150.0,
+              width: 190.0,
+              padding: EdgeInsets.only(top: 40),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(200),
+              ),
+              child: Center(
+                child: Image.asset('assets/images/logo.jpg'),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.all(10),
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'User Name',
-                    hintText: 'Enter valid mail id as abc@gmail.com'),
+                    hintText: 'Enter userName'),
               ),
             ),
             Padding(
@@ -36,7 +47,7 @@ class _LoginState extends State<LoginPage> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
-                    hintText: 'Enter your secure password'),
+                    hintText: 'Enter password'),
               ),
             ),
             Container(
