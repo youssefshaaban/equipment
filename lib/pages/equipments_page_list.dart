@@ -1,5 +1,5 @@
 import 'package:equipment/model/Equipment.dart';
-import 'package:equipment/widget/item_equipment.dart';
+import 'package:equipment/widget/item_custody.dart';
 import 'package:flutter/material.dart';
 
 class EquipmentPageList extends StatelessWidget {
@@ -11,7 +11,7 @@ class EquipmentPageList extends StatelessWidget {
       padding: EdgeInsets.all(10),
         child: ListView.builder(
           itemBuilder: (ctx, index) {
-            return ItemEquipment(
+            return ItemCustody(
               equipment: list[index],
             );
           },

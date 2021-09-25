@@ -14,8 +14,11 @@ class EquipmentPage extends StatelessWidget {
             Container(
               constraints: BoxConstraints(maxHeight: 150),
               child: Material(
-                color: Theme.of(context).primaryColor,
-                child: TabBar(tabs: [
+                color: Theme.of(context).colorScheme.primary,
+                child: TabBar(
+                    indicatorColor: Theme.of(context).colorScheme.secondary,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    tabs: [
                   Tab(
                     text: "Opened",
                   ),

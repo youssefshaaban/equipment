@@ -12,7 +12,7 @@ enum ImageSourceType { gallery, camera }
 class PurchaseProcess extends StatefulWidget {
   const PurchaseProcess({Key? key}) : super(key: key);
   static const tag = '/ppt';
-
+  static const routeName = '/addNewPurchaseProcess';
   @override
   _PurchaseProcessState createState() => _PurchaseProcessState();
 }
@@ -34,7 +34,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
       builder: (context) {
         return Container(
           height: 180,
-          color: Colors.white,
+          color: Colors.grey,
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

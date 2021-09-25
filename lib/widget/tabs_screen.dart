@@ -20,7 +20,7 @@ class _TabsScreenState extends State<TabsScreen> {
     [
       {
         'page': EquipmentPage(),
-        'title': 'Home',
+        'title': 'Custody',
       },
       {
         'page': ProfilePage(),
@@ -48,11 +48,11 @@ class _TabsScreenState extends State<TabsScreen> {
           body: pages[_selectedItem]['page'],
           bottomNavigationBar:BottomNavigationBar(
             onTap: _selectedWidget,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             selectedFontSize: 20,
             unselectedFontSize: 15,
             unselectedItemColor: Colors.white,
-            selectedItemColor: Theme.of(context).accentColor,
+            selectedItemColor: Theme.of(context).colorScheme.secondary,
             currentIndex: _selectedItem,
             items:[
               BottomNavigationBarItem(

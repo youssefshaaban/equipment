@@ -2,10 +2,10 @@ import 'package:equipment/model/Equipment.dart';
 import 'package:equipment/pages/custody_details.dart';
 import 'package:flutter/material.dart';
 
-class ItemEquipment extends StatelessWidget {
+class ItemCustody extends StatelessWidget {
   final Equipment equipment;
 
-  ItemEquipment({required this.equipment});
+  ItemCustody({required this.equipment});
 
   @override
   Widget build(BuildContext context) {
