@@ -8,7 +8,7 @@ class EquipmentPage extends StatelessWidget {
       length: 4,
       child: Scaffold(
           body: DefaultTabController(
-        length: 4,
+        length: 6,
         child: Column(
           children: [
             Container(
@@ -18,25 +18,34 @@ class EquipmentPage extends StatelessWidget {
                 child: TabBar(
                     indicatorColor: Theme.of(context).colorScheme.secondary,
                     indicatorSize: TabBarIndicatorSize.tab,
+                    isScrollable: true,
                     tabs: [
-                  Tab(
-                    text: "Opened",
-                  ),
-                  Tab(
-                    text: "Closed",
-                  ),
-                  Tab(
-                    text: "Deleted",
-                  ),
-                  Tab(
-                    text: "Finished",
-                  )
-                ]),
+                      Tab(
+                        text: "New",
+                      ),
+                      Tab(
+                        text: "Opened",
+                      ),
+                      Tab(
+                        text: "Closed",
+                      ),
+                      Tab(
+                        text: "Deleted",
+                      ),
+                      Tab(
+                        text: "Finished",
+                      ),
+                      Tab(
+                        text: "Rejected",
+                      )
+                    ]),
               ),
             ),
             Expanded(
                 child: TabBarView(
               children: [
+                EquipmentPageList(),
+                EquipmentPageList(),
                 EquipmentPageList(),
                 EquipmentPageList(),
                 EquipmentPageList(),
