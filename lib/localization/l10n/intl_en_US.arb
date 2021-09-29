@@ -1,0 +1,51 @@
+{
+  "@@locale": "en_US",
+  "loginPageAppBarTitle": "Driver",
+  "loginPageUserNameHint": "UserName",
+  "loginPagePasswordHint": "Password",
+  "loginPageButton": "Login",
+  "firstTabAppBarTitle":"custody",
+  "firstTabTitle":"Home",
+  "secondTabAppBarTitle":"profile",
+  "secondTabTitle":"Profile",
+  "equipmentPageNew":"New",
+  "equipmentPageOpened":"Opened",
+  "equipmentPageClosed":"Closed",
+  "equipmentPageDeleted":"Deleted",
+  "equipmentPageFinished":"Finished",
+  "equipmentPageRejected":"Rejected",
+  "itemCustodyPageReferenceNum":"Reference Num:"
+  "itemCustodyPageTotal":"Total:"
+  "itemCustodyPageSpent":"Spent:"
+  "equipmentPageId":"dsds"
+  "equipmentPageDate":"122/22/222"
+  "equipmentPageRemainAmount":"555"
+  "equipmentPageTotalAmount":"2222"
+  "purchaseProcessAppBarTitle":"add a purchase process",
+  "purchaseProcessSave":"Save",
+  "purchaseProcessCostHint":"Cost",
+  "purchaseProcessDescriptionHint":"Description",
+  "purchaseProcessAmountHint":"Amount",
+  "purchaseProcessAddPhotoButton":"Add photo",
+  "purchaseProcessCustomSnackBarMessage":"All fields are required",
+  "purchaseProcessCustomSnackBarMessageS":"Data Saved successfully",
+  "purchaseProcessPickWithCamera":"Camera",
+  "purchaseProcessPickFromGallery":"Gallery",
+  "custodyDetailsAppBarTitle":"Custody detail",
+  "custodyDetailsAddButton":"Add",
+  "custodyDetailsRaisingButton":"Raising to accounts",
+  "custodyDetailsCloseButton":"Close",
+  "custodyDetailsCustodyNumber":"Custody Number",
+  "custodyDetailsValue1":"Value",
+  "custodyDetailsDate":"Date",
+  "custodyDetailsValue2":"Value",
+  "custodyDetailsCost":"Cost",
+  "custodyDetailsValue3":"Value",
+  "custodyDetailsRemainAmount":"Remain Amount",
+  "custodyDetailsValue4":"Value",
+  "custodyDetailsCustodyNumber1":"Custody Number",
+  "custodyDetailsValue5":"Value",
+  "itemPurchaseCustodyNumber":"Custody Number",
+  "itemPurchaseDescription":"Description",
+  "itemPurchaseCost":"Cost",
+}
