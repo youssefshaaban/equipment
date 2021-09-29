@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Equipment{
   String? id;
   String? date;
@@ -9,7 +11,7 @@ class Equipment{
 
 List<Equipment> getData(){
   final List<Equipment> list=[
-     Equipment(id: "dsds",date: "122/22/222",remianAmount:"555",totalAmount:"2222"),
+    Equipment(id: "dsds",date: "122/22/222",remianAmount:"555",totalAmount:"2222"),
     Equipment(id: "dsds",date: "122/22/222",remianAmount:"555",totalAmount:"2222"),
     Equipment(id: "dsds",date: "122/22/222",remianAmount:"555",totalAmount:"2222"),
     Equipment(id: "dsds",date: "122/22/222",remianAmount:"555",totalAmount:"2222"),

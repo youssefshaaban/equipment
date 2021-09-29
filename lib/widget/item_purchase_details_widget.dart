@@ -1,3 +1,4 @@
+import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Details.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Custody number : ",
+                  S.of(context)!.itemPurchaseCustodyNumber,
                   style: Theme
                       .of(context)
                       .textTheme
@@ -46,7 +47,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Description:",
+                  S.of(context)!.itemPurchaseDescription,
                   style: Theme
                       .of(context)
                       .textTheme
@@ -67,7 +68,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Cost:",
+                  S.of(context)!.itemPurchaseCost,
                   style: Theme
                       .of(context)
                       .textTheme

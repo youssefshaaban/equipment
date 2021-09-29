@@ -1,3 +1,4 @@
+import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Equipment.dart';
 import 'package:equipment/pages/custody_details.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class ItemCustody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Reference Num:",
+                    S.of(context)!.itemCustodyPageReferenceNum,
                     style: TextStyle(color:Colors.blueGrey),
                   ),
                   Expanded(
@@ -50,7 +51,7 @@ class ItemCustody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Total:",
+                    S.of(context)!.itemCustodyPageTotal,
                     style: TextStyle(color:Colors.blueGrey),
                   ),
                   Expanded(
@@ -60,7 +61,7 @@ class ItemCustody extends StatelessWidget {
                       equipment.totalAmount!,
                     ),
                   )),
-                  Text("Spent:", style: TextStyle(color:Colors.blueGrey)),
+                  Text(S.of(context)!.itemCustodyPageSpent, style: TextStyle(color:Colors.blueGrey)),
                   Expanded(
                       child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),

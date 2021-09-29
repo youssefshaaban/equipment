@@ -1,7 +1,12 @@
 
+import 'package:equipment/localization/generated/l10n.dart';
+import 'package:equipment/localization/language_constants.dart';
+import 'package:equipment/localization/languages.dart';
 import 'package:equipment/pages/equipments_page.dart';
 import 'package:equipment/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 class TabsScreen extends StatefulWidget {
   static  String routeName='/tabsScreenRouteName';
   const TabsScreen({Key? key}) : super(key: key);
@@ -11,6 +16,14 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+  }
+
+
+
   List<Map<String, dynamic>> pages=[] ;
   int _selectedItem = 0;
 
@@ -20,11 +33,11 @@ class _TabsScreenState extends State<TabsScreen> {
     [
       {
         'page': EquipmentPage(),
-        'title': 'Custody',
+        'title':"Home" // S.of(context)!.firstTabAppBarTitle,
       },
       {
         'page': ProfilePage(),
-        'title': 'Profile',
+        'title': "Profile" //S.of(context)!.secondTabAppBarTitle,
       }
     ];
 
@@ -43,8 +56,38 @@ class _TabsScreenState extends State<TabsScreen> {
       length: 2,
         child: Scaffold(
         appBar: AppBar(
-        title: Text(pages[_selectedItem]['title']
-        ),),
+        title: Text(pages[_selectedItem]['title'],),
+            actions:<Widget>[
+              Padding(padding: const EdgeInsets.all(10),
+                child: DropdownButton<Language>(
+                  icon: Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  ),
+                  onChanged: (Language? language) {
+                    _changeLanguage(language!);
+                  },
+                  items: Language.languageList()
+                      .map<DropdownMenuItem<Language>>(
+                        (e) => DropdownMenuItem<Language>(
+                      value: e,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            e.flag,
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          Text(e.name)
+                        ],
+                      ),
+                    ),
+                  )
+                      .toList(),
+                ),
+              )
+            ]
+        ),
           body: pages[_selectedItem]['page'],
           bottomNavigationBar:BottomNavigationBar(
             onTap: _selectedWidget,
@@ -58,16 +101,16 @@ class _TabsScreenState extends State<TabsScreen> {
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  size: 20,
+                  size: 25,
                 ),
-                label: 'Home',
+                label: S.of(context)!.firstTabTitle,
               ),
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
-                  size: 20,
+                  size: 25,
                 ),
-                label: 'Profile',
+                label: S.of(context)!.secondTabTitle,
               ),
             ]
           )

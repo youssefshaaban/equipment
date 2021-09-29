@@ -1,3 +1,4 @@
+import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/pages/equipments_page_list.dart';
 import 'package:flutter/material.dart';
 
@@ -21,22 +22,22 @@ class EquipmentPage extends StatelessWidget {
                     isScrollable: true,
                     tabs: [
                       Tab(
-                        text: "New",
+                        text: S.of(context)!.equipmentPageNew,
                       ),
                       Tab(
-                        text: "Opened",
+                        text: S.of(context)!.equipmentPageOpened,
                       ),
                       Tab(
-                        text: "Closed",
+                        text: S.of(context)!.equipmentPageClosed,
                       ),
                       Tab(
-                        text: "Deleted",
+                        text: S.of(context)!.equipmentPageDeleted,
                       ),
                       Tab(
-                        text: "Finished",
+                        text: S.of(context)!.equipmentPageFinished,
                       ),
                       Tab(
-                        text: "Rejected",
+                        text: S.of(context)!.equipmentPageRejected,
                       )
                     ]),
               ),

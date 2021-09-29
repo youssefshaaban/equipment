@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,8 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                       },
                     ),
                     const SizedBox(width: 5,),
-                    Text('Pick With Camera',style: TextStyle(color: Colors.white),)
+                    Text(S.of(context)!.purchaseProcessPickWithCamera,
+                      style: TextStyle(color: Colors.white),)
                   ],
                 ),
               ),
@@ -81,7 +83,8 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                         getGalleryImage();
                       },
                     ),
-                    Text('Pick from gallery',style:TextStyle(color:Colors.white))
+                    Text(S.of(context)!.purchaseProcessPickFromGallery,
+                        style:TextStyle(color:Colors.white))
                   ],
                 ),
               ),
@@ -113,19 +116,20 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
 
   @override
   Widget build(BuildContext context) {
-    var deviceWidth = MediaQuery.of(context).size.width;
-    var deviceHeight = MediaQuery.of(context).size.height;
+
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('add a purchase process'),
+        title: Text(S.of(context)!.purchaseProcessAppBarTitle),
         actions: [
           TextButton(onPressed: (){
             bool valid=isDataValid();
             if(valid){
               _saveData();
             }
-          }, child: Text('Save',style: TextStyle(color: Colors.white),))
+          },
+          child: Text(S.of(context)!.purchaseProcessSave,
+            style: TextStyle(color: Colors.white),))
         ],
       ),
       body: SafeArea(
@@ -139,7 +143,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                   customEditText1(
                     keyboardType: TextInputType.number,
                     //hint: 'Cost',
-                    hint: 'Cost',
+                    hint: S.of(context)!.purchaseProcessCostHint,
                     controller: costController,
                   ),
                   const SizedBox(height: 20),
@@ -148,7 +152,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                     child: customEditText1(
                         //hint: 'Description',
                       isTextArea:true,
-                        hint: 'Description',
+                        hint: S.of(context)!.purchaseProcessDescriptionHint,
                         controller: desctController,
                         ),
                   ),
@@ -157,14 +161,15 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
                     (
                       keyboardType: TextInputType.number,
                       //hint: 'Amount',
-                      hint: 'Amount',
+                      hint: S.of(context)!.purchaseProcessAmountHint,
                       controller: amountController,
                   ),
                   const SizedBox(height: 20,),
                   if(images.isNotEmpty)
                     ElevatedButton(onPressed: (){
                       showSheet(context);
-                    }, child: Text('Add photo',style: TextStyle(color: Colors.white),)),
+                    }, child: Text(S.of(context)!.purchaseProcessAddPhotoButton,
+                      style: TextStyle(color: Colors.white),)),
 
                   const SizedBox(height: 20,),
                   images.isEmpty?
@@ -224,7 +229,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
         dateController.text.isEmpty ||
         costController.text.isEmpty ||
         desctController.text.isEmpty) {
-      customSnackBar(context, msg: "All fields are required");
+      customSnackBar(context, msg: S.of(context)!.purchaseProcessCustomSnackBarMessage);
       valid = false;
     } else {
       //customSnackBar(context, msg: "All fields are required");
@@ -234,7 +239,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   }
 
   void _saveData() {
-    customSnackBar(context, msg: "Data Saved successfully");
+    customSnackBar(context, msg:S.of(context)!.purchaseProcessCustomSnackBarMessageS);
   }
 
   _deletePhoto(int index) {

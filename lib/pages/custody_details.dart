@@ -1,3 +1,4 @@
+import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Details.dart';
 import 'package:equipment/pages/purchase_process.dart';
 import 'package:equipment/widget/item_purchase_details_widget.dart';
@@ -12,7 +13,7 @@ class CustodyDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Custody detail'),
+          title: Text(S.of(context)!.custodyDetailsAppBarTitle),
         ),
         body: Stack(
           children: [
@@ -50,7 +51,7 @@ class CustodyDetails extends StatelessWidget {
                       child: ElevatedButton.icon(
                         icon: Icon(Icons.add, size: 20, color: Colors.white),
                         label: Text(
-                          'Add',
+                          S.of(context)!.custodyDetailsAddButton,
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () {
@@ -64,7 +65,7 @@ class CustodyDetails extends StatelessWidget {
                     child: ElevatedButton.icon(
                       icon: Icon(Icons.add, size: 20, color: Colors.white),
                       label: Text(
-                        'Raising to accounts',
+                        S.of(context)!.custodyDetailsRaisingButton,
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {},
@@ -77,7 +78,7 @@ class CustodyDetails extends StatelessWidget {
                         onPressed: () {},
                         icon: Icon(Icons.close, size: 20, color: Colors.white),
                         label: Text(
-                          'Close',
+                          S.of(context)!.custodyDetailsCloseButton,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -104,13 +105,13 @@ class CustodyDetails extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Custody number :',
+                  S.of(context)!.custodyDetailsCustodyNumber,
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 const SizedBox(
                   width: 5,
                 ),
-                Text('value',
+                Text(S.of(context)!.custodyDetailsValue1,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -122,7 +123,7 @@ class CustodyDetails extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Date:',
+                Text(S.of(context)!.custodyDetailsDate,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -130,7 +131,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text('value',
+                Text(S.of(context)!.custodyDetailsValue2,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -142,7 +143,7 @@ class CustodyDetails extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Cost:',
+                Text(S.of(context)!.custodyDetailsCost,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -150,7 +151,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text('value',
+                Text(S.of(context)!.custodyDetailsValue3,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -162,7 +163,7 @@ class CustodyDetails extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Remain amount:',
+                Text(S.of(context)!.custodyDetailsRemainAmount,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -170,7 +171,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text('value',
+                Text(S.of(context)!.custodyDetailsValue4,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -182,7 +183,7 @@ class CustodyDetails extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Custody number:',
+                Text(S.of(context)!.custodyDetailsCustodyNumber1,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -190,7 +191,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text('value',
+                Text(S.of(context)!.custodyDetailsValue5,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,

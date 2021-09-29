@@ -3,6 +3,7 @@ import 'package:equipment/widget/item_custody.dart';
 import 'package:flutter/material.dart';
 
 class EquipmentPageList extends StatelessWidget {
+
   final List<Equipment> list = getData();
 
   @override
