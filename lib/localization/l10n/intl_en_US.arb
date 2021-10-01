@@ -14,13 +14,13 @@
   "equipmentPageDeleted":"Deleted",
   "equipmentPageFinished":"Finished",
   "equipmentPageRejected":"Rejected",
-  "itemCustodyPageReferenceNum":"Reference Num:"
-  "itemCustodyPageTotal":"Total:"
-  "itemCustodyPageSpent":"Spent:"
-  "equipmentPageId":"dsds"
-  "equipmentPageDate":"122/22/222"
-  "equipmentPageRemainAmount":"555"
-  "equipmentPageTotalAmount":"2222"
+  "itemCustodyPageReferenceNum":"Reference Num:",
+  "itemCustodyPageTotal":"Total:",
+  "itemCustodyPageSpent":"Spent:",
+  "equipmentPageId":"dsds",
+  "equipmentPageDate":"122/22/222",
+  "equipmentPageRemainAmount":"555",
+  "equipmentPageTotalAmount":"2222",
   "purchaseProcessAppBarTitle":"add a purchase process",
   "purchaseProcessSave":"Save",
   "purchaseProcessCostHint":"Cost",
@@ -47,5 +47,5 @@
   "custodyDetailsValue5":"Value",
   "itemPurchaseCustodyNumber":"Custody Number",
   "itemPurchaseDescription":"Description",
-  "itemPurchaseCost":"Cost",
+  "itemPurchaseCost":"Cost"
 }

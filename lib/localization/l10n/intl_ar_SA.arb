@@ -14,13 +14,13 @@
    "equipmentPageDeleted":"مسح",
    "equipmentPageFinished":"إنهاء",
    "equipmentPageRejected":"رفض",
-   "itemCustodyPageReferenceNum":"رقم المرجع:"
-   "itemCustodyPageTotal":"المجموع الكلي:"
-   "itemCustodyPageSpent":"ماتم إنفاقه:"
-   "equipmentPageId":"دددد"
-   "equipmentPageDate":"122/22/222"
-   "equipmentPageRemainAmount":"555"
-   "equipmentPageTotalAmount":"2222"
+   "itemCustodyPageReferenceNum":"رقم المرجع:",
+   "itemCustodyPageTotal":"المجموع الكلي:",
+   "itemCustodyPageSpent":"ماتم إنفاقه:",
+   "equipmentPageId":"دددد",
+   "equipmentPageDate":"122/22/222",
+   "equipmentPageRemainAmount":"555",
+   "equipmentPageTotalAmount":"2222",
    "purchaseProcessAppBarTitle":"إضافة عهدة",
    "purchaseProcessSave":"حفظ",
    "purchaseProcessCostHint":"التكلفة",
@@ -31,7 +31,7 @@
    "purchaseProcessCustomSnackBarMessageS":"تم حفظ البيانات بنجاح",
    "purchaseProcessPickWithCamera":"الكاميرا",
    "purchaseProcessPickFromGallery":"المعرض",
-   "custodyDetailsAppBarTitle":"تفاصسل العهدة"
+   "custodyDetailsAppBarTitle":"تفاصسل العهدة",
    "custodyDetailsAddButton":"إضافه",
    "custodyDetailsRaisingButton":"رفع للحسابات",
    "custodyDetailsCloseButton":"إغلاق",
@@ -47,6 +47,6 @@
    "custodyDetailsValue5":"القيمة",
    "itemPurchaseCustodyNumber":"رقم العهدة",
    "itemPurchaseDescription":"الوصف",
-   "itemPurchaseCost":"التكلفة",
+   "itemPurchaseCost":"التكلفة"
 
 }
