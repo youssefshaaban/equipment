@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image_picker: ^0.8.4+2
+  image_picker:
   modal_bottom_sheet: ^2.0.0
   nb_utils: ^4.4.1
   shared_preferences: ^2.0.6
@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
 
   retrofit: ^1.3.4+1
-  dio: ^3.0.10
+  dio:
   built_value: ^7.1.0
   json_annotation: ^3.1.0
 
