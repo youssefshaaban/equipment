@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:image_picker/image_picker.dart';
 
+
 enum ImageSourceType { gallery, camera }
 
 class PurchaseProcess extends StatefulWidget {
@@ -96,7 +97,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   }
 
   Future getCameraImage() async {
-    final image = await imagePicker.pickImage(source: ImageSource.camera);
+    final image = await ImagePicker.pickImage(source: ImageSource.camera);
     _image1 = File(image!.path);
     setState(() {
       images.add(_image1!);
@@ -106,7 +107,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   }
 
   Future getGalleryImage() async {
-    final image = await imagePicker.pickImage(source: ImageSource.gallery);
+    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image1 = File(image!.path);
     setState(() {
       images.add(_image1!);
