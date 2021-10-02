@@ -2,8 +2,9 @@ import 'package:equipment/model/Equipment.dart';
 import 'package:equipment/widget/item_custody.dart';
 import 'package:flutter/material.dart';
 
-class EquipmentPageList extends StatelessWidget {
-
+class CustodyPageList extends StatelessWidget {
+   final int status;
+   CustodyPageList({required this.status});
   final List<Equipment> list = getData();
 
   @override

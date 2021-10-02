@@ -2,7 +2,7 @@
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/localization/language_constants.dart';
 import 'package:equipment/localization/languages.dart';
-import 'package:equipment/pages/custody_page.dart';
+import 'package:equipment/features/home/custody_page.dart';
 import 'package:equipment/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
