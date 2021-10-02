@@ -1,8 +1,11 @@
 import 'package:equipment/localization/generated/l10n.dart';
-import 'package:equipment/pages/custody_page_list.dart';
+import 'package:equipment/features/home/custody_page_list.dart';
 import 'package:flutter/material.dart';
 
 class EquipmentPage extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -45,12 +48,12 @@ class EquipmentPage extends StatelessWidget {
             Expanded(
                 child: TabBarView(
               children: [
-                EquipmentPageList(),
-                EquipmentPageList(),
-                EquipmentPageList(),
-                EquipmentPageList(),
-                EquipmentPageList(),
-                EquipmentPageList(),
+                CustodyPageList(status: 6),
+                CustodyPageList(status: 1),
+                CustodyPageList(status: 2),
+                CustodyPageList(status: 3),
+                CustodyPageList(status: 4),
+                CustodyPageList(status: 5),
               ],
             ))
           ],

@@ -21,6 +21,6 @@ abstract class ApiClient {
   Future<UploadImageData> uploadImage(@Body()UploadImageRequest imageRequest);
 
   @GET(Apis.driverCustodiesByStatus)
-  Future<ResponseCustodyData> driverCustodiesByStatus(@Query("CStatus") int cStatus,
-      @Query("CUser") int cUser);
+  Future<ResponseCustodyData> driverCustodiesByStatus(@Query("CStatus") String cStatus,
+      @Query("CUser") String cUser);
 }

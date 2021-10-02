@@ -9,9 +9,9 @@ class CustodyState extends Equatable {
 
 class CustodyLoading extends CustodyState {}
 
-class CustodySuccessUser extends CustodyState {
+class CustodySuccess extends CustodyState {
   final List<CustodyData> custodies;
-  CustodySuccessUser({required this.custodies});
+  CustodySuccess({required this.custodies});
   @override
   List<Object> get props => [custodies];
 }

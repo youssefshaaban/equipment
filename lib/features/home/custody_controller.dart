@@ -5,28 +5,26 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class LoginController  extends GetxController {
+class CustodyController  extends GetxController {
   final AppRepository appRepository=AppRepository();
-  final _loginStateStream = CustodyState().obs;
+  final _custodyStateStream = CustodyState().obs;
 
-  CustodyState get state => _loginStateStream.value;
+  CustodyState get state => _custodyStateStream.value;
 
-  Future<CustodyState> login(String email, String password) async {
-    _loginStateStream.value = CustodyLoading();
+  Future<CustodyState> getCustodyByStatus(int status) async {
+    _custodyStateStream.value = CustodyLoading();
     try{
-      var user=await appRepository.getApiClient().login(LoginRequest(userName:email,password: password));
-      if(user.success==true){
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString("user_id", user.loginUserData!.userId!.toString());
-        prefs.setString("userName", user.loginUserData!.userName!);
-        prefs.setString("picture", user.loginUserData!.picture!);
-        return LoginSuccessUser(user: user.loginUserData!);
+      final prefs = await SharedPreferences.getInstance();
+      var user_id=prefs.getString("user_id");
+      var data=await appRepository.getApiClient().driverCustodiesByStatus("$state",user_id.toString());
+      if(data.success==true){
+        return CustodySuccess(custodies: data.custodyData!=null ?data.custodyData! : []);
       }else{
-        return LoginFailure(error: user.message!=null ?user.message!:"Some thing wrong");
+        return CustodyFailure(error: data.message!=null ?data.message!:"Some thing wrong");
       }
 
     } on Exception catch(e){
-      return  LoginFailure(error: e.toString());
+      return  CustodyFailure(error: e.toString());
     }
   }
 }
