@@ -132,8 +132,7 @@ class _SignInFormState extends State<_SignInForm> {
                 onPressed: _controller.state is LoginLoading
                     ? () {}
                     : () {
-                        Navigator.of(context).pop();
-                        _onLoginButtonPressed();
+                        _onLoginButtonPressed(context);
                       },
               )),
           const SizedBox(
@@ -148,6 +147,7 @@ class _SignInFormState extends State<_SignInForm> {
 
   _onLoginButtonPressed(BuildContext context) {
     if (_key.currentState!.validate()) {
+      Navigator.of(context).pop();
       _controller
           .login(_emailController.text, _passwordController.text)
           .then((value) => {
