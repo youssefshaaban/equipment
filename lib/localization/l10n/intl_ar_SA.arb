@@ -47,6 +47,7 @@
    "custodyDetailsValue5":"القيمة",
    "itemPurchaseCustodyNumber":"رقم العهدة",
    "itemPurchaseDescription":"الوصف",
-   "itemPurchaseCost":"التكلفة"
+   "itemPurchaseCost":"التكلفة",
+   "password_required": "لابد من إدخال كلمة المرور"
 
 }

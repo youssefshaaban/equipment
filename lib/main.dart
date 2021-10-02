@@ -1,7 +1,7 @@
 import 'package:equipment/pages/purchase_process.dart';
 import 'package:equipment/widget/tabs_screen.dart';
 import 'package:equipment/pages/custody_details.dart';
-import 'package:equipment/pages/login_page.dart';
+import 'package:equipment/features/login/login_page.dart';
 import 'package:equipment/utils/HexColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

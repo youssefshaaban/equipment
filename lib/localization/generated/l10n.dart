@@ -138,6 +138,24 @@ class S {
     );
   }
 
+  String get password_required {
+    return Intl.message(
+      'Password required',
+      name: 'itemEmptyPassword',
+      desc: '',
+      args: [],
+    );
+  }
+  String get userName_required {
+    return Intl.message(
+      'UserName required',
+      name: 'itemEmptyUserName',
+      desc: '',
+      args: [],
+    );
+  }
+
+
   String get equipmentPageClosed {
     return Intl.message(
       'Closed',

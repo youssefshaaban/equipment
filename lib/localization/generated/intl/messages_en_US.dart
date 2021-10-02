@@ -58,5 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "itemPurchaseCustodyNumber": MessageLookupByLibrary.simpleMessage("Custody Number:"),
     "itemPurchaseDescription": MessageLookupByLibrary.simpleMessage("Description:"),
     "itemPurchaseCost": MessageLookupByLibrary.simpleMessage("Cost:"),
+    "itemEmptyPassword": MessageLookupByLibrary.simpleMessage("Password required"),
+    "itemEmptyUserName": MessageLookupByLibrary.simpleMessage("UserName required"),
   };
 }

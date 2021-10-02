@@ -47,5 +47,6 @@
   "custodyDetailsValue5":"Value",
   "itemPurchaseCustodyNumber":"Custody Number",
   "itemPurchaseDescription":"Description",
-  "itemPurchaseCost":"Cost"
+  "itemPurchaseCost":"Cost",
+  "password_required": "Password required"
 }
