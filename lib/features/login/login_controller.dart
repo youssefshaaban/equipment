@@ -29,4 +29,11 @@ class LoginController  extends GetxController {
       return  LoginFailure(error: e.toString());
     }
   }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+
+  }
 }
