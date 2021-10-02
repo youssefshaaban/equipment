@@ -48,6 +48,6 @@
    "itemPurchaseCustodyNumber":"رقم العهدة",
    "itemPurchaseDescription":"الوصف",
    "itemPurchaseCost":"التكلفة",
-   "password_required": "لابد من إدخال كلمة المرور"
-
+   "password_required": "لابد من إدخال كلمة المرور",
+    "userName_required": "لابد من إدخال اسم المستخدم"
 }

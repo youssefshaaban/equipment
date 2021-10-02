@@ -141,7 +141,7 @@ class S {
   String get password_required {
     return Intl.message(
       'Password required',
-      name: 'itemEmptyPassword',
+      name: 'password_required',
       desc: '',
       args: [],
     );
@@ -149,7 +149,7 @@ class S {
   String get userName_required {
     return Intl.message(
       'UserName required',
-      name: 'itemEmptyUserName',
+      name: 'userName_required',
       desc: '',
       args: [],
     );

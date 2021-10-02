@@ -60,7 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "itemPurchaseCustodyNumber": MessageLookupByLibrary.simpleMessage(":رقم العهدة"),
     "itemPurchaseDescription": MessageLookupByLibrary.simpleMessage("الوصف:"),
     "itemPurchaseCost": MessageLookupByLibrary.simpleMessage("التكلفة:"),
-    "itemEmptyPassword": MessageLookupByLibrary.simpleMessage("لابد من إدخال كلمة المرور"),
-    "itemEmptyUserName": MessageLookupByLibrary.simpleMessage("لابد من إدخال اسم المستخدم"),
+    "password_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال كلمة المرور"),
+    "userName_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال اسم المستخدم"),
   };
 }

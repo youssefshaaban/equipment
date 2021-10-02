@@ -48,5 +48,6 @@
   "itemPurchaseCustodyNumber":"Custody Number",
   "itemPurchaseDescription":"Description",
   "itemPurchaseCost":"Cost",
-  "password_required": "Password required"
+  "password_required": "Password required",
+  "userName_required": "UserName required"
 }

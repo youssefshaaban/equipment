@@ -73,7 +73,7 @@ class _SignInFormState extends State<_SignInForm> {
               controller: _emailController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return S.of(context).userName_required;
+                  return S.of(context)!.userName_required;
                 }
                 return null;
               },
