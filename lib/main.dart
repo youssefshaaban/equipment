@@ -9,13 +9,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/generated/l10n.dart';
 import 'localization/language_constants.dart';
 
-// void main() {
-//   /*SystemChrome.setPreferredOrientations([
-//     DeviceOrientation.portraitUp,
-//     DeviceOrientation.portraitDown
-//   ]);*/
-//   runApp(MyApp());
-// }
+void main() {
+  /*SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);*/
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
