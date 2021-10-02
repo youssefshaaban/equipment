@@ -8,9 +8,9 @@ class LoginState extends Equatable {
 
 class LoginLoading extends LoginState {}
 
-class LoginUser extends LoginState {
+class LoginSuccessUser extends LoginState {
   final User user;
-  LoginUser({required this.user});
+  LoginSuccessUser({required this.user});
   @override
   List<Object> get props => [user];
 }

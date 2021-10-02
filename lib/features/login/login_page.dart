@@ -2,6 +2,7 @@ import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/repositery/app_repositery.dart';
 import 'package:equipment/repositery/retrofit/model/login_request.dart';
 import 'package:equipment/widget/tabs_screen.dart';
+import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,9 +43,7 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
 }
-
 
 class _SignInForm extends StatefulWidget {
   @override
@@ -77,6 +76,8 @@ class _SignInFormState extends State<_SignInForm> {
                 }
                 return null;
               },
+              keyboardType: TextInputType.text,
+              maxLines: 1,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: S.of(context)!.loginPageUserNameHint,
@@ -90,6 +91,9 @@ class _SignInFormState extends State<_SignInForm> {
             padding: EdgeInsets.all(15),
             child: TextFormField(
               controller: _passwordController,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              minLines: 1,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return S.of(context)!.password_required;
@@ -127,7 +131,10 @@ class _SignInFormState extends State<_SignInForm> {
                 child: Text(S.of(context)!.loginPageButton),
                 onPressed: _controller.state is LoginLoading
                     ? () {}
-                    : _onLoginButtonPressed,
+                    : () {
+                        Navigator.of(context).pop();
+                        _onLoginButtonPressed();
+                      },
               )),
           const SizedBox(
             height: 8,
@@ -139,17 +146,24 @@ class _SignInFormState extends State<_SignInForm> {
     });
   }
 
-  _onLoginButtonPressed() {
+  _onLoginButtonPressed(BuildContext context) {
     if (_key.currentState!.validate()) {
-      _controller.login(_emailController.text, _passwordController.text);
+      _controller
+          .login(_emailController.text, _passwordController.text)
+          .then((value) => {
+                if (value is LoginSuccessUser) {_loginProcess()}
+                else if(value is LoginFailure){
+                customSnackBar(context,msg:value.error)
+                }
+              });
     } else {
       setState(() {
         _autoValidate = true;
       });
     }
   }
+
   void _loginProcess() {
     Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
   }
-
 }

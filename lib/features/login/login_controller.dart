@@ -1,6 +1,7 @@
 import 'package:equipment/repositery/app_repositery.dart';
 import 'package:equipment/repositery/retrofit/model/login_request.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'login_state.dart';
 
@@ -10,18 +11,22 @@ class LoginController  extends GetxController {
 
   LoginState get state => _loginStateStream.value;
 
-  void login(String email, String password) async {
+  Future<LoginState> login(String email, String password) async {
     _loginStateStream.value = LoginLoading();
     try{
       var user=await appRepository.getApiClient().login(LoginRequest(userName:email,password: password));
       if(user.success==true){
-        _loginStateStream.value = LoginUser(user: user.loginUserData!);
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString("user_id", user.loginUserData!.userId!.toString());
+        prefs.setString("userName", user.loginUserData!.userName!);
+        prefs.setString("picture", user.loginUserData!.picture!);
+        return LoginSuccessUser(user: user.loginUserData!);
       }else{
-        _loginStateStream.value = LoginFailure(error: user.message!=null ?user.message!:"Some thing wrong");
+        return LoginFailure(error: user.message!=null ?user.message!:"Some thing wrong");
       }
 
     } on Exception catch(e){
-      _loginStateStream.value = LoginFailure(error: e.toString());
+      return  LoginFailure(error: e.toString());
     }
   }
 }
