@@ -132,8 +132,8 @@ class _SignInFormState extends State<_SignInForm> {
                 onPressed: _controller.state is LoginLoading
                     ? () {}
                     : () {
-                        Navigator.of(context).pop();
-                        _onLoginButtonPressed();
+                        //Navigator.of(context).pop();
+                        _onLoginButtonPressed(context);
                       },
               )),
           const SizedBox(
