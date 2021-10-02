@@ -1,17 +1,25 @@
 import 'package:json_annotation/json_annotation.dart';
 
+part 'login_data.g.dart';
 @JsonSerializable()
 class User {
-  int? UserId;
-  String? FullName;
-  String? FullNameEn;
-  String? UserName;
-  String? Password;
-  String? Picture;
-  String? Phone;
+  @JsonKey(name: "UserId")
+  int? userId;
+  @JsonKey(name: "FullName")
+  String? fullName;
+  @JsonKey(name: "FullNameEn")
+  String? fullNameEn;
+  @JsonKey(name: "UserName")
+  String? userName;
+  @JsonKey(name: "Password")
+  String? password;
+  @JsonKey(name: "Picture")
+  String? picture;
+  @JsonKey(name: "Phone")
+  String? phone;
 
   User(
-      {this.UserId, this.FullName, this.FullNameEn, this.Password, this.Phone, this.UserName, this.Picture});
+      {this.userId,this.password,this.userName,this.fullName,this.fullNameEn,this.phone,this.picture});
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
@@ -20,7 +28,7 @@ class User {
 class ResponseLoginData{
   bool? success;
   String? message;
-  dynamic loginUserData;
+  User? loginUserData;
   ResponseLoginData({this.success, this.message, this.loginUserData});
   factory ResponseLoginData.fromJson(Map<String, dynamic> json) => _$ResponseLoginDataFromJson(json);
   Map<String, dynamic> toJson() => _$ResponseLoginDataToJson(this);
