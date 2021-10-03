@@ -28,8 +28,8 @@ class _CustodyPageListState extends State<CustodyPageList> with AutomaticKeepAli
   }
   @override
   Widget build(BuildContext context) {
-    print('>>> Build Car Page');
-    super.build(context);
+      print('>>> Build Car Page');
+   // super.build(context);
     return
       Obx((){
           if(controller.state is CustodyLoading){

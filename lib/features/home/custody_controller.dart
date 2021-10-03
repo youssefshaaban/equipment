@@ -10,19 +10,19 @@ class CustodyController  extends GetxController {
   final _custodyStateStream = CustodyState().obs;
   CustodyState get state => _custodyStateStream.value;
 
-  Future<CustodyState> getCustodyByStatus(int status) async {
+  void getCustodyByStatus(int status) async {
     _custodyStateStream.value = CustodyLoading();
     try{
       final prefs = await SharedPreferences.getInstance();
       var user_id=prefs.getString("user_id");
       var data=await appRepository.getApiClient().driverCustodiesByStatus("$state",user_id.toString());
       if(data.success==true){
-        return CustodySuccess(custodies: data.custodyData!=null ?data.custodyData! : []);
+        _custodyStateStream.value= CustodySuccess(custodies: data.custodyData!=null ?data.custodyData! : []);
       }else{
-        return CustodyFailure(error: data.message!=null ?data.message!:"Some thing wrong");
+        _custodyStateStream.value= CustodyFailure(error: data.message!=null ?data.message!:"Some thing wrong");
       }
     }catch(e){
-      return  CustodyFailure(error: e.toString());
+      _custodyStateStream.value=  CustodyFailure(error: e.toString());
     }
   }
 }
