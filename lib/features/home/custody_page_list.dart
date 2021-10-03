@@ -33,9 +33,7 @@ class _CustodyPageListState extends State<CustodyPageList> {
       ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       title = routesArgument['title'];
       status = routesArgument['status'];
-      controller.getCustodyByStatus(status).then((value) => setState(() {
-        controller.set(value);
-      }));
+      controller.getCustodyByStatus(status);
     }
     super.didChangeDependencies();
   }
