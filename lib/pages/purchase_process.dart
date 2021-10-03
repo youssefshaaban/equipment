@@ -25,10 +25,13 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   TextEditingController costController = TextEditingController();
   TextEditingController desctController = TextEditingController();
   TextEditingController amountController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   List<File> images=[];
 
   File? _image1;
   final imagePicker = ImagePicker();
+
+
 
   Future showSheet(BuildContext context) {
     return showModalBottomSheet(
@@ -137,86 +140,89 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(20),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
-                  customEditText1(
-                    keyboardType: TextInputType.number,
-                    //hint: 'Cost',
-                    hint: S.of(context)!.purchaseProcessCostHint,
-                    controller: costController,
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    height: 140,
-                    child: customEditText1(
-                        //hint: 'Description',
-                      isTextArea:true,
-                        hint: S.of(context)!.purchaseProcessDescriptionHint,
-                        controller: desctController,
-                        ),
-                  ),
-                  const SizedBox(height: 20),
-                  customEditText1
-                    (
+            child: Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    customEditText1(
                       keyboardType: TextInputType.number,
-                      //hint: 'Amount',
-                      hint: S.of(context)!.purchaseProcessAmountHint,
-                      controller: amountController,
-                  ),
-                  const SizedBox(height: 20,),
-                  if(images.isNotEmpty)
-                    ElevatedButton(onPressed: (){
-                      showSheet(context);
-                    }, child: Text(S.of(context)!.purchaseProcessAddPhotoButton,
-                      style: TextStyle(color: Colors.white),)),
-
-                  const SizedBox(height: 20,),
-                  images.isEmpty?
-                  InkWell(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey,
-                      ),
-                      height: 250,
-                      width: MediaQuery.of(context).size.width*.8,
-                      child: Icon(Icons.camera_alt,size:60,color: Colors.black,),
+                      //hint: 'Cost',
+                      hint: S.of(context)!.purchaseProcessCostHint,
+                      controller: costController,
                     ),
-
-                    onTap: ()=> showSheet(context),
-                  ):
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height:200,
-                    child:
-                    ListView.builder(
-                    scrollDirection: Axis.horizontal,itemCount: images.length,itemBuilder: (context,index){
-                     return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                          child: Stack(
-                            children: [
-                              Container(
-                              height: 200,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Card(child: Image.file(images[index],fit: BoxFit.cover,)),
-                            ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: IconButton(onPressed: ()=>_deletePhoto(index),
-                                    icon: Icon(Icons.delete,size: 30,color:Colors.red)),
-                              )
-                            ],
+                    const SizedBox(height: 20),
+                    Container(
+                      height: 140,
+                      child: customEditText1(
+                          //hint: 'Description',
+                        isTextArea:true,
+                          hint: S.of(context)!.purchaseProcessDescriptionHint,
+                          controller: desctController,
                           ),
+                    ),
+                    const SizedBox(height: 20),
+                    customEditText1
+                      (
+                        keyboardType: TextInputType.number,
+                        //hint: 'Amount',
+                        hint: S.of(context)!.purchaseProcessAmountHint,
+                        controller: amountController,
+                    ),
+                    const SizedBox(height: 20,),
+                    if(images.isNotEmpty)
+                      ElevatedButton(onPressed: (){
+                        showSheet(context);
+                      }, child: Text(S.of(context)!.purchaseProcessAddPhotoButton,
+                        style: TextStyle(color: Colors.white),)),
 
-                      );
-                    }),
-                  )
-                ],
+                    const SizedBox(height: 20,),
+                    images.isEmpty?
+                    InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey,
+                        ),
+                        height: 250,
+                        width: MediaQuery.of(context).size.width*.8,
+                        child: Icon(Icons.camera_alt,size:60,color: Colors.black,),
+                      ),
+
+                      onTap: ()=> showSheet(context),
+                    ):
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height:200,
+                      child:
+                      ListView.builder(
+                      scrollDirection: Axis.horizontal,itemCount: images.length,
+                          itemBuilder: (context,index){
+                       return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                            child: Stack(
+                              children: [
+                                Container(
+                                height: 200,
+                                width: 160,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Card(child: Image.file(images[index],fit: BoxFit.cover,)),
+                              ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: IconButton(onPressed: ()=>_deletePhoto(index),
+                                      icon: Icon(Icons.delete,size: 30,color:Colors.red)),
+                                )
+                              ],
+                            ),
+
+                        );
+                      }),
+                    )
+                  ],
+              ),
             ),
           ),
         ),
