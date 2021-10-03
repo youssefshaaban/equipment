@@ -9,7 +9,7 @@ class CustodyData {
   @JsonKey(name: "CustodyId")
   int custodyId;
   @JsonKey(name: "CustodyDate")
-  String custodyDate;
+  String? custodyDate;
 
   @JsonKey(name: "TotalAmount")
   double totalAmount;
@@ -17,25 +17,25 @@ class CustodyData {
   double totalSpent;
 
   @JsonKey(name: "Details")
-  String details;
+  String? details;
   @JsonKey(name: "UserId")
-  int userId;
+  int? userId;
 
   @JsonKey(name: "FullName")
-  String fullName;
+  String? fullName;
   @JsonKey(name: "FullNameEn")
-  String fullNameEn;
+  String? fullNameEn;
   @JsonKey(name: "RegionName")
-  String regionName;
+  String? regionName;
   @JsonKey(name: "RegionNameEn")
-  String regionNameEn;
+  String? regionNameEn;
 
   @JsonKey(name: "CustodyStatus")
-  int custodyStatus;
+  int? custodyStatus;
   @JsonKey(name: "DeliveryNumber")
-  int deliveryNumber;
+  String? deliveryNumber;
   @JsonKey(name: "ReceivingNumber")
-  String receivingNumber;
+  String? receivingNumber;
   CustodyData({required this.userId,
     required this.fullNameEn,
     required this.fullName,

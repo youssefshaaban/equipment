@@ -1,4 +1,5 @@
 
+import 'package:equipment/features/home/home_page_custody.dart';
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/localization/language_constants.dart';
 import 'package:equipment/localization/languages.dart';
@@ -32,7 +33,7 @@ class _TabsScreenState extends State<TabsScreen> {
     pages=
     [
       {
-        'page': CustodyPage(),
+        'page': HomePageCustody(),
         'title':"Home" // S.of(context)!.firstTabAppBarTitle,
       },
       {

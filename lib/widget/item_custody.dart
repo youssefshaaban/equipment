@@ -40,7 +40,7 @@ class ItemCustody extends StatelessWidget {
                         )),
                   ),
                   Text(
-                    custody.custodyDate,
+                    custody.custodyDate==null?"":custody.custodyDate!,
                       style: TextStyle(color:Colors.blueGrey)
                   )
                 ],
