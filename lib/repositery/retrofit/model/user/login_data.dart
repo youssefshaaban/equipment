@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 part 'login_data.g.dart';
 @JsonSerializable()
@@ -22,6 +23,8 @@ class User {
       {this.userId,this.password,this.userName,this.fullName,this.fullNameEn,this.phone,this.picture});
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+
 }
 
 @JsonSerializable()

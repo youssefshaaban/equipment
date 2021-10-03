@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
-import 'package:equipment/repositery/retrofit/model/login_data.dart';
+import 'package:equipment/repositery/retrofit/model/user/login_data.dart';
 
 class CustodyState extends Equatable {
   @override

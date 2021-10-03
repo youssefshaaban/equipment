@@ -1,6 +1,6 @@
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/repositery/app_repositery.dart';
-import 'package:equipment/repositery/retrofit/model/login_request.dart';
+import 'package:equipment/repositery/retrofit/model/user/login_request.dart';
 import 'package:equipment/widget/tabs_screen.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class _SignInFormState extends State<_SignInForm> {
       return Form(
         key: _key,
         autovalidateMode:
-            _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
+        _autoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(15),
@@ -112,29 +112,34 @@ class _SignInFormState extends State<_SignInForm> {
           ),
           Container(
               height: 50,
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.pressed))
-                      return Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.5);
-                    return Theme.of(context)
-                        .colorScheme
-                        .primary; // Use the component's default.
-                  },
-                )),
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Theme
+                              .of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.5);
+                        return Theme
+                            .of(context)
+                            .colorScheme
+                            .primary; // Use the component's default.
+                      },
+                    )),
                 child: Text(S.of(context)!.loginPageButton),
                 onPressed: _controller.state is LoginLoading
                     ? () {}
                     : () {
-                        //Navigator.of(context).pop();
-                        _onLoginButtonPressed(context);
-                      },
+                  //Navigator.of(context).pop();
+                  _onLoginButtonPressed(context);
+                },
               )),
           const SizedBox(
             height: 8,
@@ -151,20 +156,21 @@ class _SignInFormState extends State<_SignInForm> {
       _controller
           .login(_emailController.text, _passwordController.text)
           .then((value) => {
-                if (value is LoginSuccessUser)
-                  {_loginProcess()}
-                else if (value is LoginFailure)
-                  {customSnackBar(context, msg: value.error)}
-                else
-                  {
-                    setState(() {
-                    })
-                  }
-              });
+      if (value is LoginSuccessUser)
+      {
+      _loginProcess()
+      }
+      else
+      if (value is LoginFailure)
+      {
+          customSnackBar(context, msg: value.error)
+    }
+    else {}
+  });
     } else {
-      setState(() {
-        _autoValidate = true;
-      });
+    setState(() {
+    _autoValidate = true;
+    });
     }
   }
 

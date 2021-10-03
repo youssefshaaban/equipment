@@ -8,8 +8,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //Localization
-      //profile modification button
+      body: Center(),
     );
   }
 }

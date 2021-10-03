@@ -1,5 +1,5 @@
 import 'package:equipment/repositery/app_repositery.dart';
-import 'package:equipment/repositery/retrofit/model/login_request.dart';
+import 'package:equipment/repositery/retrofit/model/user/login_request.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,6 +22,7 @@ class LoginController  extends GetxController {
         prefs.setString("picture", user.loginUserData!.picture!);
         return LoginSuccessUser(user: user.loginUserData!);
       }else{
+        _loginStateStream.value=LoginFailure(error: user.message!=null ?user.message!:"Some thing wrong");
         return LoginFailure(error: user.message!=null ?user.message!:"Some thing wrong");
       }
 
@@ -32,7 +33,7 @@ class LoginController  extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
+
     super.onClose();
 
   }

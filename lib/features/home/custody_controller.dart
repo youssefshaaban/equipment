@@ -1,6 +1,6 @@
 import 'package:equipment/features/home/custody_state.dart';
 import 'package:equipment/repositery/app_repositery.dart';
-import 'package:equipment/repositery/retrofit/model/login_request.dart';
+import 'package:equipment/repositery/retrofit/model/user/login_request.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
