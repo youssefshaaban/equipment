@@ -18,7 +18,7 @@
   "itemCustodyPageTotal":"Total:",
   "itemCustodyPageSpent":"Spent:",
   "equipmentPageId":"dsds",
-  "equipmentPageDate":"122/22/222",
+  "equipmentPageDate":"Date : ",
   "equipmentPageRemainAmount":"555",
   "equipmentPageTotalAmount":"2222",
   "purchaseProcessAppBarTitle":"add a purchase process",
@@ -49,5 +49,7 @@
   "itemPurchaseDescription":"Description",
   "itemPurchaseCost":"Cost",
   "password_required": "Password required",
-  "userName_required": "UserName required"
+  "userName_required": "UserName required",
+  "currency": "SAR",
+  "custodyReceivingNumber":"Receiving Number"
 }

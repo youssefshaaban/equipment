@@ -52,11 +52,11 @@ class HomePageCustody extends StatelessWidget{
         child: Center(
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).appBarTheme.titleTextStyle,
           ),
         ),
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.white54,
             borderRadius: BorderRadius.circular(15)),
       ),
     );

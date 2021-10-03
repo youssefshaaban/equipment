@@ -18,7 +18,7 @@
    "itemCustodyPageTotal":"المجموع الكلي:",
    "itemCustodyPageSpent":"ماتم إنفاقه:",
    "equipmentPageId":"دددد",
-   "equipmentPageDate":"122/22/222",
+   "equipmentPageDate":"تاريخ : ",
    "equipmentPageRemainAmount":"555",
    "equipmentPageTotalAmount":"2222",
    "purchaseProcessAppBarTitle":"إضافة عهدة",
@@ -49,5 +49,7 @@
    "itemPurchaseDescription":"الوصف",
    "itemPurchaseCost":"التكلفة",
    "password_required": "لابد من إدخال كلمة المرور",
-    "userName_required": "لابد من إدخال اسم المستخدم"
+    "userName_required": "لابد من إدخال اسم المستخدم",
+    "currency": "ريال ",
+    "custodyReceivingNumber": "رقم الاستلام"
 }

@@ -201,6 +201,14 @@ class S {
       args: [],
     );
   }
+  String get custodyReceivingNumber {
+    return Intl.message(
+      'Receiving Num:',
+      name: 'custodyReceivingNumber',
+      desc: '',
+      args: [],
+    );
+  }
 
   String get itemCustodyPageTotal {
     return Intl.message(
@@ -214,7 +222,7 @@ class S {
   String get itemCustodyPageSpent {
     return Intl.message(
       'Spent:',
-      name: 'equipmentPageRejected',
+      name: 'itemCustodyPageSpent',
       desc: '',
       args: [],
     );
@@ -231,8 +239,16 @@ class S {
 
   String get equipmentPageDate {
     return Intl.message(
-      '122/22/222',
+      'Date',
       name: 'equipmentPageDate',
+      desc: '',
+      args: [],
+    );
+  }
+  String get currency {
+    return Intl.message(
+      'Date',
+      name: 'currency',
       desc: '',
       args: [],
     );

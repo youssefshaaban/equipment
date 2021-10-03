@@ -36,6 +36,8 @@ class CustodyData {
   String? deliveryNumber;
   @JsonKey(name: "ReceivingNumber")
   String? receivingNumber;
+  @JsonKey(name: "ReferenceCode")
+  String? referenceCode;
   CustodyData({required this.userId,
     required this.fullNameEn,
     required this.fullName,
@@ -44,9 +46,9 @@ class CustodyData {
     required this.custodyStatus,
     required this.deliveryNumber,
     required this.details,
-    required this.receivingNumber,
-    required this.regionName,
-    required this.regionNameEn,
+     this.receivingNumber,
+     this.regionName,
+     this.regionNameEn,
     required this.totalAmount,
     required this.totalSpent,
   });

@@ -22,60 +22,37 @@ class ItemCustody extends StatelessWidget {
         margin: EdgeInsets.all(5),
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    S.of(context)!.itemCustodyPageReferenceNum,
-                    style: TextStyle(color:Colors.blueGrey),
-                  ),
-                  Expanded(
-                    child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: Text(
-                          custody.custodyId.toString(),
-                          style: TextStyle(color:Colors.blueGrey),
-                        )),
-                  ),
-                  Text(
-                    custody.custodyDate==null?"":custody.custodyDate!,
-                      style: TextStyle(color:Colors.blueGrey)
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    S.of(context)!.itemCustodyPageTotal,
-                    style: TextStyle(color:Colors.blueGrey),
-                  ),
-                  Expanded(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: Text(
-                      custody.totalAmount.toString(),
-                    ),
-                  )),
-                  Text(S.of(context)!.itemCustodyPageSpent, style: TextStyle(color:Colors.blueGrey)),
-                  Expanded(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: Text(
-                      custody.totalSpent.toString(),
-                        style: TextStyle(color:Colors.blueGrey)
-                    ),
-                  ))
-                ],
-              ),
-            )
+            buildRow(context,  S.of(context)!.itemCustodyPageReferenceNum, custody.referenceCode.toString(),),
+            buildRow(context, S.of(context)!.custodyReceivingNumber, custody.receivingNumber.toString()),
+            buildRow(context, S.of(context)!.custodyDetailsDate, custody.custodyDate.toString().split('T')[0]),
+            buildRow(context, S.of(context)!.itemCustodyPageTotal,"${custody.totalAmount.toString()} ${S.of(context)!.currency}" ),
+            buildRow(context, S.of(context)!.itemCustodyPageSpent,"${ custody.totalSpent.toString()} ${S.of(context)!.currency}"),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildRow(BuildContext context,String header,String value){
+    return   Padding(
+      padding: EdgeInsets.all(3),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            header,
+            style: TextStyle(color: Colors.blueGrey),
+          ),
+          Expanded(
+            child: Container(
+                margin:
+                EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Text(
+                  value,
+                  style: TextStyle(color: Colors.blueGrey),
+                )),
+          ),
+        ],
       ),
     );
   }

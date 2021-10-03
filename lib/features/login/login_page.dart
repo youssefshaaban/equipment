@@ -151,10 +151,15 @@ class _SignInFormState extends State<_SignInForm> {
       _controller
           .login(_emailController.text, _passwordController.text)
           .then((value) => {
-                if (value is LoginSuccessUser) {_loginProcess()}
-                else if(value is LoginFailure){
-                customSnackBar(context,msg:value.error)
-                }
+                if (value is LoginSuccessUser)
+                  {_loginProcess()}
+                else if (value is LoginFailure)
+                  {customSnackBar(context, msg: value.error)}
+                else
+                  {
+                    setState(() {
+                    })
+                  }
               });
     } else {
       setState(() {
