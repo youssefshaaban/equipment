@@ -8,52 +8,74 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 
 class CustodyPageList extends StatefulWidget {
-   final int status;
-   CustodyPageList({required this.status});
-
+  static const routeName = '/custody_list';
   @override
-  State<CustodyPageList> createState() => _CustodyPageListState(status: status);
+  State<CustodyPageList> createState() => _CustodyPageListState();
 }
 
-class _CustodyPageListState extends State<CustodyPageList> with AutomaticKeepAliveClientMixin{
-  final int status;
-  _CustodyPageListState({required this.status});
-  final List<Equipment> list = getData();
-  final controller = Get.put(CustodyController());
+class _CustodyPageListState extends State<CustodyPageList> {
+  late CustodyController controller;
+  late String title;
+  late int status;
+  var _initDataLoded = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    controller.getCustodyByStatus(status);
+
   }
+
+  @override
+  void didChangeDependencies() {
+    if (!_initDataLoded) {
+      _initDataLoded = true;
+      controller = Get.put(CustodyController());
+      final routesArgument =
+      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      title = routesArgument['title'];
+      status = routesArgument['status'];
+      controller.getCustodyByStatus(status).then((value) => setState(() {
+        controller.set(value);
+      }));
+    }
+    super.didChangeDependencies();
+  }
+
+
+  @override
+  void dispose() {
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-      print('>>> Build Car Page');
-   // super.build(context);
-    return
-      Obx((){
-          if(controller.state is CustodyLoading){
-            return Center(child: CircularProgressIndicator());
-         }else if(controller.state is CustodySuccess){
-            final custodies=(controller.state as CustodySuccess);
-            return  Padding(
-              padding: EdgeInsets.all(10),
-              child: ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return ItemCustody(
-                    custody:custodies.custodies[index],
-                  );
-                },
-                itemCount: custodies.custodies.length,
-              ),
-            );
-          }else{
-            return Center(child: Text("kkkkkkkkkkkkk"),);
-          }
-      });
-
+    print('>>>>>>>>>>>>>>>>>>>>build $status<<<<<<<<<<<<<<<<<');
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Obx(() {
+        if (controller.state is CustodyLoading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (controller.state is CustodySuccess) {
+          final custodies = (controller.state as CustodySuccess);
+          return Padding(
+            padding: EdgeInsets.all(10),
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return ItemCustody(
+                  custody: custodies.custodies[index],
+                );
+              },
+              itemCount: custodies.custodies.length,
+            ),
+          );
+        } else {
+          return Center(
+            child: Text("kkkkkkkkkkkkk"),
+          );
+        }
+      }),
+    );
   }
 
-  @override
-  bool get wantKeepAlive => true;
 }

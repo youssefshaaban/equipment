@@ -51,12 +51,12 @@ class CustodyPage extends StatelessWidget {
             child: TabBarView(
           controller: controller.tabController,
           children: [
-            CustodyPageList(status: 6),
-            CustodyPageList(status: 1),
-            CustodyPageList(status: 2),
-            CustodyPageList(status: 3),
-            CustodyPageList(status: 4),
-            CustodyPageList(status: 5),
+            // CustodyPageList(status: 6),
+            // CustodyPageList(status: 1),
+            // CustodyPageList(status: 2),
+            // CustodyPageList(status: 3),
+            // CustodyPageList(status: 4),
+            // CustodyPageList(status: 5),
           ],
         ))
       ],
@@ -72,5 +72,11 @@ class CustodyHomeController extends GetxController
   void onInit() {
     tabController = TabController(vsync: this, length: 6);
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    tabController.dispose();
   }
 }

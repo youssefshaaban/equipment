@@ -6,6 +6,7 @@ import 'package:equipment/utils/HexColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'features/home/custody_page_list.dart';
 import 'localization/generated/l10n.dart';
 import 'localization/language_constants.dart';
 
@@ -117,6 +118,7 @@ class _MyAppState extends State<MyApp> {
         home: LoginPage(),
         routes: {
           TabsScreen.routeName: (_) => TabsScreen(),
+          CustodyPageList.routeName: (_) => CustodyPageList(),
           CustodyDetails.routeName: (_) => CustodyDetails(),
           PurchaseProcess.routeName: (_) => PurchaseProcess(),
         },
