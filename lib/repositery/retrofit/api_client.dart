@@ -18,7 +18,7 @@ abstract class ApiClient {
   @POST(Apis.login)
   Future<ResponseLoginData> login(@Body()LoginRequest loginRequest);
 
-  @POST("${Apis.usersProfile}/{id}")
+  @GET("api/CustodyApi/UsersProfile/{id}")
   Future<ResponseProfileData> getProfile(@Path("id")int id);
 
   @POST(Apis.uploadImage)

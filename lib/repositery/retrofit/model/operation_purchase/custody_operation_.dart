@@ -30,5 +30,5 @@ class CustodyOper {
 
   factory CustodyOper.fromJson(Map<String, dynamic> json) => _$CustodyOperFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CustodyToJson(this);
+  Map<String, dynamic> toJson() => _$CustodyOperToJson(this);
 }

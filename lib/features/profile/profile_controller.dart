@@ -4,7 +4,7 @@ import 'package:equipment/repositery/retrofit/model/user/login_request.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginController  extends GetxController {
+class ProfileController  extends GetxController {
   final AppRepository appRepository=AppRepository();
   final _loginStateStream = DataState().obs;
 
@@ -24,6 +24,7 @@ class LoginController  extends GetxController {
 
     } catch(e){
       _loginStateStream.value=DataFailure(error: e.toString());
+      print(e);
     }
   }
 

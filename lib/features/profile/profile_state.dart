@@ -9,7 +9,7 @@ class DataState extends Equatable {
 class DataLoading extends DataState {}
 
 class DataSuccess extends DataState {
-  final Object data;
+  final User data;
   DataSuccess({required this.data});
   @override
   List<Object> get props => [data];
