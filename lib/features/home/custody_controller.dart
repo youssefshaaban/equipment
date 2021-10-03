@@ -22,7 +22,7 @@ class CustodyController  extends GetxController {
     try{
       final prefs = await SharedPreferences.getInstance();
       var user_id=prefs.getString("user_id");
-      var data=await appRepository.getApiClient().driverCustodiesByStatus("$state",user_id.toString());
+      var data=await appRepository.getApiClient().driverCustodiesByStatus("$status",user_id.toString());
       if(data.success==true){
         return CustodySuccess(custodies: data.custodyData!=null ?data.custodyData! : []);
       }else{
@@ -31,5 +31,10 @@ class CustodyController  extends GetxController {
     }catch(e){
       return CustodyFailure(error: e.toString());
     }
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
   }
 }

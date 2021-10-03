@@ -43,7 +43,8 @@ class _CustodyPageListState extends State<CustodyPageList> {
 
   @override
   void dispose() {
-    controller.dispose();
+    super.dispose();
+    controller.onClose();
   }
 
   @override
