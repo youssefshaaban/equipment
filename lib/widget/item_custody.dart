@@ -1,12 +1,13 @@
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Equipment.dart';
 import 'package:equipment/pages/custody_details.dart';
+import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:flutter/material.dart';
 
 class ItemCustody extends StatelessWidget {
-  final Equipment equipment;
+  final CustodyData custody;
 
-  ItemCustody({required this.equipment});
+  ItemCustody({required this.custody});
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +35,12 @@ class ItemCustody extends StatelessWidget {
                     child: Container(
                         margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         child: Text(
-                          equipment.id!,
+                          custody.custodyId.toString(),
                           style: TextStyle(color:Colors.blueGrey),
                         )),
                   ),
                   Text(
-                    equipment.date!,
+                    custody.custodyDate,
                       style: TextStyle(color:Colors.blueGrey)
                   )
                 ],
@@ -58,7 +59,7 @@ class ItemCustody extends StatelessWidget {
                       child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      equipment.totalAmount!,
+                      custody.totalAmount.toString(),
                     ),
                   )),
                   Text(S.of(context)!.itemCustodyPageSpent, style: TextStyle(color:Colors.blueGrey)),
@@ -66,7 +67,7 @@ class ItemCustody extends StatelessWidget {
                       child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      equipment.remianAmount!,
+                      custody.totalSpent.toString(),
                         style: TextStyle(color:Colors.blueGrey)
                     ),
                   ))

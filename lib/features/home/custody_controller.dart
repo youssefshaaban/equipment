@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CustodyController  extends GetxController {
   final AppRepository appRepository=AppRepository();
   final _custodyStateStream = CustodyState().obs;
-
   CustodyState get state => _custodyStateStream.value;
 
   Future<CustodyState> getCustodyByStatus(int status) async {
@@ -22,8 +21,7 @@ class CustodyController  extends GetxController {
       }else{
         return CustodyFailure(error: data.message!=null ?data.message!:"Some thing wrong");
       }
-
-    } on Exception catch(e){
+    }catch(e){
       return  CustodyFailure(error: e.toString());
     }
   }

@@ -32,7 +32,7 @@ class _TabsScreenState extends State<TabsScreen> {
     pages=
     [
       {
-        'page': EquipmentPage(),
+        'page': CustodyPage(),
         'title':"Home" // S.of(context)!.firstTabAppBarTitle,
       },
       {

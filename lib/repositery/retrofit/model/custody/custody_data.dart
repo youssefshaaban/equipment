@@ -7,7 +7,7 @@ part 'custody_data.g.dart';
 class CustodyData {
 
   @JsonKey(name: "CustodyId")
-  String custodyId;
+  int custodyId;
   @JsonKey(name: "CustodyDate")
   String custodyDate;
 
@@ -35,7 +35,7 @@ class CustodyData {
   @JsonKey(name: "DeliveryNumber")
   int deliveryNumber;
   @JsonKey(name: "ReceivingNumber")
-  int receivingNumber;
+  String receivingNumber;
   CustodyData({required this.userId,
     required this.fullNameEn,
     required this.fullName,
