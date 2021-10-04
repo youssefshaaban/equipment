@@ -37,9 +37,9 @@ class ProfilePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: FadeInImage(
                 image: NetworkImage((user.picture == null) ? "" : user.picture!),
-                placeholder: AssetImage("assets/images/bg_no_image.png"),
+                placeholder: AssetImage("assets/images/ic_user.png"),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/images/bg_no_image.png',
+                  return Image.asset('assets/images/ic_user.png',
                       fit: BoxFit.cover);
                 },
                 fit: BoxFit.cover,

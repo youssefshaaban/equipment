@@ -13,8 +13,8 @@ class CustodyOper {
   String? operDetails;
   @JsonKey(name: "InvoiceNumber")
   String? invoiceNumber;
-  @JsonKey(name: "images")
-  List<String>? images;
+  @JsonKey(name: "ImagesData")
+  List<ImagesData>? images;
   @JsonKey(name: "OperDate")
   String? OperDate;
   @JsonKey(name: "OperStatus")
@@ -28,7 +28,25 @@ class CustodyOper {
         required this.invoiceNumber
         });
 
+
+
   factory CustodyOper.fromJson(Map<String, dynamic> json) => _$CustodyOperFromJson(json);
 
   Map<String, dynamic> toJson() => _$CustodyOperToJson(this);
+}
+
+@JsonSerializable()
+class ImagesData {
+  @JsonKey(name: "ImageId")
+  int? imageId = 0;
+  @JsonKey(name: "ImageData")
+  String imageData;
+
+  ImagesData({required this.imageData,
+    this.imageId,
+  });
+
+  factory ImagesData.fromJson(Map<String, dynamic> json) => _$ImagesDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ImagesDataToJson(this);
 }
