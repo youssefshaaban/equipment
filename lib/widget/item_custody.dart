@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 
 class ItemCustody extends StatelessWidget {
   final CustodyData custody;
+  final int status;
 
-  ItemCustody({required this.custody});
+  ItemCustody({required this.custody,required this.status});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(CustodyDetails.routeName);
+
+        Navigator.of(context).pushNamed(CustodyDetails.routeName,arguments: {'data':custody});
       },
       child: Card(
         elevation: 5,

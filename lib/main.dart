@@ -1,4 +1,4 @@
-import 'package:equipment/pages/purchase_process.dart';
+import 'package:equipment/features/purchase/purchase_process.dart';
 import 'package:equipment/widget/tabs_screen.dart';
 import 'package:equipment/pages/custody_details.dart';
 import 'package:equipment/features/login/login_page.dart';
@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
             }
             return supportedLocales.elementAt(0);
           },
-        home: LoginPage(),
+        home: PurchaseProcess(),
         routes: {
           TabsScreen.routeName: (_) => TabsScreen(),
           CustodyPageList.routeName: (_) => CustodyPageList(),
