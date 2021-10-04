@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:equipment/repositery/retrofit/model/user/login_request.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_data.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_request.dart';
@@ -27,4 +28,15 @@ abstract class ApiClient {
   @GET(Apis.driverCustodiesByStatus)
   Future<ResponseCustodyData> driverCustodiesByStatus(@Query("CStatus") String cStatus,
       @Query("CUser") String cUser);
+
+  @POST(Apis.submitOperation)
+  Future<ResponseSubmitOperation> submitOperation(@Body() CustodyOper custodyOper);
+
+  @GET("${Apis.getCustodyOperation}/{id}")
+  Future<ResponseCustodyOpera> getCustodyOperation(@Path("id") int id);
+
+  @GET(Apis.updateCustodyStatus)
+  Future<ResponseUpdateCustodyData> updateStatusCustody(@Query("CStatus") String cStatus,
+      @Query("CId") String cUser);
+
 }

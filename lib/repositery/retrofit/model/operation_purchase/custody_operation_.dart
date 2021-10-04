@@ -13,7 +13,11 @@ class CustodyOper {
   String? operDetails;
   @JsonKey(name: "InvoiceNumber")
   String? invoiceNumber;
+  @JsonKey(name: "DriverUserId")
+  int driverUserId;
   @JsonKey(name: "ImagesData")
+  List<ImagesData>? imagesData;
+  @JsonKey(name: "images")
   List<ImagesData>? images;
   @JsonKey(name: "OperDate")
   String? OperDate;
@@ -25,7 +29,8 @@ class CustodyOper {
       {required this.operAmount,
         this.operDetails,
         required this.custodyId,
-        required this.invoiceNumber
+        required this.invoiceNumber,
+        required this.driverUserId
         });
 
 
@@ -34,6 +39,24 @@ class CustodyOper {
 
   Map<String, dynamic> toJson() => _$CustodyOperToJson(this);
 }
+
+@JsonSerializable()
+class ResponseCustodyOpera {
+  @JsonKey(name: "success")
+  bool? success;
+  @JsonKey(name: "message")
+  String? message;
+  @JsonKey(name: "COpersData")
+  List<CustodyOper> cOpersData;
+  ResponseCustodyOpera({required this.cOpersData
+  });
+
+  factory ResponseCustodyOpera.fromJson(Map<String, dynamic> json) => _$ResponseCustodyOperaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ResponseCustodyOperaToJson(this);
+}
+
+
 
 @JsonSerializable()
 class ImagesData {
@@ -49,4 +72,19 @@ class ImagesData {
   factory ImagesData.fromJson(Map<String, dynamic> json) => _$ImagesDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImagesDataToJson(this);
+}
+
+@JsonSerializable()
+class ResponseSubmitOperation {
+  @JsonKey(name: "success")
+  bool? success;
+  @JsonKey(name: "message")
+  String? message;
+  @JsonKey(name: "Oper_Id")
+  int? oper_Id;
+  ResponseSubmitOperation();
+
+  factory ResponseSubmitOperation.fromJson(Map<String, dynamic> json) => _$ResponseSubmitOperationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ResponseSubmitOperationToJson(this);
 }

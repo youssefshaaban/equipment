@@ -70,3 +70,15 @@ class ResponseCustodyData{
   Map<String, dynamic> toJson() => _$ResponseCustodyDataToJson(this);
 
 }
+
+@JsonSerializable()
+class ResponseUpdateCustodyData{
+  bool? success;
+  String? message;
+  @JsonKey(name: "UpdatedCustodyId")
+  int? updatedCustodyId;
+  ResponseUpdateCustodyData();
+  factory ResponseUpdateCustodyData.fromJson(Map<String, dynamic> json) => _$ResponseUpdateCustodyDataFromJson(json);
+  Map<String, dynamic> toJson() => _$ResponseUpdateCustodyDataToJson(this);
+
+}

@@ -6,10 +6,13 @@ class Apis {
   static const String usersProfile = 'api/CustodyApi/UsersProfile';
   static const String updateUsersData = 'api/CustodyApi/UpdateUsersData';
   static const String driverCustodiesByStatus = 'api/CustodyApi/DriverCustodiesByStatus';
-  static const String submitOperatio = 'api/CustodyApi/SubmitOperations';
+  static const String submitOperation = 'api/CustodyApi/SubmitOperations';
   static const String deleteOperationRow = 'api/CustodyApi/DeleteOperationRow';
   static const String submitOperationImages = 'api/CustodyApi/SubmitOperationImages';
   static const String uploadImage = 'api/CustodyApi/UploadImages';
+  static const String getCustodyOperation = 'api/CustodyApi/CustodyOperationsData';
+  static const String updateCustodyStatus = 'api/CustodyApi/UpdateCustodyStatus';
+
 
 }
 
