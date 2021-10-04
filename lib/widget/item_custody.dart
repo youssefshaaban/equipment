@@ -1,6 +1,6 @@
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Equipment.dart';
-import 'package:equipment/pages/custody_details.dart';
+import 'package:equipment/features/detail_custody/custody_details.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:flutter/material.dart';
 
