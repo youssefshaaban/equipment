@@ -1,21 +1,26 @@
+import 'package:equipment/features/detail_custody/custody_controller_status.dart';
+import 'package:equipment/features/detail_custody/custody_status_state.dart';
+import 'package:equipment/features/home/custody_controller.dart';
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Details.dart';
 import 'package:equipment/features/purchase/purchase_process.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:equipment/widget/item_purchase_details_widget.dart';
+import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustodyDetails extends StatelessWidget {
   static const routeName = '/custodyDetailsRouteName';
-
-
+  late CustodyStatusController _controller;
   final List<Details> detailsList1 = detailsList;
-
-
+  late CustodyData data;
   @override
   Widget build(BuildContext context) {
-    final routesArgument=ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    CustodyData data = routesArgument['data'];
+    _controller = Get.put(CustodyStatusController());
+    final routesArgument =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    data = routesArgument['data'];
     return Scaffold(
         appBar: AppBar(
           title: Text(S.of(context)!.custodyDetailsAppBarTitle),
@@ -27,7 +32,12 @@ class CustodyDetails extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      buildCardInfo(context,data.custodyStatus.toString(),data.custodyDate!,data.totalAmount.toString(),data.totalAmount.toString()),
+                      buildCardInfo(
+                          context,
+                          data.custodyStatus.toString(),
+                          data.custodyDate!,
+                          data.totalAmount.toString(),
+                          data.totalAmount.toString()),
                       Container(
                         height: MediaQuery.of(context).size.height * .62,
                         decoration: BoxDecoration(
@@ -45,15 +55,18 @@ class CustodyDetails extends StatelessWidget {
                     ],
                   ),
                 )),
-
             buildAlign(data.custodyStatus!, context)
-
-
           ],
         ));
   }
 
-  Widget buildCardInfo(BuildContext context,String custodyNumber,String date,String cost,String remainAmount,) {
+  Widget buildCardInfo(
+    BuildContext context,
+    String custodyNumber,
+    String date,
+    String cost,
+    String remainAmount,
+  ) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -74,7 +87,6 @@ class CustodyDetails extends StatelessWidget {
                   width: 5,
                 ),
                 Text(custodyNumber,
-
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -167,58 +179,8 @@ class CustodyDetails extends StatelessWidget {
     );
   }
 
-  Widget buildAlign(int status,BuildContext context){
-    if(status==1){
-      return  Align(
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: ElevatedButton.icon(
-                  icon: Icon(
-                      Icons.add, size: 20, color: Colors.white),
-                  label: Text(
-                    S.of(context)!.custodyDetailsAddButton,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(PurchaseProcess.routeName);
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              child: ElevatedButton.icon(
-                icon: Icon(Icons.add, size: 20, color: Colors.white),
-                label: Text(
-                  S.of(context)!.custodyDetailsRaisingButton,
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {},
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: Icon(
-                      Icons.close, size: 20, color: Colors.white),
-                  label: Text(
-                    S.of(context)!.custodyDetailsCloseButton,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }else if(status==0){
+  Widget buildAlign(int status, BuildContext context) {
+    if (status == 1) {
       return Align(
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -227,15 +189,14 @@ class CustodyDetails extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.all(5),
-                child: ElevatedButton(
-
-                  child: Text(
+                child: ElevatedButton.icon(
+                  icon: Icon(Icons.add, size: 20, color: Colors.white),
+                  label: Text(
                     S.of(context)!.custodyDetailsAddButton,
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(PurchaseProcess.routeName);
+                    Navigator.of(context).pushNamed(PurchaseProcess.routeName);
                   },
                 ),
               ),
@@ -246,15 +207,92 @@ class CustodyDetails extends StatelessWidget {
                   S.of(context)!.custodyDetailsRaisingButton,
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  changeStatus(2, context);
+                },
               ),
             ),
-
           ],
         ),
       );
-    }else{
+    } else if (status == 0) {
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.amber),
+                  child: Text(
+                    S.of(context)!.acceptButton,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    changeStatus(1, context);
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+                child: Text(
+                  S.of(context)!.rejectButton,
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  changeStatus(5, context);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
       return Container();
     }
+  }
+
+  progressDialogue(BuildContext context) {
+    //set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+    showDialog(
+      //prevent outside touch
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        //prevent Back button press
+        return WillPopScope(
+            onWillPop: () async {
+              return true;
+            },
+            child: alert);
+      },
+    );
+  }
+
+  void changeStatus(status, BuildContext context) {
+    progressDialogue(context);
+    _controller.getCustodyByStatus(status,data.custodyId).then((value) async{
+      Navigator.of(context).pop();
+      if (value is StatusSuccess) {
+        customSnackBar(context, msg: "success");
+        await Future.delayed(const Duration(milliseconds: 1000));
+        Navigator.of(context).pop(true);
+      } else if (value is StatusFailure) {
+        customSnackBar(context, msg: value.error);
+      }
+    });
   }
 }

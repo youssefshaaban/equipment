@@ -13,19 +13,18 @@ class CustodyStatusController  extends GetxController {
     super.onInit();
     print("################contoller####################");
   }
-  void getCustodyByStatus(int status) async {
+  Future<CustodyStatusState> getCustodyByStatus(int status,int CId) async {
     _custodyStateStream.value = StatusLoading();
     try{
-      final prefs = await SharedPreferences.getInstance();
-      var user_id=prefs.getString("user_id");
-      var data=await appRepository.getApiClient().updateStatusCustody("$status",user_id.toString());
+      // var user_id=prefs.getString("user_id");
+      var data=await appRepository.getApiClient().updateStatusCustody("$status",CId.toString());
       if(data.success==true){
-        _custodyStateStream.value=StatusSuccess(custodyId:data.updatedCustodyId!=null ?data.updatedCustodyId! :0);
+        return StatusSuccess(custodyId:data.updatedCustodyId!=null ?data.updatedCustodyId! :0);
       }else{
-        _custodyStateStream.value= StatusFailure(error: data.message!=null ?data.message!:"Some thing wrong");
+     return StatusFailure(error: data.message!=null ?data.message!:"Some thing wrong");
       }
     }catch(e){
-      _custodyStateStream.value=StatusFailure(error: e.toString());
+     return StatusFailure(error: e.toString());
     }
   }
 

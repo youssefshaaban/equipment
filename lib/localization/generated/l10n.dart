@@ -398,6 +398,24 @@ class S {
     );
   }
 
+  String get acceptButton {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get rejectButton {
+    return Intl.message(
+      'Reject',
+      name: 'reject',
+      desc: '',
+      args: [],
+    );
+  }
+
 
   String get custodyDetailsCloseButton {
     return Intl.message(

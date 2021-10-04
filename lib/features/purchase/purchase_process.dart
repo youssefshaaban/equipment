@@ -304,7 +304,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
       customSnackBar(context, msg: S.of(context)!.purchaseProcessCustomSnackBarMessage);
       valid = false;
     } else {
-      _purchaseDataController.submitOperationData(amount: amountController.text, desc: desctController.text, invoiceNumber: null, custodyId: null);
+      _purchaseDataController.submitOperationData(amount: amountController.text, desc: desctController.text, custodyId: 12);
       valid = false;
     }
     return valid;

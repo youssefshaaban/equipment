@@ -62,5 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userName_required": MessageLookupByLibrary.simpleMessage("UserName required"),
     "currency": MessageLookupByLibrary.simpleMessage("SAR"),
     "custodyReceivingNumber": MessageLookupByLibrary.simpleMessage("Receiving Number : "),
+    "accept": MessageLookupByLibrary.simpleMessage("Accept"),
+    "reject": MessageLookupByLibrary.simpleMessage("Reject"),
   };
 }

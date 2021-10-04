@@ -1,6 +1,6 @@
 import 'package:equipment/features/purchase/purchase_process.dart';
 import 'package:equipment/widget/tabs_screen.dart';
-import 'package:equipment/features/detail_custody/custody_details.dart';
+import 'package:equipment/features/detail_custody/custody_details_page.dart';
 import 'package:equipment/features/login/login_page.dart';
 import 'package:equipment/utils/HexColor.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
             }
             return supportedLocales.elementAt(0);
           },
-        home: PurchaseProcess(),
+        home: LoginPage(),
         routes: {
           TabsScreen.routeName: (_) => TabsScreen(),
           CustodyPageList.routeName: (_) => CustodyPageList(),
