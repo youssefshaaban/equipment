@@ -1,16 +1,21 @@
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Details.dart';
-import 'package:equipment/pages/purchase_process.dart';
+import 'package:equipment/features/purchase/purchase_process.dart';
+import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:equipment/widget/item_purchase_details_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustodyDetails extends StatelessWidget {
   static const routeName = '/custodyDetailsRouteName';
 
+
   final List<Details> detailsList1 = detailsList;
+
 
   @override
   Widget build(BuildContext context) {
+    final routesArgument=ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    CustodyData data = routesArgument['data'];
     return Scaffold(
         appBar: AppBar(
           title: Text(S.of(context)!.custodyDetailsAppBarTitle),
@@ -22,7 +27,7 @@ class CustodyDetails extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      buildCardInfo(context),
+                      buildCardInfo(context,data.custodyStatus.toString(),data.custodyDate!,data.totalAmount.toString(),data.totalAmount.toString()),
                       Container(
                         height: MediaQuery.of(context).size.height * .62,
                         decoration: BoxDecoration(
@@ -40,58 +45,15 @@ class CustodyDetails extends StatelessWidget {
                     ],
                   ),
                 )),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ElevatedButton.icon(
-                        icon: Icon(Icons.add, size: 20, color: Colors.white),
-                        label: Text(
-                          S.of(context)!.custodyDetailsAddButton,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(PurchaseProcess.routeName);
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      icon: Icon(Icons.add, size: 20, color: Colors.white),
-                      label: Text(
-                        S.of(context)!.custodyDetailsRaisingButton,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.close, size: 20, color: Colors.white),
-                        label: Text(
-                          S.of(context)!.custodyDetailsCloseButton,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
+
+            buildAlign(data.custodyStatus!, context)
+
+
           ],
         ));
   }
 
-  Widget buildCardInfo(BuildContext context) {
+  Widget buildCardInfo(BuildContext context,String custodyNumber,String date,String cost,String remainAmount,) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -111,7 +73,8 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(S.of(context)!.custodyDetailsValue1,
+                Text(custodyNumber,
+
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -131,7 +94,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(S.of(context)!.custodyDetailsValue2,
+                Text(date,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -151,7 +114,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(S.of(context)!.custodyDetailsValue3,
+                Text(cost,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -171,7 +134,7 @@ class CustodyDetails extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(S.of(context)!.custodyDetailsValue4,
+                Text(remainAmount,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -202,5 +165,96 @@ class CustodyDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget buildAlign(int status,BuildContext context){
+    if(status==1){
+      return  Align(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: ElevatedButton.icon(
+                  icon: Icon(
+                      Icons.add, size: 20, color: Colors.white),
+                  label: Text(
+                    S.of(context)!.custodyDetailsAddButton,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(PurchaseProcess.routeName);
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: ElevatedButton.icon(
+                icon: Icon(Icons.add, size: 20, color: Colors.white),
+                label: Text(
+                  S.of(context)!.custodyDetailsRaisingButton,
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {},
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(
+                      Icons.close, size: 20, color: Colors.white),
+                  label: Text(
+                    S.of(context)!.custodyDetailsCloseButton,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }else if(status==0){
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+
+                  child: Text(
+                    S.of(context)!.custodyDetailsAddButton,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(PurchaseProcess.routeName);
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: ElevatedButton(
+                child: Text(
+                  S.of(context)!.custodyDetailsRaisingButton,
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {},
+              ),
+            ),
+
+          ],
+        ),
+      );
+    }else{
+      return Container();
+    }
   }
 }
