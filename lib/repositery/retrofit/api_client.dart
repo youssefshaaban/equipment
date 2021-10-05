@@ -30,7 +30,7 @@ abstract class ApiClient {
       @Query("CUser") String cUser);
 
   @POST(Apis.submitOperation)
-  Future<ResponseSubmitOperation> submitOperation(@Body() CustodyOper custodyOper);
+  Future<ResponseSubmitOperation> submitOperation(@Body() RequestCustodyOpera custodyOper);
 
   @GET("${Apis.getCustodyOperation}/{id}")
   Future<ResponseCustodyOpera> getCustodyOperation(@Path("id") int id);

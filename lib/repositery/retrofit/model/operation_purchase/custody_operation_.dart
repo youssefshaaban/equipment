@@ -15,8 +15,6 @@ class CustodyOper {
   String? invoiceNumber;
   @JsonKey(name: "DriverUserId")
   int driverUserId;
-  @JsonKey(name: "ImagesData")
-  List<ImagesData>? imagesData;
   @JsonKey(name: "images")
   List<ImagesData>? images;
   @JsonKey(name: "OperDate")
@@ -56,6 +54,20 @@ class ResponseCustodyOpera {
   Map<String, dynamic> toJson() => _$ResponseCustodyOperaToJson(this);
 }
 
+
+@JsonSerializable()
+class RequestCustodyOpera{
+  @JsonKey(name: "CustodyOperations")
+  CustodyOper custodyOperations;
+  @JsonKey(name: "ImagesData")
+  List<ImagesData>? cOpersData;
+  RequestCustodyOpera({required this.custodyOperations});
+
+
+  factory RequestCustodyOpera.fromJson(Map<String, dynamic> json) => _$RequestCustodyOperaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RequestCustodyOperaToJson(this);
+}
 
 
 @JsonSerializable()
