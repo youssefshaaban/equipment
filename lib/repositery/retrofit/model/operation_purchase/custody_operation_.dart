@@ -25,7 +25,7 @@ class CustodyOper {
   int custodyId;
   CustodyOper(
       {required this.operAmount,
-        this.operDetails,
+       required this.operDetails,
         required this.custodyId,
         required this.invoiceNumber,
         required this.driverUserId

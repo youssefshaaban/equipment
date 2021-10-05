@@ -1,19 +1,18 @@
 import 'package:equipment/localization/generated/l10n.dart';
-import 'package:equipment/model/Equipment.dart';
-import 'package:equipment/pages/custody_details.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:flutter/material.dart';
 
 class ItemCustody extends StatelessWidget {
   final CustodyData custody;
-
-  ItemCustody({required this.custody});
+  final int status;
+  Function click;
+  ItemCustody({required this.custody,required this.status,required this.click});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(context).pushNamed(CustodyDetails.routeName);
+      onTap: (){
+        click();
       },
       child: Card(
         elevation: 5,

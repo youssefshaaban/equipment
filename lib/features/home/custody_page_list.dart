@@ -1,11 +1,13 @@
+import 'package:equipment/features/detail_custody/custody_details_page.dart';
 import 'package:equipment/features/home/custody_controller.dart';
 import 'package:equipment/features/home/custody_state.dart';
-import 'package:equipment/model/Equipment.dart';
+
 import 'package:equipment/widget/item_custody.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+
 
 class CustodyPageList extends StatefulWidget {
   static const routeName = '/custody_list';
@@ -61,8 +63,14 @@ class _CustodyPageListState extends State<CustodyPageList> {
             padding: EdgeInsets.all(10),
             child: ListView.builder(
               itemBuilder: (ctx, index) {
-                return ItemCustody(
-                  custody: custodies.custodies[index],
+                return InkWell(
+                  child: ItemCustody(
+                    custody: custodies.custodies[index], status: status,click: () async{
+                   var res= Navigator.of(context).pushNamed(CustodyDetails.routeName,arguments: {'data':custodies.custodies[index]});
+                   if(res is bool && res==true){
+                     controller.getCustodyByStatus(status);
+                   }
+                  },),
                 );
               },
               itemCount: custodies.custodies.length,

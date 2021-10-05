@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "userName_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال اسم المستخدم"),
     "currency": MessageLookupByLibrary.simpleMessage("ريال"),
     "custodyReceivingNumber": MessageLookupByLibrary.simpleMessage("رقم الاستلام : "),
+    "accept": MessageLookupByLibrary.simpleMessage("قبول"),
+    "reject": MessageLookupByLibrary.simpleMessage("رفض"),
 
   };
 }
