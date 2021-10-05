@@ -33,14 +33,18 @@ class PurchaseDataController extends GetxController{
   final purchaseDataState = PurchaseDataState().obs;
   PurchaseDataState get state => purchaseDataState.value;
 
-  Future<String> submitOperationData({required String amount,required String desc,required int custodyId}) async {
+  Future<String> submitOperationData({required String amount,required String desc,required int custodyId,
+    required List<ImagesData> imageData}) async {
     String message = '';
     //try {
       //purchaseDataState.value = PurchaseDataLoading();
       final prefs = await SharedPreferences.getInstance();
       var user_id = prefs.getString("user_id");
-      var data = await appRepository.getApiClient().submitOperation(CustodyOper(operAmount: 5, operDetails: desc, custodyId: 5, invoiceNumber: '5', driverUserId: 5));
-      print(data.success);
+      final CustodyOper custodyOper= new CustodyOper(operAmount: 5/*double.parse(amount)*/, operDetails: desc,
+        custodyId: custodyId, invoiceNumber: '1', driverUserId:1 /*int.parse(user_id!)*/,images:imageData );
+      var data = await appRepository.getApiClient().
+      submitOperation(RequestCustodyOpera(custodyOperations: custodyOper));
+      //print(data.success);
       if (data.success == true) {
         purchaseDataState.value = PurchaseDataSuccess(
             responseSubmitOperation: ResponseSubmitOperation(
@@ -51,7 +55,7 @@ class PurchaseDataController extends GetxController{
         purchaseDataState.value = PurchaseDataFailure(
             error: data.message != null ? data.message! : "Some thing wrong");
         print(data.message);
-        message = data.message!;
+        message = 'failed';
       }
     return message;
     }

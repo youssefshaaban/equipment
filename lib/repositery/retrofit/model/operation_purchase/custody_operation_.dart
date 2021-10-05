@@ -28,7 +28,8 @@ class CustodyOper {
        required this.operDetails,
         required this.custodyId,
         required this.invoiceNumber,
-        required this.driverUserId
+        required this.driverUserId,
+        this.images
         });
 
 
