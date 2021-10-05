@@ -2,6 +2,7 @@
 
 
 import 'package:equatable/equatable.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 
 class PurchaseDataState extends Equatable {
   @override
@@ -13,7 +14,9 @@ class PurchaseDataState extends Equatable {
 class PurchaseDataLoading extends PurchaseDataState{}
 
 class PurchaseDataSuccess extends PurchaseDataState{
+  final ResponseSubmitOperation responseSubmitOperation;
 
+  PurchaseDataSuccess({required this.responseSubmitOperation});
 }
 
 class PurchaseDataFailure extends PurchaseDataState {

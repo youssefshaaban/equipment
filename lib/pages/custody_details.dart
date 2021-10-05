@@ -46,7 +46,7 @@ class CustodyDetails extends StatelessWidget {
                   ),
                 )),
 
-            buildAlign(data.custodyStatus!, context)
+            buildAlign(data.custodyStatus!, context,data.custodyId)
 
 
           ],
@@ -167,7 +167,7 @@ class CustodyDetails extends StatelessWidget {
     );
   }
 
-  Widget buildAlign(int status,BuildContext context){
+  Widget buildAlign(int status,BuildContext context,int custodyId){
     if(status==1){
       return  Align(
         alignment: Alignment.bottomCenter,
@@ -186,7 +186,7 @@ class CustodyDetails extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.of(context)
-                        .pushNamed(PurchaseProcess.routeName);
+                        .pushNamed(PurchaseProcess.routeName,arguments: {'custodyId':custodyId});
                   },
                 ),
               ),

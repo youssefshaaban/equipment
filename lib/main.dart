@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
             }
             return supportedLocales.elementAt(0);
           },
-        home: PurchaseProcess(),
+        home: LoginPage(),
         routes: {
           TabsScreen.routeName: (_) => TabsScreen(),
           CustodyPageList.routeName: (_) => CustodyPageList(),
