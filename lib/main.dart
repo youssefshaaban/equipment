@@ -6,6 +6,7 @@ import 'package:equipment/utils/HexColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:logger/logger.dart';
 import 'features/home/custody_page_list.dart';
 import 'localization/generated/l10n.dart';
 import 'localization/language_constants.dart';
@@ -136,4 +137,11 @@ class Home extends StatelessWidget {
 
     );
   }
+}
+
+void _setupLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((rec) {
+    print('${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
 }

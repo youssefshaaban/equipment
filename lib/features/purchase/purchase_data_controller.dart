@@ -39,7 +39,8 @@ class PurchaseDataController extends GetxController{
       //purchaseDataState.value = PurchaseDataLoading();
       final prefs = await SharedPreferences.getInstance();
       var user_id = prefs.getString("user_id");
-      var data = await appRepository.getApiClient().submitOperation(CustodyOper(operAmount: 5, operDetails: desc, custodyId: 5, invoiceNumber: '5', driverUserId: 5));
+      var cust=CustodyOper(operAmount: 5, operDetails: desc, custodyId: 5, invoiceNumber: '5', driverUserId: 5);
+      var data = await appRepository.getApiClient().submitOperation(RequestCustodyOpera(custodyOperations: cust));
       print(data.success);
       if (data.success == true) {
         purchaseDataState.value = PurchaseDataSuccess(
