@@ -36,6 +36,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
   List<File> images = [];
   List<String> base64File = [];
   String base641 = '';
+  List<ImagesData> imageData=[];
 
 
   add(String base64) {
@@ -123,6 +124,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
     _imageFile = image!;
     _image1 = File(_imageFile.path);
     List<int> fileUnit8 = _image1.readAsBytesSync();
+    imageData.add(ImagesData(imageData: base64Encode(fileUnit8)));
     add(base64Encode(fileUnit8));
     setState(() {
       base641 = base64Encode(fileUnit8);
@@ -150,7 +152,7 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
             if (valid) {
               final prefs = await SharedPreferences.getInstance();
               var user_id = prefs.getString("user_id");
-              addPurchase(1);
+              addPurchase(custodyId,imageData);
               /*_purchaseDataController.addOperation(context, CustodyOper(
                   operAmount: 2,
                   operDetails: desctController.text,
@@ -304,9 +306,9 @@ class _PurchaseProcessState extends State<PurchaseProcess> {
     });
   }
 
-  void addPurchase(int custodyId) {
+  void addPurchase(int custodyId, List<ImagesData> imageData) {
     _purchaseDataController.submitOperationData(amount: amountController.text,
-        desc: desctController.text, custodyId: custodyId).then((value) =>
+        desc: desctController.text, custodyId: custodyId, imageData: imageData).then((value) =>
         customSnackBar(context, msg: value)
     );
   }

@@ -6,7 +6,7 @@ part 'custody_operation_.g.dart';
 @JsonSerializable()
 class CustodyOper {
   @JsonKey(name: "OperId")
-  int? operId;
+  int? operId=0;
   @JsonKey(name: "OperAmount")
   double operAmount;
   @JsonKey(name: "OperDetails")
@@ -28,10 +28,15 @@ class CustodyOper {
        required this.operDetails,
         required this.custodyId,
         required this.invoiceNumber,
-        required this.driverUserId
+        required this.driverUserId,
+        this.images
         });
 
 
+  @override
+  String toString() {
+    return _$CustodyOperToJson(this).toString();
+  }
 
   factory CustodyOper.fromJson(Map<String, dynamic> json) => _$CustodyOperFromJson(json);
 

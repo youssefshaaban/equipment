@@ -207,7 +207,8 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed(PurchaseProcess.routeName);
+
+                    Navigator.of(context).pushNamed(PurchaseProcess.routeName,arguments: {'custodyId':data.custodyId});
                   },
                 ),
               ),
