@@ -33,6 +33,10 @@ class CustodyOper {
         });
 
 
+  @override
+  String toString() {
+    return _$CustodyOperToJson(this).toString();
+  }
 
   factory CustodyOper.fromJson(Map<String, dynamic> json) => _$CustodyOperFromJson(json);
 
