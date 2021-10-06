@@ -288,7 +288,7 @@ class CustodyDetails extends StatelessWidget {
       Navigator.of(context).pop();
       if (value is StatusSuccess) {
         customSnackBar(context, msg: "success");
-        await Future.delayed(const Duration(milliseconds: 1000));
+        await Future.delayed(const Duration(milliseconds: 500));
         Navigator.of(context).pop(true);
       } else if (value is StatusFailure) {
         customSnackBar(context, msg: value.error);

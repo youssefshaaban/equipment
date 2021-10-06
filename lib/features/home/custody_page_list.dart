@@ -66,7 +66,7 @@ class _CustodyPageListState extends State<CustodyPageList> {
                 return InkWell(
                   child: ItemCustody(
                     custody: custodies.custodies[index], status: status,click: () async{
-                   var res= Navigator.of(context).pushNamed(CustodyDetails.routeName,arguments: {'data':custodies.custodies[index]});
+                   var res= await Navigator.of(context).pushNamed(CustodyDetails.routeName,arguments: {'data':custodies.custodies[index]});
                    if(res is bool && res==true){
                      controller.getCustodyByStatus(status);
                    }

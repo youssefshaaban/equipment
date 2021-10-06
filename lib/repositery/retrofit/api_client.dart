@@ -13,7 +13,7 @@ import 'model/user/login_data.dart';
 part 'api_client.g.dart';
 
 @RestApi(baseUrl: "http://abuzaidwf-001-site4.etempurl.com/")
-abstract class ApiClient {
+abstract class ApiClient{
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   @POST(Apis.login)
@@ -36,7 +36,7 @@ abstract class ApiClient {
   Future<ResponseCustodyOpera> getCustodyOperation(@Path("id") int id);
 
   @GET(Apis.updateCustodyStatus)
-  Future<ResponseUpdateCustodyData> updateStatusCustody(@Query("CStatus") String cStatus,
+  Future<ResponseUpdateCustodyData> updateStatusCustody(@Query("Status") String cStatus,
       @Query("CId") String cUser);
 
 }
