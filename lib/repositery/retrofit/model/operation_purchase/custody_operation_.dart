@@ -6,7 +6,7 @@ part 'custody_operation_.g.dart';
 @JsonSerializable()
 class CustodyOper {
   @JsonKey(name: "OperId")
-  int? operId;
+  int? operId=0;
   @JsonKey(name: "OperAmount")
   double operAmount;
   @JsonKey(name: "OperDetails")
