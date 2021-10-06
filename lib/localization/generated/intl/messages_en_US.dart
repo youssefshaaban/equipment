@@ -64,5 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "custodyReceivingNumber": MessageLookupByLibrary.simpleMessage("Receiving Number : "),
     "accept": MessageLookupByLibrary.simpleMessage("Accept"),
     "reject": MessageLookupByLibrary.simpleMessage("Reject"),
+    "invoiceNumber": MessageLookupByLibrary.simpleMessage("Invoice number"),
   };
 }

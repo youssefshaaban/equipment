@@ -528,6 +528,14 @@ class S {
     );
   }
 
+  String get invoiceNumber {
+    return Intl.message(
+      'Invoice number',
+      name: 'invoiceNumber',
+      desc: '',
+      args: [],
+    );
+  }
   String get itemPurchaseDescription {
     return Intl.message(
       'Description',

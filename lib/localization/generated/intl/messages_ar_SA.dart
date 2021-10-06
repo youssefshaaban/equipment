@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "custodyReceivingNumber": MessageLookupByLibrary.simpleMessage("رقم الاستلام : "),
     "accept": MessageLookupByLibrary.simpleMessage("قبول"),
     "reject": MessageLookupByLibrary.simpleMessage("رفض"),
+    "invoiceNumber": MessageLookupByLibrary.simpleMessage("رقم الفاتورة"),
 
   };
 }

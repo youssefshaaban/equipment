@@ -1,13 +1,13 @@
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/model/Details.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:flutter/material.dart';
 
 class ItemPurchaseDetailsWidget extends StatelessWidget {
-  final Details details;
+  final CustodyOper details;
 
   ItemPurchaseDetailsWidget({Key? key, required this.details}) : super(key: key);
 
-  final List<String> networkImage = ["","","","","","","","",""];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  S.of(context)!.itemPurchaseCustodyNumber,
+                  "${S.of(context)!.invoiceNumber} : ",
                   style: Theme
                       .of(context)
                       .textTheme
@@ -34,11 +34,11 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                   child: Container(
                       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       child: Text(
-                        details.custodyNumber.toString(),
+                          details.invoiceNumber==null? "":details.invoiceNumber.toString(),
                       )),
                 ),
                 Text(
-                  details.date.toString(),
+                  details.OperDate!.split('T')[0],
                 )
               ],
             ),
@@ -47,7 +47,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  S.of(context)!.itemPurchaseDescription,
+                  "${S.of(context)!.itemPurchaseDescription} ",
                   style: Theme
                       .of(context)
                       .textTheme
@@ -57,7 +57,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      details.description!,
+                      details.operDetails!,
                     ),
                   ),
                 ),
@@ -78,39 +78,42 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      details.cost.toString(),
+                      "${details.operAmount.toString()} ${S.of(context)!.currency}",
                     ),
                   ),
                 ),
               ],
             ),
-
+            details.images!=null&&details.images!.isNotEmpty?
             Container(
               height: 80,
               width: MediaQuery.of(context).size.width,
 
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: networkImage.length,
+                  itemCount: details.images!.length,
                   itemBuilder: (context, index) {
                     return Container(
                       height: 60,
                       width: 70,
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: FadeInImage(
-                          image: NetworkImage(networkImage[index]),
-                          placeholder: AssetImage("assets/images/bg_no_image.png"),
-                          imageErrorBuilder: (context, error, stackTrace) {
-                            return Image.asset('assets/images/bg_no_image.png',
-                                fit: BoxFit.cover);
-                          },
-                          fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: FadeInImage(
+                            image: NetworkImage(details.images![index].imageData),
+                            placeholder: AssetImage("assets/images/bg_no_image.png"),
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/images/bg_no_image.png',
+                                  fit: BoxFit.cover);
+                            },
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     );
                   }),
-            ),
+            ):SizedBox(height: 1,),
           ],
         ),
       ),

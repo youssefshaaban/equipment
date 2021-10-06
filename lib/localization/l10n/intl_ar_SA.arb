@@ -51,5 +51,6 @@
    "password_required": "لابد من إدخال كلمة المرور",
     "userName_required": "لابد من إدخال اسم المستخدم",
     "currency": "ريال ",
-    "custodyReceivingNumber": "رقم الاستلام"
+    "custodyReceivingNumber": "رقم الاستلام",
+ "invoiceNumber": "رقم الفاتورة"
 }

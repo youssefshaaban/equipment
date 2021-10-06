@@ -51,5 +51,6 @@
   "password_required": "Password required",
   "userName_required": "UserName required",
   "currency": "SAR",
-  "custodyReceivingNumber":"Receiving Number"
+  "custodyReceivingNumber":"Receiving Number",
+  "invoiceNumber": "Invoice number"
 }
