@@ -1,4 +1,4 @@
-import 'package:equipment/features/purchase/purchase_process.dart';
+import 'package:equipment/features/purchase/purchase_process_page.dart';
 import 'package:equipment/widget/tabs_screen.dart';
 import 'package:equipment/features/detail_custody/custody_details_page.dart';
 import 'package:equipment/features/login/login_page.dart';
@@ -121,20 +121,9 @@ class _MyAppState extends State<MyApp> {
           TabsScreen.routeName: (_) => TabsScreen(),
           CustodyPageList.routeName: (_) => CustodyPageList(),
           CustodyDetails.routeName: (_) => CustodyDetails(),
-          PurchaseProcess.routeName: (_) => PurchaseProcess(),
+          PurchaseProcessPage.routeName: (_) => PurchaseProcessPage(),
         },
       );
     }
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-    );
   }
 }

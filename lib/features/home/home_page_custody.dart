@@ -3,19 +3,18 @@ import 'package:equipment/localization/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomePageCustody extends StatelessWidget{
-
+class HomePageCustody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final list=[
-    S.of(context)!.equipmentPageNew,
-    S.of(context)!.equipmentPageOpened,
-    S.of(context)!.equipmentPageClosed,
-    S.of(context)!.equipmentPageDeleted,
-    S.of(context)!.equipmentPageFinished,
-    S.of(context)!.equipmentPageRejected
+    final list = [
+      S.of(context)!.equipmentPageNew,
+      S.of(context)!.equipmentPageOpened,
+      S.of(context)!.equipmentPageClosed,
+      S.of(context)!.equipmentPageDeleted,
+      S.of(context)!.equipmentPageFinished,
+      S.of(context)!.equipmentPageRejected
     ];
-   return Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -25,23 +24,21 @@ class HomePageCustody extends StatelessWidget{
             mainAxisSpacing: 10),
         itemBuilder: (ctx, index) {
           final title = list[index];
-          return buildItemCustody(context, title,index);
+          return buildItemCustody(context, title, index);
         },
         itemCount: list.length,
       ),
     );
-
   }
 
-  void selectCustody(BuildContext ctx,int index,String title) {
+  void selectCustody(BuildContext ctx, int index, String title) {
     Navigator.of(ctx).pushNamed(CustodyPageList.routeName,
-        arguments: {'title': title
-        ,'status':index
-    });
+        arguments: {'title': title, 'status': index});
   }
-  Widget buildItemCustody(BuildContext context,String title, index){
+
+  Widget buildItemCustody(BuildContext context, String title, index) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         selectCustody(context, index, title);
       },
       splashColor: Theme.of(context).primaryColor,
@@ -52,11 +49,12 @@ class HomePageCustody extends StatelessWidget{
         child: Center(
           child: Text(
             title,
-            style: Theme.of(context).appBarTheme.titleTextStyle,
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontFamily: 'Lato'),
           ),
         ),
         decoration: BoxDecoration(
-            color: Colors.white54,
+            color: Colors.cyan,
             borderRadius: BorderRadius.circular(15)),
       ),
     );

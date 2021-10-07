@@ -30,7 +30,20 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(200),
                 ),
                 child: Center(
-                  child: Image.asset('assets/images/logo.jpg'),
+                  child:
+                  Container(
+                    width: 120,
+                    height: 120,
+                    child: FadeInImage(
+                      image: NetworkImage("http://abuzaidwf-001-site4.etempurl.com/Uploads/Logo/logo-only366280.jpg"),
+                      placeholder: AssetImage("assets/images/bg_no_image.png"),
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return Image.asset('assets/images/bg_no_image.png',
+                            fit: BoxFit.cover);
+                      },
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -51,7 +64,6 @@ class _SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<_SignInForm> {
-  late ScaffoldMessengerState _messengerState;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();

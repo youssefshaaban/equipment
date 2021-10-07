@@ -1,5 +1,4 @@
 import 'package:equipment/localization/generated/l10n.dart';
-import 'package:equipment/model/Details.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:flutter/material.dart';
 

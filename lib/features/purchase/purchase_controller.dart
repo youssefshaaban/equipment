@@ -1,38 +1,58 @@
 
 
+import 'package:equipment/features/purchase/purchase_data_state.dart';
 import 'package:equipment/features/purchase/purchase_state.dart';
 import 'package:equipment/repositery/app_repositery.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_data.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_request.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PurchaseController extends GetxController{
   final AppRepository appRepository=AppRepository();
+  final uploadStateStream=ImageUploadStateState().obs;
+  ImageUploadStateState get upload_imag_estate => uploadStateStream.value;
   final purchaseStateStream=PurchaseState().obs;
-  PurchaseState get state => purchaseStateStream.value;
+  PurchaseState get purchase_estate => purchaseStateStream.value;
 
 
-  Future<String> uploadImage(String base64File) async{
-    purchaseStateStream.value = PurchaseLoading();
-    String message='';
+  Future<ImageUploadStateState> uploadImage(String base64File) async{
+    uploadStateStream.value = ImageUploadLoading();
     try{
       var imageDate= await appRepository.getApiClient().uploadImage(UploadImageRequest(imageData: base64File));
       if(imageDate.success==true){
-        purchaseStateStream.value = PurchaseSuccess(uploadImageData: UploadImageData(fullPath: base64File, message: '', success: true));
-        message= "uploaded successfully";
+        return ImageUploadSuccess(uploadImageData: imageDate);
+
       }else{
-        purchaseStateStream.value= PurchaseFailure(error:"Some thing wrong");
-        message= "can't upload photo";
+        return ImageUploadFailure(error:"Some thing wrong");
       }
 
     }
     catch(error){
-      purchaseStateStream.value= PurchaseFailure(error: error.toString());
+      return ImageUploadFailure(error: error.toString());
     }
-
-    return message;
-
   }
+
+
+  Future<PurchaseState> submitOperationData({required CustodyOper custodyOper,required List<ImagesData> imageData}) async {
+    try {
+
+      var request = RequestCustodyOpera(custodyOperations: custodyOper);
+      request.cOpersData = imageData;
+      var data = await appRepository.getApiClient().submitOperation(request);
+      if (data.success == true) {
+        return PurchaseSuccess(operId: data.oper_Id);
+      }
+      else {
+        return PurchaseFailure(
+            error: data.message != null ? data.message! : "Some thing wrong");
+      }
+    } catch(error){
+      return PurchaseFailure(error: error.toString());
+    }
+  }
+
 
   @override
   void onClose() {

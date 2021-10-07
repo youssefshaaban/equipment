@@ -62,7 +62,7 @@ class ResponseCustodyOpera {
 
 @JsonSerializable()
 class RequestCustodyOpera{
-  @JsonKey(name: "CustodyOperations")
+  @JsonKey(name: "OperData")
   CustodyOper custodyOperations;
   @JsonKey(name: "ImagesData")
   List<ImagesData>? cOpersData;
@@ -82,9 +82,14 @@ class ImagesData {
   @JsonKey(name: "ImageData")
   String imageData;
 
-  ImagesData({required this.imageData,
-    this.imageId,
+  ImagesData({required this.imageData
   });
+
+
+  @override
+  String toString() {
+    return _$ImagesDataToJson(this).toString();
+  }
 
   factory ImagesData.fromJson(Map<String, dynamic> json) => _$ImagesDataFromJson(json);
 

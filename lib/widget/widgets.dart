@@ -23,6 +23,31 @@ Widget customEditText({double? circular,String? label,String? hint , TextEditing
     );
 }
 
+progressDialogue(BuildContext context) {
+  //set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    content: Container(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    ),
+  );
+  showDialog(
+    //prevent outside touch
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      //prevent Back button press
+      return WillPopScope(
+          onWillPop: () async {
+            return true;
+          },
+          child: alert);
+    },
+  );
+}
 
 
 customSnackBar(BuildContext context, {String msg = ""}) {

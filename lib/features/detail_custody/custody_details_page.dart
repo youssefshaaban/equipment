@@ -3,8 +3,7 @@ import 'package:equipment/features/detail_custody/custody_operation_statr.dart';
 import 'package:equipment/features/detail_custody/custody_status_state.dart';
 import 'package:equipment/features/home/custody_controller.dart';
 import 'package:equipment/localization/generated/l10n.dart';
-import 'package:equipment/model/Details.dart';
-import 'package:equipment/features/purchase/purchase_process.dart';
+import 'package:equipment/features/purchase/purchase_process_page.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:equipment/widget/item_purchase_details_widget.dart';
 import 'package:equipment/widget/widgets.dart';
@@ -51,11 +50,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                   child: Column(
                     children: [
                       buildCardInfo(
-                          context,
-                          data.custodyStatus.toString(),
-                          data.custodyDate!,
-                          data.totalAmount.toString(),
-                          data.totalAmount.toString()),
+                          context),
                       Center(
                         child: Obx(
                           () {
@@ -72,11 +67,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
   }
 
   Widget buildCardInfo(
-    BuildContext context,
-    String custodyNumber,
-    String date,
-    String cost,
-    String remainAmount,
+    BuildContext context
   ) {
     return Card(
       elevation: 3,
@@ -91,13 +82,16 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             Row(
               children: [
                 Text(
-                  S.of(context)!.custodyDetailsCustodyNumber,
-                  style: Theme.of(context).textTheme.headline1,
+                  S.of(context)!.itemCustodyPageReferenceNum,
+                  style:TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
-                Text(custodyNumber,
+                Text(data.referenceCode==null?"":data.referenceCode!,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -112,12 +106,12 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                 Text(S.of(context)!.custodyDetailsDate,
                     style: TextStyle(
                         color: Colors.blueGrey,
-                        fontSize: 15,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold)),
                 const SizedBox(
                   width: 5,
                 ),
-                Text(date,
+                Text(data.custodyDate==null?"":data.custodyDate!.split('T')[0],
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -132,12 +126,12 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                 Text(S.of(context)!.custodyDetailsCost,
                     style: TextStyle(
                         color: Colors.blueGrey,
-                        fontSize: 15,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold)),
                 const SizedBox(
                   width: 5,
                 ),
-                Text(cost,
+                Text("${data.totalAmount} ${S.of(context)!.currency}",
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -149,35 +143,15 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             ),
             Row(
               children: [
-                Text(S.of(context)!.custodyDetailsRemainAmount,
+                Text("${S.of(context)!.custodyDetailsRemainAmount} : ",
                     style: TextStyle(
                         color: Colors.blueGrey,
-                        fontSize: 15,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold)),
                 const SizedBox(
                   width: 5,
                 ),
-                Text(remainAmount,
-                    style: TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold)),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Text(S.of(context)!.custodyDetailsCustodyNumber1,
-                    style: TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(S.of(context)!.custodyDetailsValue5,
+                Text("${data.totalSpent.toString()} ${S.of(context)!.currency}",
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -206,9 +180,11 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                     S.of(context)!.custodyDetailsAddButton,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {
-
-                    Navigator.of(context).pushNamed(PurchaseProcess.routeName,arguments: {'custodyId':data.custodyId});
+                  onPressed: () async {
+                    var result=await Navigator.of(context).pushNamed(PurchaseProcessPage.routeName,arguments: {'custodyId':data.custodyId});
+                    if(result==true){
+                      _controller.getCustodyOperation(data.custodyId);
+                    }
                   },
                 ),
               ),
@@ -268,31 +244,6 @@ class _CustodyDetailsState extends State<CustodyDetails> {
     }
   }
 
-  progressDialogue(BuildContext context) {
-    //set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      content: Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    );
-    showDialog(
-      //prevent outside touch
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        //prevent Back button press
-        return WillPopScope(
-            onWillPop: () async {
-              return true;
-            },
-            child: alert);
-      },
-    );
-  }
 
   void changeStatus(status, BuildContext context) {
     progressDialogue(context);
