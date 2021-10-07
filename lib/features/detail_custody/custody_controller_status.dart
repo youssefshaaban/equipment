@@ -51,7 +51,7 @@ class CustodyDetailController  extends GetxController {
 
   @override
   void onClose() {
-    _custodyStateStream.
+
     super.onClose();
   }
 }
