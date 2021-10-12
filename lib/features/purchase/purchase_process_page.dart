@@ -7,10 +7,13 @@ import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_o
 import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_data.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 enum ImageSourceType { gallery, camera }
 
@@ -33,8 +36,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   //     Get.put(PurchaseDataController());
   final _formKey = GlobalKey<FormState>();
 
-  // List<File> images = [];
-  // List<String> base64File = [];
   List<UploadImageData> imageData = [];
   late int custodyId;
   var _initDataLoded = false;
@@ -44,9 +45,8 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
     var uploadImage = await _purchaseController.uploadImage(base64);
     if (uploadImage is ImageUploadSuccess) {
       setState(() {
-        // base641 = base64Encode(fileUnit8);
-        // base64File.add(base64Encode(fileUnit8));
         imageData.add(uploadImage.uploadImageData);
+        customSnackBar(context, msg: "Uploaded Successfully");
         Navigator.of(context).pop();
       });
     } else if (uploadImage is ImageUploadFailure) {
@@ -57,90 +57,121 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
 
   Future showSheet(BuildContext context) {
     return showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(
-          height: 180,
-          color: Colors.grey,
-          child: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                  getImage(ImageSource.camera);
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                        size: 40,
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 180,
+            color: Colors.grey,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.camera_alt, size: 40, color: Colors.black,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              getImage(ImageSource.camera);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * .3,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40)
+                              ),
+                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white),)),
+                            ),
+                          )
+                        ],
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        getImage(ImageSource.camera);
-                      },
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      S.of(context)!.purchaseProcessPickWithCamera,
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                  getImage(ImageSource.gallery);
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.photo,
-                        color: Colors.white,
-                        size: 40,
+                      Divider(thickness: 1, color: Colors.white,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.photo, size: 40, color: Colors.black,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              getImage(ImageSource.gallery);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * .3,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40)
+                              ),
+                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white),)),
+                            ),
+                          )
+                        ],
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        getImage(
-                          ImageSource.gallery,
-                        );
-                      },
-                    ),
-                    Text(S.of(context)!.purchaseProcessPickFromGallery,
-                        style: TextStyle(color: Colors.white))
-                  ],
-                ),
-              ),
-            ],
-          )),
-        );
-      },
-    );
+                    ],
+                  )),
+            ),
+          );
+        });
   }
 
   Future getImage(ImageSource source) async {
-    File? _image1;
-    XFile _imageFile;
+
     final imagePicker = ImagePicker();
-    final image = await imagePicker.pickImage(source: source);
-    _imageFile = image!;
-    _image1 = File(_imageFile.path);
-    List<int> fileUnit8 = _image1.readAsBytesSync();
-    //imageData.add(ImagesData(imageData: base64Encode(fileUnit8)));
-    addImage(base64Encode(fileUnit8));
-    //print(images.length);
+    await imagePicker.pickImage(source: source)
+        .then((value) => cropImage(imageFile: File(value!.path))
+        .then((value) => compressFile(value!)
+        .then((value)  {
+         var fileUnit8 = value.readAsBytesSync();
+          addImage(base64Encode(fileUnit8));
+        })));
   }
+  Future<File> compressFile(File file) async{
+    File compressedFile = await FlutterNativeImage.compressImage(file.path,
+      quality: 5,);
+    return compressedFile;
+  }
+
+  Future<File?>cropImage({required File imageFile}) async{
+    File? croppedFile =await ImageCropper.cropImage(
+        sourcePath: imageFile.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        )
+    );
+    return croppedFile;
+  }
+
+
 
   @override
   void initState() {
@@ -252,9 +283,8 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                                       height: 130,
                                       width: 130,
                                       margin: EdgeInsets.all(5),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: FadeInImage(
+                                      child:
+                                       FadeInImage(
                                           image: NetworkImage(
                                               imageData[index].fullPath),
                                           placeholder: AssetImage(
@@ -267,7 +297,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                                           },
                                           fit: BoxFit.fill,
                                         ),
-                                      ),
                                     ),
                                     Align(
                                       alignment: Alignment.bottomCenter,

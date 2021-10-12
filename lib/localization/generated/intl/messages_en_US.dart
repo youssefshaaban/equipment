@@ -65,5 +65,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "accept": MessageLookupByLibrary.simpleMessage("Accept"),
     "reject": MessageLookupByLibrary.simpleMessage("Reject"),
     "invoiceNumber": MessageLookupByLibrary.simpleMessage("Invoice number"),
+    "openCamOrGallery": MessageLookupByLibrary.simpleMessage("open"),
   };
 }
