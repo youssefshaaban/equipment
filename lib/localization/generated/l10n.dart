@@ -555,6 +555,14 @@ class S {
     );
   }
 
+  String get openCamOrGallery {
+    return Intl.message(
+      'open',
+      name: 'openCamOrGallery',
+      desc: '',
+      args: [],
+    );
+  }
 
 }
 

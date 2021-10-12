@@ -52,5 +52,6 @@
     "userName_required": "لابد من إدخال اسم المستخدم",
     "currency": "ريال ",
     "custodyReceivingNumber": "رقم الاستلام",
- "invoiceNumber": "رقم الفاتورة"
+    "invoiceNumber": "رقم الفاتورة",
+    "openCamOrGallery":"فتح"
 }
