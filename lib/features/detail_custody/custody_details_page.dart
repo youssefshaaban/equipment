@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equipment/features/detail_custody/custody_controller_status.dart';
 import 'package:equipment/features/detail_custody/custody_operation_statr.dart';
 import 'package:equipment/features/detail_custody/custody_status_state.dart';
@@ -5,10 +7,14 @@ import 'package:equipment/features/home/custody_controller.dart';
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/features/purchase/purchase_process_page.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:equipment/widget/item_purchase_details_widget.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../../utils.dart';
 
 class CustodyDetails extends StatefulWidget {
   static const routeName = '/custodyDetailsRouteName';
@@ -19,6 +25,9 @@ class CustodyDetails extends StatefulWidget {
 
 class _CustodyDetailsState extends State<CustodyDetails> {
   late CustodyDetailController _controller;
+  TextEditingController amount=new TextEditingController();
+  TextEditingController details=new TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   late CustodyData data;
   var _initDataLoded = false;
@@ -197,6 +206,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                 ),
                 onPressed: () {
                   changeStatus(2, context);
+                  showRaiseAlert(context);
                 },
               ),
             ),
@@ -280,95 +290,294 @@ class _CustodyDetailsState extends State<CustodyDetails> {
           child: ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                return Dismissible(
-                  background:stackBehindDissmis() ,
-                  secondaryBackground: secondaryStackBehindDissmis(),
-                  key: ObjectKey(list[index]),
-                  confirmDismiss: (DismissDirection direction)async{
-                    return await showDialog(
-                      context: context,
-                      builder: (BuildContext context){
-                        return AlertDialog(
-                            title: const Text('Confirm'),
-                        content: direction==DismissDirection.startToEnd?
-                            Text("Are you sure you want to delete"):
-                            Text("Are you sure you want to edit the process"),
-                          actions: <Widget>[
-                            Row(
-                              children: [
-                                TextButton(
-                                  child: direction==DismissDirection.startToEnd?
-                                  Text('Delete')  :
-                                  Text('Edit'),
-                                  onPressed: () {
-                                    if(direction==DismissDirection.startToEnd) {
-                                      deleteProcess();
-                                      Navigator.of(context).pop();
-                                    }else{
-                                      Navigator.of(context).pushNamed(PurchaseProcessPage.routeName,arguments: {
-                                        'custodyId':list[index].operId,
-                                        'custodyAmount':list[index].operAmount,
-                                        'custodyDetails':list[index].operDetails,
-                                      });
-                                      //Navigator.of(context).pop();
-                                    }
-                                  },
-                                ),
-                                TextButton(
-                                  child:Text('Cancel'),
-                                  onPressed: () {
-                                      Navigator.of(context).pop();
-                                    }
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      }
-                    );
-                  },
-                  child: ItemPurchaseDetailsWidget(
-                    details: list[index],
-                  ),
+                return Stack(
+                  children:[
+                    ItemPurchaseDetailsWidget(
+                      details: list[index],
+                    ),
+                    Positioned(
+                        bottom: 0,
+                        left: 0,
+                        child: Row(
+                      children: [
+                        IconButton(onPressed: (){
+                          showSheet(context,list[index].operAmount,list[index].operDetails,list[index].images);
+                        }, icon: Icon(Icons.edit)),
+                        SizedBox(width: 5,),
+                        IconButton(onPressed: (){
+                          showDeleteAlert(context,list,index);
+
+                        }, icon: Icon(Icons.delete)),
+                      ],
+                    ))
+                  ]
                 );
               }));
     } else {
       return Container();
     }
+
+
   }
 
-  Widget stackBehindDissmis() {
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: Container(
-        color:Colors.red,
-          child: Row(
-            children:[
-              Icon(Icons.delete,color:Colors.white,size:20),
-              const SizedBox(width:5),
-              Text("Delete",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
-            ]
-          ),
-      ),
+
+
+  showRaiseAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("process can't be modified after raise"),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  child: new Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: new Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            )
+          ],
+        );
+      },
     );
   }
 
-
-  Widget secondaryStackBehindDissmis() {
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: Container(
-          color:Colors.blue,
-            child: Row(
-                children:[
-                  Icon(Icons.edit,color:Colors.white,size:20),
-                  const SizedBox(width:5),
-                  Text("Edit",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
-                ]
-          )
-      ),
+  showDeleteAlert(BuildContext context, List<CustodyOper> list, int index, ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("delete the process?"),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  child: new Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: new Text("Delete"),
+                  onPressed: () {
+                    deleteProcess( list, index);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            )
+          ],
+        );
+      },
     );
   }
 
-  void deleteProcess() {}
-}
+  Future showSheet(BuildContext context, double operAmount, String? operDetails, List<ImagesData>? images,) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: MediaQuery.of(context).size.height*.5,
+            color: Colors.grey,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key:_formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: amount,
+                        initialValue: operAmount.toString(),
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return "enter a valid value";
+                          }
+                          else
+                            return null;
+                        },
+                      ),
+                      SizedBox(height:3),
+                      TextFormField(
+                        controller: details,
+                        initialValue: operDetails.toString(),
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return "enter a valid value";
+                          }else if(value.length<5){
+                            return "description can't be less than 5 chars";
+                          }
+                          else
+                            return null;
+                        },
+                      ),
+                      SizedBox(height:3),
+                      if(images!.isNotEmpty)
+                        ElevatedButton(onPressed:()=>showPhotoSheet(context), child:Text('Add Photo')),
+                      images.isEmpty?
+                      InkWell(
+                        onTap: ()=>showPhotoSheet(context),
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          color:Colors.grey,
+                          child:Icon(Icons.camera_alt,color:Colors.black) ,
+                        ),
+                      ):
+                      ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: images.length,
+                          itemBuilder: (context, index){
+                            return   InkWell(
+                                onTap: ()=>showPhotoSheet(context),
+                                child:Container(
+                                  height: 60,
+                                  width: 70,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child:
+                                      FadeInImage(
+                                        image: NetworkImage(images[index].imageData),
+                                        placeholder: AssetImage("assets/images/bg_no_image.png"),
+                                        imageErrorBuilder: (context, error, stackTrace) {
+                                          return Image.asset('assets/images/bg_no_image.png',
+                                              fit: BoxFit.cover);
+                                        },
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                            );
+                          }),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(onPressed:()=>Navigator.of(context).pop() , child: Text("Cancel")),
+                          ElevatedButton(onPressed:(){
+                            editData();
+                            Navigator.of(context).pop();
+                          }, child: Text("Save")),
+                        ],)
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  Future showPhotoSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 180,
+            color: Colors.grey,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.camera_alt, size: 40, color: Colors.black,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              getImage(ImageSource.camera);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * .3,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40)
+                              ),
+                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white),)),
+                            ),
+                          )
+                        ],
+                      ),
+                      Divider(thickness: 1, color: Colors.white,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.photo, size: 40, color: Colors.black,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              getImage(ImageSource.gallery);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * .3,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40)
+                              ),
+                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white),)),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  )),
+            ),
+          );
+        });
+  }
+
+  Future getImage(ImageSource source) async {
+
+    final imagePicker = ImagePicker();
+    await imagePicker.pickImage(source: source)
+        .then((value) => cropImage(imageFile: File(value!.path))
+        .then((value) => compressFile(value!)
+        .then((value){
+      var fileUnit8 = value.readAsBytesSync();
+      //addImage(base64Encode(fileUnit8));
+    })));
+  }
+
+  void editData() {}
+
+  void deleteProcess(List<CustodyOper> list,int index){
+    /*setState(() {
+      list.removeAt(index);
+    });*/
+  }
+
+  }
+
+

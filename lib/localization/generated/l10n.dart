@@ -579,6 +579,42 @@ class S {
       args: [],
     );
   }
+  String get editSheetTFFamount {
+    return Intl.message(
+      'enter a valid value',
+      name: 'editSheetTFFamount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editSheetTFFdesc {
+    return Intl.message(
+      'enter a valid value',
+      name: 'editSheetTFFdesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editSheetSaveButton {
+    return Intl.message(
+      'Save',
+      name: 'editSheetSaveButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editSheetCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'editSheetCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get processConfirmationCancelButton {
     return Intl.message(
       'Cancel',

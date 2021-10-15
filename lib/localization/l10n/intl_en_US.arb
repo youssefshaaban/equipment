@@ -56,5 +56,10 @@
   "openCamOrGallery":"open",
   "processConfirmation":"process can't be modified after raise are you sure?",
   "processConfirmationAddButton":"Add",
-  "processConfirmationCancelButton":"Cancel"
+  "processConfirmationCancelButton":"Cancel",
+  "editSheetTFFamount":"enter a valid value",
+  "editSheetTFFdesc":"enter a valid value",
+  "editSheetSaveButton":"Save",
+  "editSheetCancelButton":"Cancel",
+
 }

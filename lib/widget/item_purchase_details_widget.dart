@@ -1,13 +1,34 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ItemPurchaseDetailsWidget extends StatelessWidget {
+import '../utils.dart';
+
+class ItemPurchaseDetailsWidget extends StatefulWidget {
   final CustodyOper details;
 
   ItemPurchaseDetailsWidget({Key? key, required this.details}) : super(key: key);
 
+  @override
+  State<ItemPurchaseDetailsWidget> createState() => _ItemPurchaseDetailsWidgetState();
+}
 
+class _ItemPurchaseDetailsWidgetState extends State<ItemPurchaseDetailsWidget> {
+
+  TextEditingController cost= TextEditingController();
+  TextEditingController amount= TextEditingController();
+  TextEditingController desc= TextEditingController();
+
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,11 +54,11 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                   child: Container(
                       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       child: Text(
-                          details.invoiceNumber==null? "":details.invoiceNumber.toString(),
+                          widget.details.invoiceNumber==null? "":widget.details.invoiceNumber.toString(),
                       )),
                 ),
                 Text(
-                  details.OperDate!.split('T')[0],
+                  widget.details.OperDate!.split('T')[0],
                 )
               ],
             ),
@@ -56,7 +77,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      details.operDetails!,
+                      widget.details.operDetails!,
                     ),
                   ),
                 ),
@@ -77,22 +98,22 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Text(
-                      "${details.operAmount.toString()} ${S.of(context)!.currency}",
+                      "${widget.details.operAmount.toString()} ${S.of(context)!.currency}",
                     ),
                   ),
                 ),
               ],
             ),
-            details.images!=null&&details.images!.isNotEmpty?
+            widget.details.images!=null&&widget.details.images!.isNotEmpty?
             Container(
               height: 80,
               width: MediaQuery.of(context).size.width,
 
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: details.images!.length,
+                  itemCount: widget.details.images!.length,
                   itemBuilder: (context, index) {
-                    return Container(
+                    return widget.details.images!.isNotEmpty? Container(
                       height: 60,
                       width: 70,
                       child: Padding(
@@ -100,7 +121,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: FadeInImage(
-                            image: NetworkImage(details.images![index].imageData),
+                            image: NetworkImage(widget.details.images![index].imageData),
                             placeholder: AssetImage("assets/images/bg_no_image.png"),
                             imageErrorBuilder: (context, error, stackTrace) {
                               return Image.asset('assets/images/bg_no_image.png',
@@ -110,12 +131,27 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                    );
+                    ):
+                        Container();
                   }),
-            ):SizedBox(height: 1,),
+            ):SizedBox(height: 3,),
           ],
         ),
       ),
     );
   }
+
+
+
+  void deleteProcess(){
+
+  }
+
+  void editData() {
+
+  }
+
+
+
+
 }

@@ -30,15 +30,14 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   TextEditingController costController = TextEditingController();
   TextEditingController descController = TextEditingController();
   final PurchaseController _purchaseController = Get.put(PurchaseController());
+  final _formKey = GlobalKey<FormState>();
 
   // final PurchaseDataController _purchaseDataController =
   //     Get.put(PurchaseDataController());
-  final _formKey = GlobalKey<FormState>();
 
   List<UploadImageData> imageData = [];
   late int custodyId;
-  late double custodyAmount;
-  late String custodyDetails;
+
 
   var _initDataLoded = false;
 
@@ -274,8 +273,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
       final routeArguments =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       custodyId = routeArguments['custodyId'];
-      custodyAmount = routeArguments['custodyAmount'];
-      custodyDetails = routeArguments['custodyDetails'];
     }
     super.didChangeDependencies();
   }

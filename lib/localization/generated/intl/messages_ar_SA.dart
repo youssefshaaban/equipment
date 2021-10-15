@@ -70,6 +70,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "openCamOrGallery": MessageLookupByLibrary.simpleMessage("فتح"),
     "processConfirmation":MessageLookupByLibrary.simpleMessage("لا يمكن تعديل عملية الشراء بعد التعديل هل انت متأكد؟"),
     "processConfirmationAddButton":MessageLookupByLibrary.simpleMessage("إضافه"),
-    "processConfirmationCancelButton":MessageLookupByLibrary.simpleMessage("إلغاء")
+    "processConfirmationCancelButton":MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "editSheetTFFamount":MessageLookupByLibrary.simpleMessage("ادخل القيمه المطلوبه"),
+    "editSheetTFFdesc":MessageLookupByLibrary.simpleMessage("ادخل القيمه المطلوبه"),
+    "editSheetSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
+    "editSheetCancelButton":MessageLookupByLibrary.simpleMessage("الغاء"),
   };
 }
