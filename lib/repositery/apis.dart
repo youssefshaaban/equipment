@@ -12,6 +12,7 @@ class Apis {
   static const String uploadImage = 'api/CustodyApi/UploadImages';
   static const String getCustodyOperation = 'api/CustodyApi/CustodyOperationsData';
   static const String updateCustodyStatus = 'api/CustodyApi/UpdateCustodyStatus';
+  static const String deleteOperation = 'api/CustodyApi/DeleteOperationRow';
 
 
 }

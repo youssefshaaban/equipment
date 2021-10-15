@@ -13,6 +13,9 @@ class CustodyDetailController  extends GetxController {
   CustodyStatusState get state => _custodyStateStream.value;
   final _custodyOperationStream = CustodyOperationsState().obs;
   CustodyOperationsState get stateOperation => _custodyOperationStream.value;
+
+  final _custodyDeleteOperationStream = DeleteOperationStatusState().obs;
+  DeleteOperationStatusState get deleteStateOperation => _custodyDeleteOperationStream.value;
   @override
   void onInit() {
     super.onInit();
@@ -30,6 +33,21 @@ class CustodyDetailController  extends GetxController {
       }
     }catch(e){
      return StatusFailure(error: e.toString());
+    }
+  }
+
+  Future<DeleteOperationStatusState> deleteOperation(id) async {
+    _custodyDeleteOperationStream.value = DeleteOperationStatusLoading();
+    try{
+      // var user_id=prefs.getString("user_id");
+      var data=await appRepository.getApiClient().deleteOperation(id);
+      if(data.success==true){
+        return DeleteOperationStatusSuccess(success:true);
+      }else{
+        return DeleteOperationStatusFailure(error: data.message!=null ?data.message!:"Some thing wrong");
+      }
+    }catch(e){
+      return DeleteOperationStatusFailure(error: e.toString());
     }
   }
 
