@@ -52,6 +52,9 @@
   "userName_required": "UserName required",
   "currency": "SAR",
   "custodyReceivingNumber":"Receiving Number",
-  "invoiceNumber": "Invoice number"
-  "openCamOrGallery":"open"
+  "invoiceNumber": "Invoice number",
+  "openCamOrGallery":"open",
+  "processConfirmation":"process can't be modified after raise are you sure?",
+  "processConfirmationAddButton":"Add",
+  "processConfirmationCancelButton":"Cancel"
 }

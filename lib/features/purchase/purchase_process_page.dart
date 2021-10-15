@@ -7,15 +7,14 @@ import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_o
 import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_data.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
+
 import 'package:get/get.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils.dart';
 
-enum ImageSourceType { gallery, camera }
 
 class PurchaseProcessPage extends StatefulWidget {
   const PurchaseProcessPage({Key? key}) : super(key: key);
@@ -29,7 +28,7 @@ class PurchaseProcessPage extends StatefulWidget {
 class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   TextEditingController invoiceNumberController = TextEditingController();
   TextEditingController costController = TextEditingController();
-  TextEditingController desctController = TextEditingController();
+  TextEditingController descController = TextEditingController();
   final PurchaseController _purchaseController = Get.put(PurchaseController());
 
   // final PurchaseDataController _purchaseDataController =
@@ -38,6 +37,9 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
 
   List<UploadImageData> imageData = [];
   late int custodyId;
+  late double custodyAmount;
+  late String custodyDetails;
+
   var _initDataLoded = false;
 
   addImage(String base64) async {
@@ -55,6 +57,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
     }
   }
 
+  //Image
   Future showSheet(BuildContext context) {
     return showModalBottomSheet(
         context: context,
@@ -131,6 +134,121 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
         });
   }
 
+  //Add a process
+  Future showProcessSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 250,
+            color: Colors.black,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Add To Process?",style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold,)),
+                      const SizedBox(height:10),
+                      Card(
+                          child:Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(invoiceNumberController.text),
+                          )
+                      ),
+                      const SizedBox(height:10),
+                      Card(
+                          child:Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(costController.text),
+                          )
+                      ),
+                      const SizedBox(height:10),
+                      Card(
+                        child:Text(descController.text),
+                      ),
+                      const SizedBox(height:10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          ElevatedButton(
+                              onPressed: ()=>Navigator.of(context).pop(),
+                              child: Text('Cancel')
+                          ),
+                          ElevatedButton(
+                              onPressed: (){
+                                if(_formKey.currentState!.validate()){
+                                  addPurchase(context);
+                                }
+                              },
+                              child: Text('Add')
+                          ),
+                        ],
+                      )
+                      /*Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.camera_alt, size: 40, color: Colors.black,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              getImage(ImageSource.camera);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * .3,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40)
+                              ),
+                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white),)),
+                            ),
+                          )
+                        ],
+                      ),
+                      Divider(thickness: 1, color: Colors.white,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.photo, size: 40, color: Colors.black,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              getImage(ImageSource.gallery);
+                            },
+                            child: Container(
+                              height: 40,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * .3,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(40)
+                              ),
+                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white),)),
+                            ),
+                          )
+                        ],
+                      ),*/
+                    ],
+                  )),
+            ),
+          );
+        });
+  }
+
   Future getImage(ImageSource source) async {
 
     final imagePicker = ImagePicker();
@@ -141,34 +259,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
          var fileUnit8 = value.readAsBytesSync();
           addImage(base64Encode(fileUnit8));
         })));
-  }
-  Future<File> compressFile(File file) async{
-    File compressedFile = await FlutterNativeImage.compressImage(file.path,
-      quality: 5,);
-    return compressedFile;
-  }
-
-  Future<File?>cropImage({required File imageFile}) async{
-    File? croppedFile =await ImageCropper.cropImage(
-        sourcePath: imageFile.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ],
-        androidUiSettings: AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: Colors.deepOrange,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(
-          minimumAspectRatio: 1.0,
-        )
-    );
-    return croppedFile;
   }
 
 
@@ -184,6 +274,8 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
       final routeArguments =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       custodyId = routeArguments['custodyId'];
+      custodyAmount = routeArguments['custodyAmount'];
+      custodyDetails = routeArguments['custodyDetails'];
     }
     super.didChangeDependencies();
   }
@@ -195,11 +287,8 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
         title: Text(S.of(context)!.purchaseProcessAppBarTitle),
         actions: [
           TextButton(
-              onPressed: () async {
-                bool valid = isDataValid();
-                if (valid) {
-                  addPurchase(context);
-                }
+              onPressed: (){
+                showProcessSheet(context);
               },
               child: Text(
                 S.of(context)!.purchaseProcessSave,
@@ -212,10 +301,83 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
           child: Container(
             padding: const EdgeInsets.all(20),
             child: Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  customEditText1(
+                  /*TextFormField(
+                    controller: costController,
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "valie can't be empty";
+                      }
+                      else
+                        return null;
+                    },
+                    decoration:const InputDecoration(
+                        hintText: 'shop name',
+                        border:OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)
+                        )
+                    ),
+                  ),*/
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: costController,
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "valie can't be empty";
+                      }
+                      else
+                        return null;
+                  },
+                    decoration:const InputDecoration(
+                      hintText: 'cost',
+                      border:OutlineInputBorder(
+                       borderSide: BorderSide(color: Colors.black)
+                      )
+                    ),
+                  ),
+                  const SizedBox(height:5),
+                  TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: invoiceNumberController,
+                      validator: (value){
+                        if(value!.isEmpty){
+                          return "valie can't be empty";
+                        }
+                        else
+                          return null;
+                      },
+                      decoration:const InputDecoration(
+                          hintText: 'amount',
+                          border:OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)
+                          )
+                      )
+                  ),
+                  const SizedBox(height:5),
+
+                  TextFormField(
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return "valie can't be empty";
+                          }
+                          else if(value.length<5) {
+                            return "value can't be less than 5 chars";
+                          }
+                        },
+                        controller: descController,
+                        decoration:const InputDecoration(
+                            hintText: 'description',
+                            border:OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)
+                            )
+                        ),
+                      maxLines: 5,
+                      minLines: 3,
+                    ),
+                /*  customEditText1(
                     keyboardType: TextInputType.number,
                     //hint: 'Cost',
                     hint: S.of(context)!.purchaseProcessCostHint,
@@ -237,7 +399,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                       hint: S.of(context)!.purchaseProcessDescriptionHint,
                       controller: desctController,
                     ),
-                  ),
+                  ),*/
                   const SizedBox(
                     height: 10,
                   ),
@@ -305,9 +467,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                                           icon: Icon(Icons.delete,
                                               size: 30, color: Colors.red)),
                                     )
-
-                                    /*if(_purchaseController.state is PurchaseLoading)
-                                      Center(child: CircularProgressIndicator(),)*/
                                   ],
                                 );
                               }),
@@ -319,20 +478,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
         ),
       ),
     );
-  }
-
-  bool isDataValid() {
-    bool valid;
-    if (costController.text.isEmpty ||
-        costController.text.isEmpty ||
-        desctController.text.isEmpty) {
-      customSnackBar(context,
-          msg: S.of(context)!.purchaseProcessCustomSnackBarMessage);
-      valid = false;
-    } else {
-      valid = true;
-    }
-    return valid;
   }
 
   _deletePhoto(int index) {
@@ -347,7 +492,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
     var user_id = prefs.getString("user_id");
     var custodyOper = new CustodyOper(
         operAmount: double.parse(costController.text),
-        operDetails: desctController.text,
+        operDetails: descController.text,
         custodyId: custodyId,
         invoiceNumber: invoiceNumberController.text,
         driverUserId: int.parse(user_id!));

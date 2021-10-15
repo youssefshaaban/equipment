@@ -66,5 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "reject": MessageLookupByLibrary.simpleMessage("Reject"),
     "invoiceNumber": MessageLookupByLibrary.simpleMessage("Invoice number"),
     "openCamOrGallery": MessageLookupByLibrary.simpleMessage("open"),
+    "processConfirmation":MessageLookupByLibrary.simpleMessage("process can't be modified after raise are you sure?"),
+    "processConfirmationAddButton":MessageLookupByLibrary.simpleMessage("Add"),
+    "processConfirmationCancelButton":MessageLookupByLibrary.simpleMessage("Cancel")
   };
 }

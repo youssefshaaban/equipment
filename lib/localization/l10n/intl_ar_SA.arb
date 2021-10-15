@@ -53,5 +53,8 @@
     "currency": "ريال ",
     "custodyReceivingNumber": "رقم الاستلام",
     "invoiceNumber": "رقم الفاتورة",
-    "openCamOrGallery":"فتح"
+    "openCamOrGallery":"فتح",
+    "processConfirmation":"لا يمكن تعديل عملية الشراء بعد التعديل هل انت متأكد",
+    "processConfirmationAddButton":"إضافه",
+    "processConfirmationCancelButton":"إلغاء",
 }
