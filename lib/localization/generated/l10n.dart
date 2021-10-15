@@ -563,6 +563,30 @@ class S {
       args: [],
     );
   }
+  String get processConfirmation {
+    return Intl.message(
+      'open',
+      name: "process can't be modified after raise are you sure?",
+      desc: '',
+      args: [],
+    );
+  }
+  String get processConfirmationAddButton {
+    return Intl.message(
+      'Add',
+      name: 'processConfirmationAddButton',
+      desc: '',
+      args: [],
+    );
+  }
+  String get processConfirmationCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'processConfirmationCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
 
 }
 

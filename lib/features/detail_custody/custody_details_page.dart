@@ -99,7 +99,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
               ],
             ),
             const SizedBox(
-              height: 10,
+              height:10,
             ),
             Row(
               children: [
@@ -280,12 +280,95 @@ class _CustodyDetailsState extends State<CustodyDetails> {
           child: ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                return ItemPurchaseDetailsWidget(
-                  details: list[index],
+                return Dismissible(
+                  background:stackBehindDissmis() ,
+                  secondaryBackground: secondaryStackBehindDissmis(),
+                  key: ObjectKey(list[index]),
+                  confirmDismiss: (DismissDirection direction)async{
+                    return await showDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                            title: const Text('Confirm'),
+                        content: direction==DismissDirection.startToEnd?
+                            Text("Are you sure you want to delete"):
+                            Text("Are you sure you want to edit the process"),
+                          actions: <Widget>[
+                            Row(
+                              children: [
+                                TextButton(
+                                  child: direction==DismissDirection.startToEnd?
+                                  Text('Delete')  :
+                                  Text('Edit'),
+                                  onPressed: () {
+                                    if(direction==DismissDirection.startToEnd) {
+                                      deleteProcess();
+                                      Navigator.of(context).pop();
+                                    }else{
+                                      Navigator.of(context).pushNamed(PurchaseProcessPage.routeName,arguments: {
+                                        'custodyId':list[index].operId,
+                                        'custodyAmount':list[index].operAmount,
+                                        'custodyDetails':list[index].operDetails,
+                                      });
+                                      //Navigator.of(context).pop();
+                                    }
+                                  },
+                                ),
+                                TextButton(
+                                  child:Text('Cancel'),
+                                  onPressed: () {
+                                      Navigator.of(context).pop();
+                                    }
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                  },
+                  child: ItemPurchaseDetailsWidget(
+                    details: list[index],
+                  ),
                 );
               }));
     } else {
       return Container();
     }
   }
+
+  Widget stackBehindDissmis() {
+    return Padding(
+      padding: const EdgeInsets.all(30),
+      child: Container(
+        color:Colors.red,
+          child: Row(
+            children:[
+              Icon(Icons.delete,color:Colors.white,size:20),
+              const SizedBox(width:5),
+              Text("Delete",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
+            ]
+          ),
+      ),
+    );
+  }
+
+
+  Widget secondaryStackBehindDissmis() {
+    return Padding(
+      padding: const EdgeInsets.all(30),
+      child: Container(
+          color:Colors.blue,
+            child: Row(
+                children:[
+                  Icon(Icons.edit,color:Colors.white,size:20),
+                  const SizedBox(width:5),
+                  Text("Edit",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
+                ]
+          )
+      ),
+    );
+  }
+
+  void deleteProcess() {}
 }

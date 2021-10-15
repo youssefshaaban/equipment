@@ -14,7 +14,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
       elevation: 5,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5))),
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(50),
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Column(

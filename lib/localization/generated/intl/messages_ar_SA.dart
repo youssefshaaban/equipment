@@ -68,5 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "reject": MessageLookupByLibrary.simpleMessage("رفض"),
     "invoiceNumber": MessageLookupByLibrary.simpleMessage("رقم الفاتورة"),
     "openCamOrGallery": MessageLookupByLibrary.simpleMessage("فتح"),
+    "processConfirmation":MessageLookupByLibrary.simpleMessage("لا يمكن تعديل عملية الشراء بعد التعديل هل انت متأكد؟"),
+    "processConfirmationAddButton":MessageLookupByLibrary.simpleMessage("إضافه"),
+    "processConfirmationCancelButton":MessageLookupByLibrary.simpleMessage("إلغاء")
   };
 }
