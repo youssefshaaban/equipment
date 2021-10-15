@@ -24,3 +24,28 @@ class StatusFailure extends CustodyStatusState {
   @override
   List<Object> get props => [error];
 }
+
+
+class DeleteOperationStatusState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+
+class DeleteOperationStatusLoading extends DeleteOperationStatusState {}
+
+class DeleteOperationStatusSuccess extends DeleteOperationStatusState {
+  final bool success;
+  DeleteOperationStatusSuccess({required this.success});
+  @override
+  List<Object> get props => [success];
+}
+
+class DeleteOperationStatusFailure extends DeleteOperationStatusState {
+  final String error;
+
+  DeleteOperationStatusFailure({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}

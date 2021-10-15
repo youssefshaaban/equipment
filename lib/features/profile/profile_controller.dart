@@ -24,7 +24,6 @@ class ProfileController  extends GetxController {
 
     } catch(e){
       _loginStateStream.value=DataFailure(error: e.toString());
-      print(e);
     }
   }
 

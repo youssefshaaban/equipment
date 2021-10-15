@@ -48,12 +48,12 @@ class ProfilePage extends StatelessWidget {
           ),
           SizedBox(height: 10,),
           Text(
-            user.fullName!,
+            user.fullName==null?"":user.fullName!,
             style: TextStyle(fontSize: 20, color: Colors.grey),
           ),
           SizedBox(height: 10,),
           Text(
-            user.phone!,
+            user.phone==null?"":user.phone!,
             style: Theme.of(context).textTheme.headline1,
           ),
         ],
