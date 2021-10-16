@@ -74,6 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "editSheetTFFamount":MessageLookupByLibrary.simpleMessage("ادخل القيمه المطلوبه"),
     "editSheetTFFdesc":MessageLookupByLibrary.simpleMessage("ادخل القيمه المطلوبه"),
     "editSheetSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
-    "editSheetCancelButton":MessageLookupByLibrary.simpleMessage("الغاء"),
+    "cancelButton":MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "okButton":MessageLookupByLibrary.simpleMessage("تم"),
+    "alertMessageOfCloseCustody":MessageLookupByLibrary.simpleMessage("لا يمكن التعديل على العهده بعد رفع العهده للحسابات "),
+    "deleteButton":MessageLookupByLibrary.simpleMessage("مسـح"),
+    "txtMsgDeleteOperation":MessageLookupByLibrary.simpleMessage("هل انت متاكد من مسح العملية ؟"),
+    "field_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال قيمة للحقل")
   };
 }

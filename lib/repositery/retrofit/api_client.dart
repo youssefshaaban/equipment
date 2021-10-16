@@ -36,7 +36,7 @@ abstract class ApiClient{
   Future<ResponseCustodyOpera> getCustodyOperation(@Path("id") int id);
 
   @GET("${Apis.deleteOperation}/{id}")
-  Future<ResponseCustodyOpera> deleteOperation(@Path("id") int id);
+  Future<BaseResponse> deleteOperation(@Path("id") int id);
 
   @GET(Apis.updateCustodyStatus)
   Future<ResponseUpdateCustodyData> updateStatusCustody(@Query("Status") String cStatus,

@@ -60,6 +60,10 @@
   "editSheetTFFamount":"enter a valid value",
   "editSheetTFFdesc":"enter a valid value",
   "editSheetSaveButton":"Save",
-  "editSheetCancelButton":"Cancel",
-
+  "cancelButton":"Cancel",
+  "okButton": "Ok",
+  "alertMessageOfCloseCustody": "Custody can't be modified after raise to accountant",
+  "deleteButton": "Delete",
+  "txtMsgDeleteOperation":"Are you sure delete operation ?",
+  "field_required": "Filed required"
 }

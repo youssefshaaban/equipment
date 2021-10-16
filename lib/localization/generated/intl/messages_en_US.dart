@@ -72,6 +72,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "editSheetTFFamount":MessageLookupByLibrary.simpleMessage("enter a valid value"),
     "editSheetTFFdesc":MessageLookupByLibrary.simpleMessage("enter a valid value"),
     "editSheetSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
-    "editSheetCancelButton":MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cancelButton":MessageLookupByLibrary.simpleMessage("Cancel"),
+    "alertMessageOfCloseCustody":MessageLookupByLibrary.simpleMessage("Custody can't be modified after raise to accountant"),
+    "deleteButton":MessageLookupByLibrary.simpleMessage("Delete"),
+    "txtMsgDeleteOperation":MessageLookupByLibrary.simpleMessage("Are you sure delete operation ?"),
+    "field_required": MessageLookupByLibrary.simpleMessage("field required"),
   };
 }

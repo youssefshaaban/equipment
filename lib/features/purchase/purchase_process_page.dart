@@ -57,13 +57,13 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   }
 
   //Image
-  Future showSheet(BuildContext context) {
+  Future showBottomSheetImage(BuildContext context) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
             height: 180,
-            color: Colors.grey,
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Center(
@@ -75,7 +75,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(
-                            Icons.camera_alt, size: 40, color: Colors.black,),
+                            Icons.camera_alt, size: 40),
                           InkWell(
                             onTap: () {
                               Navigator.of(context).pop();
@@ -88,7 +88,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                                   .size
                                   .width * .3,
                               decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  color: Colors.grey,
                                   borderRadius: BorderRadius.circular(40)
                               ),
                               child: Center(child: Text(S.of(context)!.openCamOrGallery,
@@ -98,12 +98,11 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                           )
                         ],
                       ),
-                      Divider(thickness: 1, color: Colors.white,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.photo, size: 40, color: Colors.black,),
+                          Icon(Icons.photo, size: 40),
                           InkWell(
                             onTap: () {
                               Navigator.of(context).pop();
@@ -116,7 +115,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                                   .size
                                   .width * .3,
                               decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  color: Colors.grey,
                                   borderRadius: BorderRadius.circular(40)
                               ),
                               child: Center(child: Text(S.of(context)!.openCamOrGallery,
@@ -285,7 +284,8 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
         actions: [
           TextButton(
               onPressed: (){
-                showProcessSheet(context);
+                //showProcessSheet(context);
+                addPurchase(context);
               },
               child: Text(
                 S.of(context)!.purchaseProcessSave,
@@ -323,13 +323,13 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                     controller: costController,
                     validator: (value){
                       if(value!.isEmpty){
-                        return "valie can't be empty";
+                        return S.of(context)!.field_required;
                       }
                       else
                         return null;
                   },
-                    decoration:const InputDecoration(
-                      hintText: 'cost',
+                    decoration:InputDecoration(
+                      hintText: "${S.of(context)!.invoiceNumber}",
                       border:OutlineInputBorder(
                        borderSide: BorderSide(color: Colors.black)
                       )
@@ -341,13 +341,13 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                       controller: invoiceNumberController,
                       validator: (value){
                         if(value!.isEmpty){
-                          return "valie can't be empty";
+                          return S.of(context)!.field_required;
                         }
                         else
                           return null;
                       },
-                      decoration:const InputDecoration(
-                          hintText: 'amount',
+                      decoration: InputDecoration(
+                          hintText: S.of(context)!.purchaseProcessAmountHint,
                           border:OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)
                           )
@@ -358,15 +358,15 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                   TextFormField(
                         validator: (value){
                           if(value!.isEmpty){
-                            return "valie can't be empty";
+                            return S.of(context)!.field_required;
                           }
                           else if(value.length<5) {
                             return "value can't be less than 5 chars";
                           }
                         },
                         controller: descController,
-                        decoration:const InputDecoration(
-                            hintText: 'description',
+                        decoration: InputDecoration(
+                            hintText: S.of(context)!.itemPurchaseDescription,
                             border:OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black)
                             )
@@ -403,7 +403,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                   if (imageData.isNotEmpty)
                     ElevatedButton(
                         onPressed: () {
-                          showSheet(context);
+                          showBottomSheetImage(context);
                         },
                         child: Text(
                           S.of(context)!.purchaseProcessAddPhotoButton,
@@ -427,7 +427,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                               color: Colors.black,
                             ),
                           ),
-                          onTap: () => showSheet(context),
+                          onTap: () => showBottomSheetImage(context),
                         )
                       : Container(
                           width: MediaQuery.of(context).size.width,
@@ -484,30 +484,32 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   }
 
   void addPurchase(BuildContext context) async {
-    progressDialogue(context);
-    final prefs = await SharedPreferences.getInstance();
-    var user_id = prefs.getString("user_id");
-    var custodyOper = new CustodyOper(
-        operAmount: double.parse(costController.text),
-        operDetails: descController.text,
-        custodyId: custodyId,
-        invoiceNumber: invoiceNumberController.text,
-        driverUserId: int.parse(user_id!));
-    _purchaseController
-        .submitOperationData(
-            custodyOper: custodyOper,
-            imageData: imageData
-                .map((e) => ImagesData(imageData: e.fullPath))
-                .toList())
-        .then((value) async {
-      Navigator.of(context).pop();
-      if (value is PurchaseSuccess) {
-        customSnackBar(context, msg: "success");
-        await Future.delayed(const Duration(milliseconds: 500));
-        Navigator.of(context).pop(true);
-      } else if (value is PurchaseFailure) {
-        customSnackBar(context, msg: value.error);
-      }
-    });
+    if(_formKey.currentState!.validate()){
+      progressDialogue(context);
+      final prefs = await SharedPreferences.getInstance();
+      var user_id = prefs.getString("user_id");
+      var custodyOper = new CustodyOper(
+          operAmount: double.parse(costController.text),
+          operDetails: descController.text,
+          custodyId: custodyId,
+          invoiceNumber: invoiceNumberController.text,
+          driverUserId: int.parse(user_id!));
+      _purchaseController
+          .submitOperationData(
+          custodyOper: custodyOper,
+          imageData: imageData
+              .map((e) => ImagesData(imageData: e.fullPath))
+              .toList())
+          .then((value) async {
+        Navigator.of(context).pop();
+        if (value is PurchaseSuccess) {
+          customSnackBar(context, msg: "success");
+          await Future.delayed(const Duration(milliseconds: 500));
+          Navigator.of(context).pop(true);
+        } else if (value is PurchaseFailure) {
+          customSnackBar(context, msg: value.error);
+        }
+      });
+    }
   }
 }

@@ -59,6 +59,18 @@ class ResponseCustodyOpera {
   Map<String, dynamic> toJson() => _$ResponseCustodyOperaToJson(this);
 }
 
+@JsonSerializable()
+class BaseResponse{
+  @JsonKey(name: "success")
+  bool? success;
+  @JsonKey(name: "message")
+  String? message;
+  BaseResponse();
+  factory BaseResponse.fromJson(Map<String, dynamic> json) => _$BaseResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
+}
+
 
 @JsonSerializable()
 class RequestCustodyOpera{

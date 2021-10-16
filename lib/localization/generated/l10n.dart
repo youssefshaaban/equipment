@@ -322,6 +322,16 @@ class S {
   }
 
 
+  String get field_required {
+    return Intl.message(
+      'Filed required',
+      name: 'field_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+
   String get purchaseProcessAddPhotoButton {
     return Intl.message(
       'Add photo',
@@ -606,14 +616,51 @@ class S {
     );
   }
 
-  String get editSheetCancelButton {
+  String get cancelButton {
     return Intl.message(
       'Cancel',
-      name: 'editSheetCancelButton',
+      name: 'cancelButton',
       desc: '',
       args: [],
     );
   }
+  String get deleteButton {
+    return Intl.message(
+      'Delete',
+      name: 'deleteButton',
+      desc: '',
+      args: [],
+    );
+  }
+  String get txtMsgDeleteOperation {
+    return Intl.message(
+      'Are you sure delete operation ?',
+      name: 'txtMsgDeleteOperation',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+  String get okButton {
+    return Intl.message(
+      'Ok',
+      name: 'okButton',
+      desc: '',
+      args: [],
+    );
+  }
+  String get alertMessageOfCloseCustody {
+    return Intl.message(
+      "Custody can't be modified after raise to accountant",
+      name: 'alertMessageOfCloseCustody',
+      desc: '',
+      args: [],
+    );
+  }
+
+
 
   String get processConfirmationCancelButton {
     return Intl.message(

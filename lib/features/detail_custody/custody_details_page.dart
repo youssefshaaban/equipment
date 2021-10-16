@@ -25,8 +25,8 @@ class CustodyDetails extends StatefulWidget {
 
 class _CustodyDetailsState extends State<CustodyDetails> {
   late CustodyDetailController _controller;
-  TextEditingController amount=new TextEditingController();
-  TextEditingController details=new TextEditingController();
+  TextEditingController amount = new TextEditingController();
+  TextEditingController details = new TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   late CustodyData data;
@@ -58,8 +58,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      buildCardInfo(
-                          context),
+                      buildCardInfo(context),
                       Center(
                         child: Obx(
                           () {
@@ -75,9 +74,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
         ));
   }
 
-  Widget buildCardInfo(
-    BuildContext context
-  ) {
+  Widget buildCardInfo(BuildContext context) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
@@ -92,7 +89,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
               children: [
                 Text(
                   S.of(context)!.itemCustodyPageReferenceNum,
-                  style:TextStyle(
+                  style: TextStyle(
                       color: Colors.blueGrey,
                       fontSize: 17,
                       fontWeight: FontWeight.bold),
@@ -100,7 +97,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(data.referenceCode==null?"":data.referenceCode!,
+                Text(data.referenceCode == null ? "" : data.referenceCode!,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -108,7 +105,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
               ],
             ),
             const SizedBox(
-              height:10,
+              height: 10,
             ),
             Row(
               children: [
@@ -120,7 +117,10 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(data.custodyDate==null?"":data.custodyDate!.split('T')[0],
+                Text(
+                    data.custodyDate == null
+                        ? ""
+                        : data.custodyDate!.split('T')[0],
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 15,
@@ -190,8 +190,10 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    var result=await Navigator.of(context).pushNamed(PurchaseProcessPage.routeName,arguments: {'custodyId':data.custodyId});
-                    if(result==true){
+                    var result = await Navigator.of(context).pushNamed(
+                        PurchaseProcessPage.routeName,
+                        arguments: {'custodyId': data.custodyId});
+                    if (result == true) {
                       _controller.getCustodyOperation(data.custodyId);
                     }
                   },
@@ -205,7 +207,6 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  changeStatus(2, context);
                   showRaiseAlert(context);
                 },
               ),
@@ -254,7 +255,6 @@ class _CustodyDetailsState extends State<CustodyDetails> {
     }
   }
 
-
   void changeStatus(status, BuildContext context) {
     progressDialogue(context);
     _controller
@@ -290,34 +290,17 @@ class _CustodyDetailsState extends State<CustodyDetails> {
           child: ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                return Stack(
-                  children:[
-                    ItemPurchaseDetailsWidget(
-                      details: list[index],
-                    ),
-                    Positioned(
-                        bottom: 0,
-                        left: 0,
-                        child: Row(
-                      children: [
-                        IconButton(onPressed: (){
-                          showSheet(context,list[index].operAmount,list[index].operDetails,list[index].images);
-                        }, icon: Icon(Icons.edit)),
-                        SizedBox(width: 5,),
-                        IconButton(onPressed: (){
-                          showDeleteAlert(context,list,index);
-
-                        }, icon: Icon(Icons.delete)),
-                      ],
-                    ))
-                  ]
+                return ItemPurchaseDetailsWidget(
+                  details: list[index],
+                  clickDelete: (detail) {
+                    showDeleteAlert(context, detail);
+                  },
+                  clickEdit: (item) {},
                 );
               }));
     } else {
       return Container();
     }
-
-
   }
 
 
@@ -327,21 +310,22 @@ class _CustodyDetailsState extends State<CustodyDetails> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("process can't be modified after raise"),
+          title: new Text(S.of(context)!.alertMessageOfCloseCustody),
           actions: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  child: new Text("Cancel"),
+                  child: new Text(S.of(context)!.cancelButton),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: new Text("OK"),
+                  child: new Text(S.of(context)!.okButton),
                   onPressed: () {
                     Navigator.of(context).pop();
+                    changeStatus(2, context);
                   },
                 ),
               ],
@@ -352,27 +336,30 @@ class _CustodyDetailsState extends State<CustodyDetails> {
     );
   }
 
-  showDeleteAlert(BuildContext context, List<CustodyOper> list, int index, ) {
+  showDeleteAlert(
+    BuildContext context,
+      CustodyOper custodyOper
+  ) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("delete the process?"),
+          title: new Text(S.of(context)!.txtMsgDeleteOperation),
           actions: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextButton(
-                  child: new Text("Cancel"),
+                  child: new Text(S.of(context)!.cancelButton),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: new Text("Delete"),
+                  child: new Text(S.of(context)!.okButton),
                   onPressed: () {
-                    deleteProcess( list, index);
                     Navigator.of(context).pop();
+                    deleteProcess(custodyOper.operId!);
                   },
                 ),
               ],
@@ -383,96 +370,109 @@ class _CustodyDetailsState extends State<CustodyDetails> {
     );
   }
 
-  Future showSheet(BuildContext context, double operAmount, String? operDetails, List<ImagesData>? images,) {
+  Future showSheet(
+    BuildContext context,
+    double operAmount,
+    String? operDetails,
+    List<ImagesData>? images,
+  ) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
-            height: MediaQuery.of(context).size.height*.5,
+            height: MediaQuery.of(context).size.height * .5,
             color: Colors.grey,
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Form(
-                  key:_formKey,
+                  key: _formKey,
                   child: Column(
                     children: [
                       TextFormField(
                         controller: amount,
                         initialValue: operAmount.toString(),
-                        validator: (value){
-                          if(value!.isEmpty){
+                        validator: (value) {
+                          if (value!.isEmpty) {
                             return "enter a valid value";
-                          }
-                          else
+                          } else
                             return null;
                         },
                       ),
-                      SizedBox(height:3),
+                      SizedBox(height: 3),
                       TextFormField(
                         controller: details,
                         initialValue: operDetails.toString(),
-                        validator: (value){
-                          if(value!.isEmpty){
+                        validator: (value) {
+                          if (value!.isEmpty) {
                             return "enter a valid value";
-                          }else if(value.length<5){
+                          } else if (value.length < 5) {
                             return "description can't be less than 5 chars";
-                          }
-                          else
+                          } else
                             return null;
                         },
                       ),
-                      SizedBox(height:3),
-                      if(images!.isNotEmpty)
-                        ElevatedButton(onPressed:()=>showPhotoSheet(context), child:Text('Add Photo')),
-                      images.isEmpty?
-                      InkWell(
-                        onTap: ()=>showPhotoSheet(context),
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          color:Colors.grey,
-                          child:Icon(Icons.camera_alt,color:Colors.black) ,
-                        ),
-                      ):
-                      ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: images.length,
-                          itemBuilder: (context, index){
-                            return   InkWell(
-                                onTap: ()=>showPhotoSheet(context),
-                                child:Container(
-                                  height: 60,
-                                  width: 70,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child:
-                                      FadeInImage(
-                                        image: NetworkImage(images[index].imageData),
-                                        placeholder: AssetImage("assets/images/bg_no_image.png"),
-                                        imageErrorBuilder: (context, error, stackTrace) {
-                                          return Image.asset('assets/images/bg_no_image.png',
-                                              fit: BoxFit.cover);
-                                        },
-                                        fit: BoxFit.fill,
+                      SizedBox(height: 3),
+                      if (images!.isNotEmpty)
+                        ElevatedButton(
+                            onPressed: () => showPhotoSheet(context),
+                            child: Text('Add Photo')),
+                      images.isEmpty
+                          ? InkWell(
+                              onTap: () => showPhotoSheet(context),
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                color: Colors.grey,
+                                child:
+                                    Icon(Icons.camera_alt, color: Colors.black),
+                              ),
+                            )
+                          : ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: images.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                    onTap: () => showPhotoSheet(context),
+                                    child: Container(
+                                      height: 60,
+                                      width: 70,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: FadeInImage(
+                                            image: NetworkImage(
+                                                images[index].imageData),
+                                            placeholder: AssetImage(
+                                                "assets/images/bg_no_image.png"),
+                                            imageErrorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                  'assets/images/bg_no_image.png',
+                                                  fit: BoxFit.cover);
+                                            },
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                )
-                            );
-                          }),
-
+                                    ));
+                              }),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ElevatedButton(onPressed:()=>Navigator.of(context).pop() , child: Text("Cancel")),
-                          ElevatedButton(onPressed:(){
-                            editData();
-                            Navigator.of(context).pop();
-                          }, child: Text("Save")),
-                        ],)
+                          ElevatedButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text("Cancel")),
+                          ElevatedButton(
+                              onPressed: () {
+                                editData();
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Save")),
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -488,96 +488,103 @@ class _CustodyDetailsState extends State<CustodyDetails> {
         builder: (context) {
           return Container(
             height: 180,
-            color: Colors.grey,
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.camera_alt, size: 40, color: Colors.black,),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              getImage(ImageSource.camera);
-                            },
-                            child: Container(
-                              height: 40,
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * .3,
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(40)
-                              ),
-                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
-                                style: TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.white),)),
-                            ),
-                          )
-                        ],
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.camera_alt,
+                        size: 40
                       ),
-                      Divider(thickness: 1, color: Colors.white,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.photo, size: 40, color: Colors.black,),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              getImage(ImageSource.gallery);
-                            },
-                            child: Container(
-                              height: 40,
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * .3,
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(40)
-                              ),
-                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
-                                style: TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.white),)),
-                            ),
-                          )
-                        ],
-                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          getImage(ImageSource.camera);
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * .3,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(40)),
+                          child: Center(
+                              child: Text(
+                            S.of(context)!.openCamOrGallery,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          )),
+                        ),
+                      )
                     ],
-                  )),
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.photo,
+                        size: 40,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          getImage(ImageSource.gallery);
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * .3,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(40)),
+                          child: Center(
+                              child: Text(
+                            S.of(context)!.openCamOrGallery,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          )),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              )),
             ),
           );
         });
   }
 
   Future getImage(ImageSource source) async {
-
     final imagePicker = ImagePicker();
-    await imagePicker.pickImage(source: source)
-        .then((value) => cropImage(imageFile: File(value!.path))
-        .then((value) => compressFile(value!)
-        .then((value){
-      var fileUnit8 = value.readAsBytesSync();
-      //addImage(base64Encode(fileUnit8));
-    })));
+    await imagePicker.pickImage(source: source).then((value) =>
+        cropImage(imageFile: File(value!.path))
+            .then((value) => compressFile(value!).then((value) {
+                  var fileUnit8 = value.readAsBytesSync();
+                  //addImage(base64Encode(fileUnit8));
+                })));
   }
 
   void editData() {}
 
-  void deleteProcess(List<CustodyOper> list,int index){
-    /*setState(() {
-      list.removeAt(index);
-    });*/
+  void deleteProcess(int id) {
+    progressDialogue(context);
+    _controller.deleteOperation(id).then((value){
+      if(value is DeleteOperationStatusSuccess){
+        Navigator.of(context).pop();
+        _controller.getCustodyOperation(data.custodyId);
+      }else if(value is DeleteOperationStatusFailure){
+        Navigator.of(context).pop();
+        customSnackBar(context,msg:value.error);
+      }
+    });
   }
-
-  }
-
-
+}
