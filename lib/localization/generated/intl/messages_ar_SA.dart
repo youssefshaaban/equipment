@@ -51,7 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "custodyDetailsValue1": MessageLookupByLibrary.simpleMessage("القيمة"),
     "custodyDetailsDate": MessageLookupByLibrary.simpleMessage("التاريخ:"),
     "custodyDetailsValue2": MessageLookupByLibrary.simpleMessage("القيمه"),
-    "custodyDetailsCost": MessageLookupByLibrary.simpleMessage("التكلفة:"),
+    "txtCost": MessageLookupByLibrary.simpleMessage("التكلفة:"),
     "custodyDetailsValue3": MessageLookupByLibrary.simpleMessage("القيمة"),
     "custodyDetailsRemainAmount": MessageLookupByLibrary.simpleMessage("المصروف "),
     "custodyDetailsValue4": MessageLookupByLibrary.simpleMessage("القيمة"),

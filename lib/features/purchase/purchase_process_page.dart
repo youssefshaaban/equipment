@@ -58,6 +58,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
 
   //Image
   Future showBottomSheetImage(BuildContext context) {
+    FocusScope.of(context).unfocus();
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -285,6 +286,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
           TextButton(
               onPressed: (){
                 //showProcessSheet(context);
+                FocusScope.of(context).unfocus();
                 addPurchase(context);
               },
               child: Text(
@@ -347,7 +349,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                           return null;
                       },
                       decoration: InputDecoration(
-                          hintText: S.of(context)!.purchaseProcessAmountHint,
+                          hintText: S.of(context)!.textCost,
                           border:OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)
                           )

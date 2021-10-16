@@ -39,7 +39,7 @@
   "custodyDetailsValue1":"Value",
   "custodyDetailsDate":"Date",
   "custodyDetailsValue2":"Value",
-  "custodyDetailsCost":"Cost",
+  "txtCost":"Cost",
   "custodyDetailsValue3":"Value",
   "custodyDetailsRemainAmount":"Remain Amount",
   "custodyDetailsValue4":"Value",

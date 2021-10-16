@@ -473,7 +473,7 @@ class S {
     );
   }
 
-  String get custodyDetailsCost {
+  String get textCost {
     return Intl.message(
       'Cost',
       name: 'custodyDetailsCost',

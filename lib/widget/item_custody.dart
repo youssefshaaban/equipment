@@ -24,7 +24,7 @@ class ItemCustody extends StatelessWidget {
             buildRow(context,  S.of(context)!.itemCustodyPageReferenceNum, custody.referenceCode.toString(),),
             buildRow(context, S.of(context)!.custodyReceivingNumber, custody.receivingNumber==null?"":custody.receivingNumber!),
             buildRow(context, S.of(context)!.custodyDetailsDate, custody.custodyDate.toString().split('T')[0]),
-            buildRow(context, S.of(context)!.custodyDetailsCost,"${custody.totalAmount.toString()} ${S.of(context)!.currency}" ),
+            buildRow(context, S.of(context)!.textCost,"${custody.totalAmount.toString()} ${S.of(context)!.currency}" ),
             buildRow(context, S.of(context)!.custodyDetailsRemainAmount,"${ custody.totalSpent.toString()} ${S.of(context)!.currency}"),
           ],
         ),

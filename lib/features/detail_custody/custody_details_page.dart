@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:equipment/features/detail_custody/custody_controller_status.dart';
 import 'package:equipment/features/detail_custody/custody_operation_statr.dart';
 import 'package:equipment/features/detail_custody/custody_status_state.dart';
-import 'package:equipment/features/home/custody_controller.dart';
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/features/purchase/purchase_process_page.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
@@ -132,7 +131,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             ),
             Row(
               children: [
-                Text(S.of(context)!.custodyDetailsCost,
+                Text(S.of(context)!.textCost,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 17,
@@ -313,21 +312,22 @@ class _CustodyDetailsState extends State<CustodyDetails> {
           title: new Text(S.of(context)!.alertMessageOfCloseCustody),
           actions: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TextButton(
-                  child: new Text(S.of(context)!.cancelButton),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
                 TextButton(
                   child: new Text(S.of(context)!.okButton),
                   onPressed: () {
                     Navigator.of(context).pop();
                     changeStatus(2, context);
                   },
+                )
+                ,TextButton(
+                  child: new Text(S.of(context)!.cancelButton),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
+
               ],
             )
           ],
@@ -525,7 +525,6 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                       )
                     ],
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
