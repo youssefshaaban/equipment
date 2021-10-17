@@ -34,6 +34,9 @@ class PurchaseController extends GetxController{
     }
   }
 
+  Future<BaseResponse> deleteImage(int id) {
+      return appRepository.getApiClient().deleteImage(id);
+  }
 
   Future<PurchaseState> submitOperationData({required CustodyOper custodyOper,required List<ImagesData> imageData}) async {
     try {

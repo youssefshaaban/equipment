@@ -67,7 +67,7 @@
   "txtMsgDeleteOperation": "هل انت متاكد من مسح العملية ؟",
   "field_required": "لابد من إدخال قيمة للحقل",
 
-    "editAppBarTitle":"تعديل البانات",
+    "editAppBarTitle":"تعديل العملية",
     "editCostTF":"التكلفة",
     "editCostValueValidation":"ادخل قيمه صحيحه",
     "editAmountTF":"الكمية",

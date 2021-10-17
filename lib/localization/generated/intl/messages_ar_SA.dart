@@ -80,7 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteButton":MessageLookupByLibrary.simpleMessage("مسـح"),
     "txtMsgDeleteOperation":MessageLookupByLibrary.simpleMessage("هل انت متاكد من مسح العملية ؟"),
     "field_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال قيمة للحقل"),
-    "editAppBarTitle":MessageLookupByLibrary.simpleMessage("تعديل البيانات"),
+    "editAppBarTitle":MessageLookupByLibrary.simpleMessage("تعديل العملية"),
     "editCostTF":MessageLookupByLibrary.simpleMessage("التكلفة"),
     "editCostValueValidation":MessageLookupByLibrary.simpleMessage("Enter a valid value"),
     "editAmountTF":MessageLookupByLibrary.simpleMessage("الكمية"),

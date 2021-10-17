@@ -674,7 +674,7 @@ class S {
 
   String get editAppBarTitle {
     return Intl.message(
-      'Edit Data',
+      'Edit operation',
       name: 'editAppBarTitle',
       desc: '',
       args: [],

@@ -13,6 +13,7 @@ class Apis {
   static const String getCustodyOperation = 'api/CustodyApi/CustodyOperationsData';
   static const String updateCustodyStatus = 'api/CustodyApi/UpdateCustodyStatus';
   static const String deleteOperation = 'api/CustodyApi/DeleteOperationRow';
+  static const String deleteImageRow = 'api/CustodyApi/DeleteImageRow';
 
 
 }

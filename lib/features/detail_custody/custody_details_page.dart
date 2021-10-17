@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:equipment/features/detail_custody/custody_controller_status.dart';
 import 'package:equipment/features/detail_custody/custody_operation_statr.dart';
 import 'package:equipment/features/detail_custody/custody_status_state.dart';
+import 'package:equipment/features/detail_custody/edit_operation_details.dart';
 import 'package:equipment/features/purchase/purchase_controller.dart';
 import 'package:equipment/features/purchase/purchase_state.dart';
 import 'package:equipment/localization/generated/l10n.dart';
@@ -300,7 +301,15 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                   clickDelete: (detail) {
                     showDeleteAlert(context, detail);
                   },
-
+                  clickEdit: (item){
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (context) => new EditOperationDetails(details:item,),
+                    )).then((value){
+                      if(value==true){
+                        _controller.getCustodyOperation(data.custodyId);
+                      }
+                    });
+                  },
                 );
               }));
     } else {

@@ -38,6 +38,9 @@ abstract class ApiClient{
   @GET("${Apis.deleteOperation}/{id}")
   Future<BaseResponse> deleteOperation(@Path("id") int id);
 
+  @GET("${Apis.deleteImageRow}/{id}")
+  Future<BaseResponse> deleteImage(@Path("id") int id);
+
   @GET(Apis.updateCustodyStatus)
   Future<ResponseUpdateCustodyData> updateStatusCustody(@Query("Status") String cStatus,
       @Query("CId") String cUser);

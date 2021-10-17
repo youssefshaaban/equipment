@@ -67,7 +67,7 @@
   "txtMsgDeleteOperation":"Are you sure delete operation ?",
   "field_required": "Filed required",
 
-  "editAppBarTitle":"Edit Data",
+  "editAppBarTitle":"Edit operation",
   "editCostTF":"cost",
   "editCostValueValidation":"Enter a valid value",
   "editAmountTF":"amount",
