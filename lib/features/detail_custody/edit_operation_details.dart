@@ -34,7 +34,6 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
   TextEditingController amountController = TextEditingController();
   TextEditingController descController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  List<UploadImageData> imageData = [];
   final PurchaseController _purchaseController = Get.put(PurchaseController());
 
   //late CustodyOper data;
