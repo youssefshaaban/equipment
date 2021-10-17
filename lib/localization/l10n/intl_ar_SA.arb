@@ -65,6 +65,17 @@
   "alertMessageOfCloseCustody": "لايمكن التعديل فى العهده بعد رفع للحسابات",
   "deleteButton": "مسح",
   "txtMsgDeleteOperation": "هل انت متاكد من مسح العملية ؟",
-  "field_required": "لابد من إدخال قيمة للحقل"
+  "field_required": "لابد من إدخال قيمة للحقل",
 
+    "editAppBarTitle":"تعديل البانات",
+    "editCostTF":"التكلفة",
+    "editCostValueValidation":"ادخل قيمه صحيحه",
+    "editAmountTF":"الكمية",
+    "editAmountValueValidation":"ادخل قيمه صحيحه",
+    "editDescTF":"الوصف",
+    "editDescValueValidation":"ادخل قيمه صحيحه",
+    "editDescValueValidation1":"لا يمكن ان يكون الوصف اقل من خمس حروف",
+    "editAddPhotoButton":"إضافة صورة",
+    "editSaveButton":"حفظ",
+    "editCancelButton":"إلغاء",
 }

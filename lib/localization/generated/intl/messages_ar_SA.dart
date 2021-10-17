@@ -79,6 +79,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "alertMessageOfCloseCustody":MessageLookupByLibrary.simpleMessage("لا يمكن التعديل على العهده بعد رفع العهده للحسابات "),
     "deleteButton":MessageLookupByLibrary.simpleMessage("مسـح"),
     "txtMsgDeleteOperation":MessageLookupByLibrary.simpleMessage("هل انت متاكد من مسح العملية ؟"),
-    "field_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال قيمة للحقل")
+    "field_required": MessageLookupByLibrary.simpleMessage("لابد من إدخال قيمة للحقل"),
+    "editAppBarTitle":MessageLookupByLibrary.simpleMessage("تعديل البيانات"),
+    "editCostTF":MessageLookupByLibrary.simpleMessage("التكلفة"),
+    "editCostValueValidation":MessageLookupByLibrary.simpleMessage("Enter a valid value"),
+    "editAmountTF":MessageLookupByLibrary.simpleMessage("الكمية"),
+    "editAmountValueValidation":MessageLookupByLibrary.simpleMessage("ادخل قيمه صحيحه"),
+    "editDescTF":MessageLookupByLibrary.simpleMessage("الوصف"),
+    "editDescValueValidation":MessageLookupByLibrary.simpleMessage("ادخل قيمه صحيحه"),
+    "editDescValueValidation1":MessageLookupByLibrary.simpleMessage("لا يمكن ان يكون الوصف اقل من خمس حروف"),
+    "editAddPhotoButton":MessageLookupByLibrary.simpleMessage("إضافة صورة"),
+    "editSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
+    "editCancelButton":MessageLookupByLibrary.simpleMessage("إلغاء"),
   };
 }

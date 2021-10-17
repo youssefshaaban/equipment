@@ -1,12 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:equipment/features/detail_custody/custody_controller_status.dart';
 import 'package:equipment/features/detail_custody/custody_operation_statr.dart';
 import 'package:equipment/features/detail_custody/custody_status_state.dart';
+import 'package:equipment/features/purchase/purchase_controller.dart';
+import 'package:equipment/features/purchase/purchase_state.dart';
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/features/purchase/purchase_process_page.dart';
 import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_data.dart';
 import 'package:equipment/widget/item_purchase_details_widget.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +31,8 @@ class _CustodyDetailsState extends State<CustodyDetails> {
   TextEditingController amount = new TextEditingController();
   TextEditingController details = new TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  List<UploadImageData> imageData = [];
+  final PurchaseController _purchaseController = Get.put(PurchaseController());
 
   late CustodyData data;
   var _initDataLoded = false;
@@ -294,7 +300,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                   clickDelete: (detail) {
                     showDeleteAlert(context, detail);
                   },
-                  clickEdit: (item) {},
+
                 );
               }));
     } else {
@@ -370,7 +376,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
     );
   }
 
-  Future showSheet(
+  /*Future showSheet(
     BuildContext context,
     double operAmount,
     String? operDetails,
@@ -391,7 +397,13 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                     children: [
                       TextFormField(
                         controller: amount,
-                        initialValue: operAmount.toString(),
+                        //initialValue: operAmount.toString(),
+                      decoration:InputDecoration(
+                          hintText: amount.text,
+                          border:OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)
+                          )
+                      ),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "enter a valid value";
@@ -399,10 +411,16 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                             return null;
                         },
                       ),
-                      SizedBox(height: 3),
+                      SizedBox(height: 5),
                       TextFormField(
                         controller: details,
-                        initialValue: operDetails.toString(),
+                        //initialValue: operDetails.toString(),
+                          decoration:InputDecoration(
+                              hintText:details.text,
+                              border:OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black)
+                              )
+                          ),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "enter a valid value";
@@ -412,7 +430,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                             return null;
                         },
                       ),
-                      SizedBox(height: 3),
+                      SizedBox(height: 5),
                       if (images!.isNotEmpty)
                         ElevatedButton(
                             onPressed: () => showPhotoSheet(context),
@@ -423,41 +441,53 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                               child: Container(
                                 height: 50,
                                 width: 50,
-                                color: Colors.grey,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.grey,
+                                ),
                                 child:
-                                    Icon(Icons.camera_alt, color: Colors.black),
+                                    Center(child: Icon(Icons.camera_alt, color: Colors.black)),
                               ),
                             )
                           : ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: images.length,
                               itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () => showPhotoSheet(context),
-                                    child: Container(
-                                      height: 60,
-                                      width: 70,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(5),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: FadeInImage(
-                                            image: NetworkImage(
-                                                images[index].imageData),
-                                            placeholder: AssetImage(
-                                                "assets/images/bg_no_image.png"),
-                                            imageErrorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Image.asset(
-                                                  'assets/images/bg_no_image.png',
-                                                  fit: BoxFit.cover);
-                                            },
-                                            fit: BoxFit.fill,
+                                    return Stack(
+                                      children: [
+                                        Container(
+                                        height: 60,
+                                        width: 70,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: FadeInImage(
+                                              image: NetworkImage(
+                                                  images[index].imageData),
+                                              placeholder: AssetImage(
+                                                  "assets/images/bg_no_image.png"),
+                                              imageErrorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                    'assets/images/bg_no_image.png',
+                                                    fit: BoxFit.cover);
+                                              },
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ));
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: IconButton(
+                                              onPressed: () => _deletePhoto(index,images),
+                                              icon: Icon(Icons.delete,
+                                                  size: 30, color: Colors.red)),
+                                        )
+                                      ],
+                                    );
                               }),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -480,9 +510,15 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             ),
           );
         });
-  }
+  }*/
 
-  Future showPhotoSheet(BuildContext context) {
+  /*_deletePhoto(int index, List<ImagesData> images) {
+    setState(() {
+      images.removeAt(index);
+    });
+  }*/
+
+  /*Future showPhotoSheet(BuildContext context) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -526,7 +562,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
@@ -560,7 +596,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             ),
           );
         });
-  }
+  }*/
 
   Future getImage(ImageSource source) async {
     final imagePicker = ImagePicker();
@@ -568,8 +604,23 @@ class _CustodyDetailsState extends State<CustodyDetails> {
         cropImage(imageFile: File(value!.path))
             .then((value) => compressFile(value!).then((value) {
                   var fileUnit8 = value.readAsBytesSync();
-                  //addImage(base64Encode(fileUnit8));
+                  addImage(base64Encode(fileUnit8));
                 })));
+  }
+
+  addImage(String base64) async {
+    progressDialogue(context);
+    var uploadImage = await _purchaseController.uploadImage(base64);
+    if (uploadImage is ImageUploadSuccess) {
+      setState(() {
+        imageData.add(uploadImage.uploadImageData);
+        customSnackBar(context, msg: "Uploaded Successfully");
+        Navigator.of(context).pop();
+      });
+    } else if (uploadImage is ImageUploadFailure) {
+      customSnackBar(context, msg: uploadImage.error);
+      Navigator.of(context).pop();
+    }
   }
 
   void editData() {}

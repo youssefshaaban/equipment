@@ -671,6 +671,112 @@ class S {
     );
   }
 
+
+  String get editAppBarTitle {
+    return Intl.message(
+      'Edit Data',
+      name: 'editAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get editCostTF {
+    return Intl.message(
+      'Add',
+      name: 'editCostTF',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get editCostValueValidation {
+    return Intl.message(
+      'Enter a valid value',
+      name: 'editCostValueValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get editAmountTF {
+    return Intl.message(
+      'amount',
+      name: 'editAmountTF',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get editAmountValueValidation {
+    return Intl.message(
+      'Enter a valid value',
+      name: 'editAmountValueValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get editDescTF {
+    return Intl.message(
+      'description',
+      name: 'editDescTF',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get editDescValueValidation {
+    return Intl.message(
+      'Enter a valid value',
+      name: 'editDescValueValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editDescValueValidation1 {
+    return Intl.message(
+      "desc can't be less than 5 chars",
+      name: 'editDescValueValidation1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editAddPhotoButton {
+    return Intl.message(
+      'Add Photo',
+      name: 'editAddPhotoButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editSaveButton {
+    return Intl.message(
+      'Save',
+      name: 'editSaveButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get editCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'editCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
 }
 
 

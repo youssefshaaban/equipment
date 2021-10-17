@@ -77,5 +77,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteButton":MessageLookupByLibrary.simpleMessage("Delete"),
     "txtMsgDeleteOperation":MessageLookupByLibrary.simpleMessage("Are you sure delete operation ?"),
     "field_required": MessageLookupByLibrary.simpleMessage("field required"),
+    "editAppBarTitle":MessageLookupByLibrary.simpleMessage("Edit Data"),
+    "editCostTF":MessageLookupByLibrary.simpleMessage("cost"),
+    "editCostValueValidation":MessageLookupByLibrary.simpleMessage("Enter a valid value"),
+    "editAmountTF":MessageLookupByLibrary.simpleMessage("amount"),
+    "editAmountValueValidation":MessageLookupByLibrary.simpleMessage("Enter a valid value"),
+    "editDescTF":MessageLookupByLibrary.simpleMessage("description"),
+    "editDescValueValidation":MessageLookupByLibrary.simpleMessage("Enter a valid value"),
+    "editDescValueValidation1":MessageLookupByLibrary.simpleMessage("desc can't be less than 5 chars"),
+    "editAddPhotoButton":MessageLookupByLibrary.simpleMessage("Add Photo"),
+    "editSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
+    "editCancelButton":MessageLookupByLibrary.simpleMessage("Cancel"),
   };
 }

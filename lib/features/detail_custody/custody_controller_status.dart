@@ -16,6 +16,10 @@ class CustodyDetailController  extends GetxController {
 
   final _custodyDeleteOperationStream = DeleteOperationStatusState().obs;
   DeleteOperationStatusState get deleteStateOperation => _custodyDeleteOperationStream.value;
+
+  /*final _custodyUpdateOperationStream = UpdateOperationStatusState().obs;
+  UpdateOperationStatusState get updateStateOperation => _custodyUpdateOperationStream.value;*/
+
   @override
   void onInit() {
     super.onInit();
@@ -51,6 +55,11 @@ class CustodyDetailController  extends GetxController {
     }
   }
 
+
+  /*Future<UpdateOperationStatusState>updateOperation()async{
+    _custodyUpdateOperationStream.value = UpdateOperationStatusLoading();
+    var data=await appRepository.getApiClient().updateStatusCustody(cStatus, cUser);
+  }*/
 
   void getCustodyOperation(int CId) async {
     _custodyOperationStream.value = OperationLoading();

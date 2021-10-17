@@ -65,5 +65,18 @@
   "alertMessageOfCloseCustody": "Custody can't be modified after raise to accountant",
   "deleteButton": "Delete",
   "txtMsgDeleteOperation":"Are you sure delete operation ?",
-  "field_required": "Filed required"
+  "field_required": "Filed required",
+
+  "editAppBarTitle":"Edit Data",
+  "editCostTF":"cost",
+  "editCostValueValidation":"Enter a valid value",
+  "editAmountTF":"amount",
+  "editAmountValueValidation":"Enter a valid value",
+  "editDescTF":"description",
+  "editDescValueValidation":"Enter a valid value",
+  "editDescValueValidation1":"desc can't be less than 5 chars",
+  "editAddPhotoButton":"Add Photo",
+  "editSaveButton":"Save",
+  "editCancelButton":"Cancel",
+
 }

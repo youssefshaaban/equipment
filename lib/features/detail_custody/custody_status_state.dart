@@ -49,3 +49,29 @@ class DeleteOperationStatusFailure extends DeleteOperationStatusState {
   @override
   List<Object> get props => [error];
 }
+
+
+
+
+class UpdateOperationStatusState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+class UpdateOperationStatusLoading extends UpdateOperationStatusState {}
+
+class UpdateOperationStatusSuccess extends UpdateOperationStatusState {
+  final bool success;
+  UpdateOperationStatusSuccess({required this.success});
+  @override
+  List<Object> get props => [success];
+}
+
+class UpdateOperationStatusFailure extends UpdateOperationStatusState {
+  final String error;
+
+  UpdateOperationStatusFailure({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}

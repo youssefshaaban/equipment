@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:equipment/features/detail_custody/edt_custody_details.dart';
 import 'package:equipment/localization/generated/l10n.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ import '../utils.dart';
 class ItemPurchaseDetailsWidget extends StatelessWidget {
   final CustodyOper details;
   final Function clickDelete;
-  final Function clickEdit;
-  ItemPurchaseDetailsWidget({Key? key, required this.details,required this.clickDelete,required this.clickEdit})
+  //final Function clickEdit;
+  ItemPurchaseDetailsWidget({Key? key, required this.details,required this.clickDelete})
       : super(key: key);
 
   @override
@@ -44,8 +45,12 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
-                      //     showSheet(context,list[index].operAmount,list[index].operDetails,list[index].images);
-                      clickEdit(details);
+                      //Navigator.of(context).pushNamed(EditCustodyDetails( amount: details.operAmount.toString(), description: details.operDetails, images: details.images))
+                      //Navigator.of(context).pushNamed(EditCustodyDetails.routeName,arguments: {'details':details});
+                      Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => new EditCustodyDetails(details:details,),
+
+                      ));
                     },
                     icon: Icon(Icons.edit,color: Colors.cyan,)),
                 IconButton(
