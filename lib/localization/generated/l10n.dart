@@ -681,6 +681,15 @@ class S {
     );
   }
 
+  String get saveSuccess {
+    return Intl.message(
+      'Save success',
+      name: 'saveSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
 
   String get editCostTF {
     return Intl.message(

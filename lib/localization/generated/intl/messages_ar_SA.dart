@@ -101,5 +101,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileArUserNameValidationPassword":MessageLookupByLibrary.simpleMessage("أدخل قيمه"),
     "profileArUserNameValidationPassword1":MessageLookupByLibrary.simpleMessage("لايمكن أن يكون إسم المستخدم أقل من خمس حروف"),
     "profileSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
+    "saveSuccess":MessageLookupByLibrary.simpleMessage("تم الحفظ بنجاح"),
   };
 }

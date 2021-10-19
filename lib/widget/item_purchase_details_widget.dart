@@ -13,7 +13,8 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
   final CustodyOper details;
   final Function clickDelete;
   final Function clickEdit;
-  ItemPurchaseDetailsWidget({Key? key, required this.details,required this.clickDelete,required this.clickEdit})
+  final int custodyStatus;
+  ItemPurchaseDetailsWidget({Key? key, required this.details,required this.clickDelete,required this.clickEdit,required this.custodyStatus})
       : super(key: key);
 
   @override
@@ -43,14 +44,15 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                             : details.invoiceNumber.toString(),
                       )),
                 ),
+                custodyStatus==1?
                 IconButton(
                     onPressed: () {
                       //Navigator.of(context).pushNamed(EditCustodyDetails( amount: details.operAmount.toString(), description: details.operDetails, images: details.images))
                       //Navigator.of(context).pushNamed(EditCustodyDetails.routeName,arguments: {'details':details});
                       clickEdit(details);
                     },
-                    icon: Icon(Icons.edit,color: Colors.cyan,)),
-                IconButton(
+                    icon: Icon(Icons.edit,color: Colors.cyan,)):Container(),
+                custodyStatus==1?IconButton(
                     onPressed: () {
                       //   showDeleteAlert(context,list,index);
                       clickDelete(details);
@@ -58,7 +60,7 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                     icon: Icon(
                       Icons.delete,
                       color: Colors.red,
-                    )),
+                    )):Container(),
               ],
             ),
             const SizedBox(height: 5),

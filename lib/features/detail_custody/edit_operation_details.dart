@@ -173,124 +173,126 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
               ))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Container(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: invoiceController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return S.of(context)!.editCostValueValidation;
-                    } else
-                      return null;
-                  },
-                  decoration: InputDecoration(
-                      hintText: S.of(context)!.editCostTF,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black))),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Container(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  TextFormField(
                     keyboardType: TextInputType.number,
-                    controller: costController,
-
-                    //initialValue: widget.details.operAmount.toString(),
+                    controller: invoiceController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return S.of(context)!.editAmountValueValidation;
+                        return S.of(context)!.field_required;
                       } else
                         return null;
                     },
                     decoration: InputDecoration(
-                        hintText: S.of(context)!.editAmountTF,
+                        hintText: S.of(context)!.invoiceNumber,
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)))),
-                const SizedBox(height: 10),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return S.of(context)!.editDescValueValidation;
-                    } else if (value.length < 5) {
-                      return S.of(context)!.editDescValueValidation1;
-                    }
-                  },
+                            borderSide: BorderSide(color: Colors.black))),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: costController,
 
-                  controller: descController,
-                  //initialValue: "descr",
-                  decoration: InputDecoration(
-                      hintText: S.of(context)!.editDescTF,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black))),
-                  maxLines: 5,
-                  minLines: 3,
-                ),
-                if (widget.details.images!.isNotEmpty)
-                  ElevatedButton(
-                      onPressed: () => showPhotoImage(context),
-                      child: Text(S.of(context)!.editAddPhotoButton)),
-                widget.details.images!.isEmpty
-                    ? InkWell(
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey,
+                      //initialValue: widget.details.operAmount.toString(),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return S.of(context)!.editAmountValueValidation;
+                        } else
+                          return null;
+                      },
+                      decoration: InputDecoration(
+                          hintText: S.of(context)!.editAmountTF,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)))),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return S.of(context)!.editDescValueValidation;
+                      } else if (value.length < 5) {
+                        return S.of(context)!.editDescValueValidation1;
+                      }
+                    },
+
+                    controller: descController,
+                    //initialValue: "descr",
+                    decoration: InputDecoration(
+                        hintText: S.of(context)!.editDescTF,
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                    maxLines: 5,
+                    minLines: 3,
+                  ),
+                  if (widget.details.images!.isNotEmpty)
+                    ElevatedButton(
+                        onPressed: () => showPhotoImage(context),
+                        child: Text(S.of(context)!.editAddPhotoButton)),
+                  widget.details.images!.isEmpty
+                      ? InkWell(
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey,
+                            ),
+                            height: 250,
+                            width: MediaQuery.of(context).size.width * .8,
+                            child: Icon(
+                              Icons.camera_alt,
+                              size: 60,
+                              color: Colors.black,
+                            ),
                           ),
-                          height: 250,
-                          width: MediaQuery.of(context).size.width * .8,
-                          child: Icon(
-                            Icons.camera_alt,
-                            size: 60,
-                            color: Colors.black,
-                          ),
-                        ),
-                        onTap: () => showPhotoImage(context),
-                      )
-                    : Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 150,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: widget.details.images!.length,
-                            itemBuilder: (context, index) {
-                              return Stack(
-                                children: [
-                                  Container(
-                                    height: 130,
-                                    width: 130,
-                                    margin: EdgeInsets.all(5),
-                                    child: FadeInImage(
-                                      image: NetworkImage(widget
-                                          .details.images![index].imageData),
-                                      placeholder: AssetImage(
-                                          "assets/images/bg_no_image.png"),
-                                      imageErrorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Image.asset(
-                                            'assets/images/bg_no_image.png',
-                                            fit: BoxFit.cover);
-                                      },
-                                      fit: BoxFit.fill,
+                          onTap: () => showPhotoImage(context),
+                        )
+                      : Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 150,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: widget.details.images!.length,
+                              itemBuilder: (context, index) {
+                                return Stack(
+                                  children: [
+                                    Container(
+                                      height: 130,
+                                      width: 130,
+                                      margin: EdgeInsets.all(5),
+                                      child: FadeInImage(
+                                        image: NetworkImage(widget
+                                            .details.images![index].imageData),
+                                        placeholder: AssetImage(
+                                            "assets/images/bg_no_image.png"),
+                                        imageErrorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.asset(
+                                              'assets/images/bg_no_image.png',
+                                              fit: BoxFit.cover);
+                                        },
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: IconButton(
-                                        onPressed: () => _deletePhoto(index),
-                                        icon: Icon(Icons.delete,
-                                            size: 30, color: Colors.red)),
-                                  )
-                                ],
-                              );
-                            }),
-                      ),
-              ],
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: IconButton(
+                                          onPressed: () => _deletePhoto(index),
+                                          icon: Icon(Icons.delete,
+                                              size: 30, color: Colors.red)),
+                                    )
+                                  ],
+                                );
+                              }),
+                        ),
+                ],
+              ),
             ),
           ),
         ),
@@ -346,6 +348,12 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
         }
       });
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _purchaseController.dispose();
   }
 
 /*void deleteProcess(int id) {

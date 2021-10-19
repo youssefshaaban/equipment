@@ -41,6 +41,9 @@ abstract class ApiClient{
   @GET("${Apis.deleteImageRow}/{id}")
   Future<BaseResponse> deleteImage(@Path("id") int id);
 
+  @POST("${Apis.updateUsersData}")
+  Future<BaseResponse> updateUserData(@Body() User user);
+
   @GET(Apis.updateCustodyStatus)
   Future<ResponseUpdateCustodyData> updateStatusCustody(@Query("Status") String cStatus,
       @Query("CId") String cUser);

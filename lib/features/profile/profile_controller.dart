@@ -1,5 +1,7 @@
 import 'package:equipment/features/profile/profile_state.dart';
 import 'package:equipment/repositery/app_repositery.dart';
+import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
+import 'package:equipment/repositery/retrofit/model/user/login_data.dart';
 import 'package:equipment/repositery/retrofit/model/user/login_request.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +27,10 @@ class ProfileController  extends GetxController {
     } catch(e){
       _loginStateStream.value=DataFailure(error: e.toString());
     }
+  }
+
+  Future<BaseResponse> updateUser(User user)  {
+     return  appRepository.getApiClient().updateUserData(user);
   }
 
   @override

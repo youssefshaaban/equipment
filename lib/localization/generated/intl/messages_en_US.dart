@@ -98,5 +98,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileArUserNameValidationPassword":MessageLookupByLibrary.simpleMessage("enter a valid value"),
     "profileArUserNameValidationPassword1":MessageLookupByLibrary.simpleMessage("password can't be less than 5 chars"),
     "profileSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
+    "saveSuccess":MessageLookupByLibrary.simpleMessage("Save success"),
   };
 }

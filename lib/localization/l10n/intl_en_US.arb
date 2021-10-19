@@ -88,6 +88,6 @@
   "profileArUserNameValidationPassword":"enter a valid value",
   "profileArUserNameValidationPassword1":"password can't be less than 5 chars",
   "profileSaveButton":"Save",
-
+  "saveSuccess":"Save success"
 
 }

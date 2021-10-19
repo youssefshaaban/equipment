@@ -310,7 +310,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
                       }
                     });
                   },
-                );
+                custodyStatus: data.custodyStatus!,);
               }));
     } else {
       return Container();
