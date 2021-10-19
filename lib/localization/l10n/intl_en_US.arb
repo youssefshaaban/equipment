@@ -78,5 +78,16 @@
   "editAddPhotoButton":"Add Photo",
   "editSaveButton":"Save",
   "editCancelButton":"Cancel",
+  "profileEnUserNameEditText":"user name(English)",
+  "profileEnUserNameValidationEditText":"enter a valid value",
+  "profileEnUserNameValidationEditText1":"user name can't be less than 5 chars",
+  "profileArUserNameEditText":"user name(Arabic)",
+  "profileArUserNameValidationEditText":"enter a valid value",
+  "profileArUserNameValidationEditText1":"user name can't be less than 5 chars",
+  "profilePassword":"password",
+  "profileArUserNameValidationPassword":"enter a valid value",
+  "profileArUserNameValidationPassword1":"password can't be less than 5 chars",
+  "profileSaveButton":"Save",
+
 
 }

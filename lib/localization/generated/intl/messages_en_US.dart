@@ -88,5 +88,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "editAddPhotoButton":MessageLookupByLibrary.simpleMessage("Add Photo"),
     "editSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
     "editCancelButton":MessageLookupByLibrary.simpleMessage("Cancel"),
+    "profileEnUserNameEditText":MessageLookupByLibrary.simpleMessage("user name(English)"),
+    "profileEnUserNameValidationEditText":MessageLookupByLibrary.simpleMessage("enter a valid value"),
+    "profileEnUserNameValidationEditText1":MessageLookupByLibrary.simpleMessage("user name can't be less than 5 chars"),
+    "profileArUserNameEditText":MessageLookupByLibrary.simpleMessage("user name(Arabic)"),
+    "profileArUserNameValidationEditText":MessageLookupByLibrary.simpleMessage("enter a valid value"),
+    "profileArUserNameValidationEditText1":MessageLookupByLibrary.simpleMessage("user name can't be less than 5 chars"),
+    "profilePassword":MessageLookupByLibrary.simpleMessage("password"),
+    "profileArUserNameValidationPassword":MessageLookupByLibrary.simpleMessage("enter a valid value"),
+    "profileArUserNameValidationPassword1":MessageLookupByLibrary.simpleMessage("password can't be less than 5 chars"),
+    "profileSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
   };
 }

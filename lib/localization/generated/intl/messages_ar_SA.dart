@@ -91,5 +91,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "editAddPhotoButton":MessageLookupByLibrary.simpleMessage("إضافة صورة"),
     "editSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
     "editCancelButton":MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "profileEnUserNameEditText":MessageLookupByLibrary.simpleMessage("إسم المستحخدم(الإنجليزيه)"),
+    "profileEnUserNameValidationEditText":MessageLookupByLibrary.simpleMessage("أدخل قيمه"),
+    "profileEnUserNameValidationEditText1":MessageLookupByLibrary.simpleMessage("لايمكن أن يكون إسم المستخدم أقل من خمس حروف"),
+    "profileArUserNameEditText":MessageLookupByLibrary.simpleMessage("إسم المستحخدم(العربيه)"),
+    "profileArUserNameValidationEditText":MessageLookupByLibrary.simpleMessage("أدخل قيمه"),
+    "profileArUserNameValidationEditText1":MessageLookupByLibrary.simpleMessage("لايمكن أن يكون إسم المستخدم أقل من خمس حروف"),
+    "profilePassword":MessageLookupByLibrary.simpleMessage("الباسوورد"),
+    "profileArUserNameValidationPassword":MessageLookupByLibrary.simpleMessage("أدخل قيمه"),
+    "profileArUserNameValidationPassword1":MessageLookupByLibrary.simpleMessage("لايمكن أن يكون إسم المستخدم أقل من خمس حروف"),
+    "profileSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
   };
 }

@@ -777,6 +777,96 @@ class S {
     );
   }
 
+  String get profileEnUserNameEditText {
+    return Intl.message(
+      'user name(English)',
+      name: 'profileEnUserNameEditText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileEnUserNameValidationEditText {
+    return Intl.message(
+      'enter a valid value',
+      name: 'profileEnUserNameValidationEditText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileEnUserNameValidationEditText1 {
+    return Intl.message(
+      "user name can't be less than 5 chars",
+      name: 'profileEnUserNameValidationEditText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileArUserNameEditText {
+    return Intl.message(
+      'user name(Arabic)',
+      name: 'profileArUserNameEditText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileArUserNameValidationEditText {
+    return Intl.message(
+      'enter a valid value',
+      name: 'profileArUserNameValidationEditText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileArUserNameValidationEditText1 {
+    return Intl.message(
+      "user name can't be less than 5 chars",
+      name: 'profileArUserNameValidationEditText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profilePassword {
+    return Intl.message(
+      'password',
+      name: 'profilePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileArUserNameValidationPassword {
+    return Intl.message(
+      'enter a valid value',
+      name: 'profileArUserNameValidationPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileSaveButton {
+    return Intl.message(
+      'Save',
+      name: 'profileSaveButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get profileArUserNameValidationPassword1 {
+    return Intl.message(
+      "password can't be less than 5 chars",
+      name: 'profileArUserNameValidationPassword1',
+      desc: '',
+      args: [],
+    );
+  }
+
 }
 
 
