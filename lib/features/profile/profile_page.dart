@@ -114,6 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(height:10),
                     TextFormField(
                       keyboardType: TextInputType.number,
+                      obscureText: true,
                       controller: password,
                       validator: (value){
                         if(value!.isEmpty){
