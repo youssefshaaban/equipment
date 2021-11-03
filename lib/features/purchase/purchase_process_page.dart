@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils.dart';
 
-
 class PurchaseProcessPage extends StatefulWidget {
   const PurchaseProcessPage({Key? key}) : super(key: key);
   static const tag = '/ppt';
@@ -29,6 +28,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   TextEditingController invoiceNumberController = TextEditingController();
   TextEditingController costController = TextEditingController();
   TextEditingController descController = TextEditingController();
+  TextEditingController sellerController = TextEditingController();
   final PurchaseController _purchaseController = Get.put(PurchaseController());
   final _formKey = GlobalKey<FormState>();
 
@@ -37,7 +37,6 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
 
   List<UploadImageData> imageData = [];
   late int custodyId;
-
 
   var _initDataLoded = false;
 
@@ -69,65 +68,64 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
               padding: const EdgeInsets.all(16),
               child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.camera_alt, size: 40),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              getImage(ImageSource.camera);
-                            },
-                            child: Container(
-                              height: 40,
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * .3,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(40)
-                              ),
-                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
-                                style: TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.white),)),
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.photo, size: 40),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              getImage(ImageSource.gallery);
-                            },
-                            child: Container(
-                              height: 40,
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * .3,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(40)
-                              ),
-                              child: Center(child: Text(S.of(context)!.openCamOrGallery,
-                                style: TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.white),)),
-                            ),
-                          )
-                        ],
-                      ),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.camera_alt, size: 40),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          getImage(ImageSource.camera);
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * .3,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(40)),
+                          child: Center(
+                              child: Text(
+                            S.of(context)!.openCamOrGallery,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          )),
+                        ),
+                      )
                     ],
-                  )),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.photo, size: 40),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          getImage(ImageSource.gallery);
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * .3,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(40)),
+                          child: Center(
+                              child: Text(
+                            S.of(context)!.openCamOrGallery,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          )),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              )),
             ),
           );
         });
@@ -145,47 +143,46 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
               padding: const EdgeInsets.all(16),
               child: Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Add To Process?",style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold,)),
-                      const SizedBox(height:10),
-                      Card(
-                          child:Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Text(invoiceNumberController.text),
-                          )
-                      ),
-                      const SizedBox(height:10),
-                      Card(
-                          child:Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Text(costController.text),
-                          )
-                      ),
-                      const SizedBox(height:10),
-                      Card(
-                        child:Text(descController.text),
-                      ),
-                      const SizedBox(height:10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-
-                          ElevatedButton(
-                              onPressed: ()=>Navigator.of(context).pop(),
-                              child: Text('Cancel')
-                          ),
-                          ElevatedButton(
-                              onPressed: (){
-                                if(_formKey.currentState!.validate()){
-                                  addPurchase(context);
-                                }
-                              },
-                              child: Text('Add')
-                          ),
-                        ],
-                      )
-                      /*Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Add To Process?",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  const SizedBox(height: 10),
+                  Card(
+                      child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(invoiceNumberController.text),
+                  )),
+                  const SizedBox(height: 10),
+                  Card(
+                      child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(costController.text),
+                  )),
+                  const SizedBox(height: 10),
+                  Card(
+                    child: Text(descController.text),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Cancel')),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              addPurchase(context);
+                            }
+                          },
+                          child: Text('Add')),
+                    ],
+                  )
+                  /*Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -241,26 +238,22 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                           )
                         ],
                       ),*/
-                    ],
-                  )),
+                ],
+              )),
             ),
           );
         });
   }
 
   Future getImage(ImageSource source) async {
-
     final imagePicker = ImagePicker();
-    await imagePicker.pickImage(source: source)
-        .then((value) => cropImage(imageFile: File(value!.path))
-        .then((value) => compressFile(value!)
-        .then((value)  {
-         var fileUnit8 = value.readAsBytesSync();
-          addImage(base64Encode(fileUnit8));
-        })));
+    await imagePicker.pickImage(source: source).then((value) =>
+        cropImage(imageFile: File(value!.path))
+            .then((value) => compressFile(value!).then((value) {
+                  var fileUnit8 = value.readAsBytesSync();
+                  addImage(base64Encode(fileUnit8));
+                })));
   }
-
-
 
   @override
   void initState() {
@@ -284,7 +277,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
         title: Text(S.of(context)!.purchaseProcessAppBarTitle),
         actions: [
           TextButton(
-              onPressed: (){
+              onPressed: () {
                 //showProcessSheet(context);
                 FocusScope.of(context).unfocus();
                 addPurchase(context);
@@ -321,62 +314,65 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                     ),
                   ),*/
                   TextFormField(
-                    keyboardType: TextInputType.number,
-                    controller: costController,
-                    validator: (value){
-                      if(value!.isEmpty){
+                    keyboardType: TextInputType.text,
+                    controller: sellerController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
                         return S.of(context)!.field_required;
-                      }
-                      else
+                      } else
                         return null;
-                  },
-                    decoration:InputDecoration(
-                      hintText: "${S.of(context)!.invoiceNumber}",
-                      border:OutlineInputBorder(
-                       borderSide: BorderSide(color: Colors.black)
-                      )
-                    ),
+                    },
+                    decoration: InputDecoration(
+                        hintText: "${S.of(context)!.shopName}",
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
                   ),
-                  const SizedBox(height:5),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: invoiceNumberController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return S.of(context)!.field_required;
+                      } else
+                        return null;
+                    },
+                    decoration: InputDecoration(
+                        hintText: "${S.of(context)!.invoiceNumber}",
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                  ),
+                  const SizedBox(height: 5),
                   TextFormField(
                       keyboardType: TextInputType.number,
-                      controller: invoiceNumberController,
-                      validator: (value){
-                        if(value!.isEmpty){
+                      controller: costController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
                           return S.of(context)!.field_required;
-                        }
-                        else
+                        } else
                           return null;
                       },
                       decoration: InputDecoration(
                           hintText: S.of(context)!.textCost,
-                          border:OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)
-                          )
-                      )
-                  ),
-                  const SizedBox(height:5),
-
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)))),
+                  const SizedBox(height: 5),
                   TextFormField(
-                        validator: (value){
-                          if(value!.isEmpty){
-                            return S.of(context)!.field_required;
-                          }
-                          else if(value.length<5) {
-                            return "value can't be less than 5 chars";
-                          }
-                        },
-                        controller: descController,
-                        decoration: InputDecoration(
-                            hintText: S.of(context)!.itemPurchaseDescription,
-                            border:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black)
-                            )
-                        ),
-                      maxLines: 5,
-                      minLines: 3,
-                    ),
-                /*  customEditText1(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return S.of(context)!.field_required;
+                      } else if (value.length < 5) {
+                        return "value can't be less than 5 chars";
+                      }
+                    },
+                    controller: descController,
+                    decoration: InputDecoration(
+                        hintText: S.of(context)!.itemPurchaseDescription,
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                    maxLines: 5,
+                    minLines: 3,
+                  ),
+                  /*  customEditText1(
                     keyboardType: TextInputType.number,
                     //hint: 'Cost',
                     hint: S.of(context)!.purchaseProcessCostHint,
@@ -444,20 +440,19 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
                                       height: 130,
                                       width: 130,
                                       margin: EdgeInsets.all(5),
-                                      child:
-                                       FadeInImage(
-                                          image: NetworkImage(
-                                              imageData[index].fullPath),
-                                          placeholder: AssetImage(
-                                              "assets/images/bg_no_image.png"),
-                                          imageErrorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                                'assets/images/bg_no_image.png',
-                                                fit: BoxFit.cover);
-                                          },
-                                          fit: BoxFit.fill,
-                                        ),
+                                      child: FadeInImage(
+                                        image: NetworkImage(
+                                            imageData[index].fullPath),
+                                        placeholder: AssetImage(
+                                            "assets/images/bg_no_image.png"),
+                                        imageErrorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.asset(
+                                              'assets/images/bg_no_image.png',
+                                              fit: BoxFit.cover);
+                                        },
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                     Align(
                                       alignment: Alignment.bottomCenter,
@@ -486,7 +481,7 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
   }
 
   void addPurchase(BuildContext context) async {
-    if(_formKey.currentState!.validate()){
+    if (_formKey.currentState!.validate()) {
       progressDialogue(context);
       final prefs = await SharedPreferences.getInstance();
       var user_id = prefs.getString("user_id");
@@ -496,12 +491,13 @@ class _PurchaseProcessPageState extends State<PurchaseProcessPage> {
           custodyId: custodyId,
           invoiceNumber: invoiceNumberController.text,
           driverUserId: int.parse(user_id!));
+      custodyOper.sellerName = sellerController.text;
       _purchaseController
           .submitOperationData(
-          custodyOper: custodyOper,
-          imageData: imageData
-              .map((e) => ImagesData(imageData: e.fullPath))
-              .toList())
+              custodyOper: custodyOper,
+              imageData: imageData
+                  .map((e) => ImagesData(imageData: e.fullPath))
+                  .toList())
           .then((value) async {
         Navigator.of(context).pop();
         if (value is PurchaseSuccess) {

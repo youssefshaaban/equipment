@@ -221,7 +221,7 @@ class S {
 
   String get itemCustodyPageSpent {
     return Intl.message(
-      'Spent:',
+      'Spent',
       name: 'itemCustodyPageSpent',
       desc: '',
       args: [],
@@ -495,6 +495,14 @@ class S {
     return Intl.message(
       'Remain Amount',
       name: 'custodyDetailsRemainAmount',
+      desc: '',
+      args: [],
+    );
+  }
+  String get shopName {
+    return Intl.message(
+      'Seller name',
+      name: 'shopName',
       desc: '',
       args: [],
     );

@@ -1,9 +1,6 @@
 import 'package:equipment/features/detail_custody/custody_status_state.dart';
-import 'package:equipment/features/home/custody_state.dart';
 import 'package:equipment/repositery/app_repositery.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'custody_operation_statr.dart';
 
 
@@ -25,11 +22,11 @@ class CustodyDetailController  extends GetxController {
     super.onInit();
     print("################contoller####################");
   }
-  Future<CustodyStatusState> updateCustodyByStatus(int status,int CId) async {
+  Future<CustodyStatusState> updateCustodyByStatus(int status,int cId) async {
     _custodyStateStream.value = StatusLoading();
     try{
       // var user_id=prefs.getString("user_id");
-      var data=await appRepository.getApiClient().updateStatusCustody("$status",CId.toString());
+      var data=await appRepository.getApiClient().updateStatusCustody("$status",cId.toString());
       if(data.success==true){
         return StatusSuccess(custodyId:data.updatedCustodyId!=null ?data.updatedCustodyId! :0);
       }else{
@@ -61,13 +58,13 @@ class CustodyDetailController  extends GetxController {
     var data=await appRepository.getApiClient().updateStatusCustody(cStatus, cUser);
   }*/
 
-  void getCustodyOperation(int CId) async {
+  void getCustodyOperation(int cId) async {
     _custodyOperationStream.value = OperationLoading();
     try{
       // var user_id=prefs.getString("user_id");
-      var data=await appRepository.getApiClient().getCustodyOperation(CId);
+      var data=await appRepository.getApiClient().getCustodyOperation(cId);
       if(data.success==true){
-        _custodyOperationStream.value= CustodyOperationsSuccess(CustodyOpers:data.cOpersData);
+        _custodyOperationStream.value= CustodyOperationsSuccess(custodyOpers:data.cOpersData);
       }else{
         _custodyOperationStream.value= CustodyOperationFailure(error: data.message!=null ?data.message!:"Some thing wrong");
       }

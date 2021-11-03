@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "equipmentPageRejected": MessageLookupByLibrary.simpleMessage("العهد تم رفضها"),
     "itemCustodyPageReferenceNum": MessageLookupByLibrary.simpleMessage("رقم المرجعى : "),
     "itemCustodyPageTotal": MessageLookupByLibrary.simpleMessage("المجموع الكلي :"),
-    "itemCustodyPageSpent": MessageLookupByLibrary.simpleMessage("ماتم إنفاقه :"),
+    "itemCustodyPageSpent": MessageLookupByLibrary.simpleMessage("ماتم إنفاقه "),
     "equipmentPageId": MessageLookupByLibrary.simpleMessage("dsds"),
     "equipmentPageDate": MessageLookupByLibrary.simpleMessage("تاريخ :"),
     "equipmentPageRemainAmount": MessageLookupByLibrary.simpleMessage("555"),
@@ -102,5 +102,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileArUserNameValidationPassword1":MessageLookupByLibrary.simpleMessage("لايمكن أن يكون إسم المستخدم أقل من خمس حروف"),
     "profileSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
     "saveSuccess":MessageLookupByLibrary.simpleMessage("تم الحفظ بنجاح"),
+    "shopName":MessageLookupByLibrary.simpleMessage("إسم المحل"),
   };
 }

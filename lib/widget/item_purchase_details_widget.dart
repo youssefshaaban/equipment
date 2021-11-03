@@ -14,7 +14,13 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
   final Function clickDelete;
   final Function clickEdit;
   final int custodyStatus;
-  ItemPurchaseDetailsWidget({Key? key, required this.details,required this.clickDelete,required this.clickEdit,required this.custodyStatus})
+
+  ItemPurchaseDetailsWidget(
+      {Key? key,
+      required this.details,
+      required this.clickDelete,
+      required this.clickEdit,
+      required this.custodyStatus})
       : super(key: key);
 
   @override
@@ -28,6 +34,17 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Column(
           children: [
+            Row(
+              children: [
+                Text(
+                  "${S.of(context)!.shopName} : ",
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                Text(
+                  details.sellerName == null ? "" : details.sellerName!,
+                )
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -44,23 +61,29 @@ class ItemPurchaseDetailsWidget extends StatelessWidget {
                             : details.invoiceNumber.toString(),
                       )),
                 ),
-                custodyStatus==1?
-                IconButton(
-                    onPressed: () {
-                      //Navigator.of(context).pushNamed(EditCustodyDetails( amount: details.operAmount.toString(), description: details.operDetails, images: details.images))
-                      //Navigator.of(context).pushNamed(EditCustodyDetails.routeName,arguments: {'details':details});
-                      clickEdit(details);
-                    },
-                    icon: Icon(Icons.edit,color: Colors.cyan,)):Container(),
-                custodyStatus==1?IconButton(
-                    onPressed: () {
-                      //   showDeleteAlert(context,list,index);
-                      clickDelete(details);
-                    },
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    )):Container(),
+                custodyStatus == 1
+                    ? IconButton(
+                        onPressed: () {
+                          //Navigator.of(context).pushNamed(EditCustodyDetails( amount: details.operAmount.toString(), description: details.operDetails, images: details.images))
+                          //Navigator.of(context).pushNamed(EditCustodyDetails.routeName,arguments: {'details':details});
+                          clickEdit(details);
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          color: Colors.cyan,
+                        ))
+                    : Container(),
+                custodyStatus == 1
+                    ? IconButton(
+                        onPressed: () {
+                          //   showDeleteAlert(context,list,index);
+                          clickDelete(details);
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ))
+                    : Container(),
               ],
             ),
             const SizedBox(height: 5),

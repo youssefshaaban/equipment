@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
-import 'package:equipment/repositery/retrofit/model/user/login_data.dart';
 
 class CustodyOperationsState extends Equatable {
   @override
@@ -11,10 +9,10 @@ class CustodyOperationsState extends Equatable {
 class OperationLoading extends CustodyOperationsState {}
 
 class CustodyOperationsSuccess extends CustodyOperationsState {
-  final List<CustodyOper> CustodyOpers;
-  CustodyOperationsSuccess({required this.CustodyOpers});
+  final List<CustodyOper> custodyOpers;
+  CustodyOperationsSuccess({required this.custodyOpers});
   @override
-  List<Object> get props => [CustodyOpers];
+  List<Object> get props => [custodyOpers];
 }
 
 class CustodyOperationFailure extends CustodyOperationsState {

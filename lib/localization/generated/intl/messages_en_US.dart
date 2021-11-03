@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "equipmentPageRejected": MessageLookupByLibrary.simpleMessage("Rejected custody"),
     "itemCustodyPageReferenceNum": MessageLookupByLibrary.simpleMessage("Reference Num : "),
     "itemCustodyPageTotal": MessageLookupByLibrary.simpleMessage("Total : "),
-    "itemCustodyPageSpent": MessageLookupByLibrary.simpleMessage("Spent : "),
+    "itemCustodyPageSpent": MessageLookupByLibrary.simpleMessage("Spent"),
     "equipmentPageId": MessageLookupByLibrary.simpleMessage("dsds"),
     "equipmentPageDate": MessageLookupByLibrary.simpleMessage("Date : "),
     "equipmentPageRemainAmount": MessageLookupByLibrary.simpleMessage("555"),
@@ -99,5 +99,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileArUserNameValidationPassword1":MessageLookupByLibrary.simpleMessage("password can't be less than 5 chars"),
     "profileSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
     "saveSuccess":MessageLookupByLibrary.simpleMessage("Save success"),
+    "shopName":MessageLookupByLibrary.simpleMessage("Shop name"),
   };
 }

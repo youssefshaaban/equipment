@@ -25,7 +25,8 @@ class ItemCustody extends StatelessWidget {
             buildRow(context, S.of(context)!.custodyReceivingNumber, custody.receivingNumber==null?"":custody.receivingNumber!),
             buildRow(context, S.of(context)!.custodyDetailsDate, custody.custodyDate.toString().split('T')[0]),
             buildRow(context, "${S.of(context)!.editCostTF} : ","${custody.totalAmount.toString()} ${S.of(context)!.currency}" ),
-            buildRow(context, "${S.of(context)!.custodyDetailsRemainAmount} : ","${ custody.totalSpent.toString()} ${S.of(context)!.currency}"),
+            buildRow(context, "${S.of(context)!.itemCustodyPageSpent} : "," ${ custody.totalSpent.toString()} ${S.of(context)!.currency} "),
+            buildRow(context, "${S.of(context)!.custodyDetailsRemainAmount} : "," ${ custody.totalAmount - custody.totalSpent } ${S.of(context)!.currency} "),
           ],
         ),
       ),
@@ -38,14 +39,17 @@ class ItemCustody extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            header,
-            style: TextStyle(color: Colors.blueGrey),
+          Padding(
+            padding: EdgeInsets.only(left: 5,right: 5),
+            child: Text(
+              header,
+              style: TextStyle(color: Colors.blueGrey),
+            ),
           ),
           Expanded(
             child: Container(
                 margin:
-                EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                EdgeInsets.symmetric(vertical: 0, horizontal: 5),
                 child: Text(
                   value,
                   style: TextStyle(color: Colors.blueGrey),

@@ -5,10 +5,7 @@ import 'package:equipment/features/detail_custody/custody_controller_status.dart
 import 'package:equipment/features/purchase/purchase_controller.dart';
 import 'package:equipment/features/purchase/purchase_state.dart';
 import 'package:equipment/localization/generated/l10n.dart';
-
-import 'package:equipment/repositery/retrofit/model/custody/custody_data.dart';
 import 'package:equipment/repositery/retrofit/model/operation_purchase/custody_operation_.dart';
-import 'package:equipment/repositery/retrofit/model/operation_purchase/upload_image_data.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,8 +28,8 @@ class EditOperationDetails extends StatefulWidget {
 class _EditOperationDetailsState extends State<EditOperationDetails> {
   TextEditingController costController = TextEditingController();
   TextEditingController invoiceController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
   TextEditingController descController = TextEditingController();
+  TextEditingController sellerController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final PurchaseController _purchaseController = Get.put(PurchaseController());
 
@@ -69,7 +66,7 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                               borderRadius: BorderRadius.circular(40)),
                           child: Center(
                               child: Text(
-                            "open",
+                              S.of(context)!.openCamOrGallery,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -99,7 +96,7 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                               borderRadius: BorderRadius.circular(40)),
                           child: Center(
                               child: Text(
-                            "open",
+                            S.of(context)!.openCamOrGallery,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -152,6 +149,9 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
         widget.details.operAmount == 0 ? "" : "${widget.details.operAmount}";
     descController.text =
         widget.details.operDetails == null ? "" : widget.details.operDetails!;
+    sellerController.text =
+    widget.details.sellerName == null ? "" : widget.details.sellerName!;
+
     super.initState();
   }
 
@@ -183,6 +183,21 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                 children: [
                   const SizedBox(height: 10),
                   TextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: sellerController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return S.of(context)!.field_required;
+                      } else
+                        return null;
+                    },
+                    decoration: InputDecoration(
+                        labelText: S.of(context)!.shopName,
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
                     keyboardType: TextInputType.number,
                     controller: invoiceController,
                     validator: (value) {
@@ -192,7 +207,7 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                         return null;
                     },
                     decoration: InputDecoration(
-                        hintText: S.of(context)!.invoiceNumber,
+                        labelText: S.of(context)!.invoiceNumber,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black))),
                   ),
@@ -200,8 +215,6 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                   TextFormField(
                       keyboardType: TextInputType.number,
                       controller: costController,
-
-                      //initialValue: widget.details.operAmount.toString(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return S.of(context)!.editAmountValueValidation;
@@ -209,7 +222,7 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                           return null;
                       },
                       decoration: InputDecoration(
-                          hintText: S.of(context)!.editAmountTF,
+                          labelText: S.of(context)!.editAmountTF,
                           border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)))),
                   const SizedBox(height: 10),
@@ -225,7 +238,7 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
                     controller: descController,
                     //initialValue: "descr",
                     decoration: InputDecoration(
-                        hintText: S.of(context)!.editDescTF,
+                        labelText: S.of(context)!.editDescTF,
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black))),
                     maxLines: 5,
@@ -334,6 +347,7 @@ class _EditOperationDetailsState extends State<EditOperationDetails> {
           driverUserId: int.parse(user_id!));
       custodyOper.operStatus = widget.details.operStatus;
       custodyOper.operId = widget.details.operId;
+      custodyOper.sellerName=sellerController.text;
       _purchaseController
           .submitOperationData(
               custodyOper: custodyOper,

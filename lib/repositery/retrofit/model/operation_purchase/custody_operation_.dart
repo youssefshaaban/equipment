@@ -13,6 +13,8 @@ class CustodyOper {
   String? operDetails;
   @JsonKey(name: "InvoiceNumber")
   String? invoiceNumber;
+  @JsonKey(name: "SellerName")
+  String? sellerName;
   @JsonKey(name: "DriverUserId")
   int driverUserId;
   @JsonKey(name: "images")

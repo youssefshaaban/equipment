@@ -16,7 +16,7 @@
   "equipmentPageRejected": "رفض",
   "itemCustodyPageReferenceNum": "رقم المرجع:",
   "itemCustodyPageTotal": "المجموع الكلي:",
-  "itemCustodyPageSpent": "ماتم إنفاقه:",
+  "itemCustodyPageSpent": "ماتم إنفاقه",
   "equipmentPageId": "دددد",
   "equipmentPageDate": "تاريخ : ",
   "equipmentPageRemainAmount": "555",
@@ -83,10 +83,12 @@
   "profileEnUserNameValidationEditText1": "لايمكن أن يكون إسم المستخدم أقل من خمس حروف",
   "profileArUserNameEditText": "إسم المستحخدم(العربيه)",
   "profileArUserNameValidationEditText": "أدخل قيمه",
+  "profileArUserNameValidationEditText": "أدخل قيمه",
   "profileArUserNameValidationEditText1": "لايمكن أن يكون إسم المستخدم أقل من خمس حروف",
   "profilePassword": "الباسوورد",
   "profileArUserNameValidationPassword": "أدخل قيم",
   "profileArUserNameValidationPassword1": "لايمكن أن يكون إسم المستخدم أقل من خمس حروف",
   "profileSaveButton": "حفظ",
-  "saveSuccess": "تم الحفظ بنجاح"
+  "saveSuccess": "تم الحفظ بنجاح",
+  "shopName":"إسم المحل"
 }

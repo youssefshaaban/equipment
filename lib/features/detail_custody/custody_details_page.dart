@@ -31,7 +31,6 @@ class _CustodyDetailsState extends State<CustodyDetails> {
   late CustodyDetailController _controller;
   TextEditingController amount = new TextEditingController();
   TextEditingController details = new TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   List<UploadImageData> imageData = [];
   final PurchaseController _purchaseController = Get.put(PurchaseController());
 
@@ -158,7 +157,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             ),
             Row(
               children: [
-                Text("${S.of(context)!.custodyDetailsRemainAmount} : ",
+                Text("${S.of(context)!.itemCustodyPageSpent} : ",
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 17,
@@ -286,7 +285,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
       return Container();
     } else if (_controller.stateOperation is CustodyOperationsSuccess) {
       var list =
-          (_controller.stateOperation as CustodyOperationsSuccess).CustodyOpers;
+          (_controller.stateOperation as CustodyOperationsSuccess).custodyOpers;
       return Container(
           height: MediaQuery.of(context).size.height * .59,
           decoration: BoxDecoration(

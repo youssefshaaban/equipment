@@ -16,7 +16,7 @@
   "equipmentPageRejected":"Rejected",
   "itemCustodyPageReferenceNum":"Reference Num:",
   "itemCustodyPageTotal":"Total:",
-  "itemCustodyPageSpent":"Spent:",
+  "itemCustodyPageSpent":"Spent",
   "equipmentPageId":"dsds",
   "equipmentPageDate":"Date : ",
   "equipmentPageRemainAmount":"555",
@@ -88,6 +88,7 @@
   "profileArUserNameValidationPassword":"enter a valid value",
   "profileArUserNameValidationPassword1":"password can't be less than 5 chars",
   "profileSaveButton":"Save",
-  "saveSuccess":"Save success"
+  "saveSuccess":"Save success",
+  "shopName":"Shop name"
 
 }
