@@ -137,7 +137,7 @@ class _CustodyDetailsState extends State<CustodyDetails> {
             ),
             Row(
               children: [
-                Text(S.of(context)!.textCost,
+                Text(S.of(context)!.itemCustodyCost,
                     style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 17,

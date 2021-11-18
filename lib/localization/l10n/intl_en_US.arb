@@ -15,6 +15,7 @@
   "equipmentPageFinished":"Finished",
   "equipmentPageRejected":"Rejected",
   "itemCustodyPageReferenceNum":"Reference Num:",
+  "itemCustodyCost": "Cost:",
   "itemCustodyPageTotal":"Total:",
   "itemCustodyPageSpent":"Spent",
   "equipmentPageId":"dsds",

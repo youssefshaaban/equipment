@@ -884,6 +884,15 @@ class S {
     );
   }
 
+  String get itemCustodyCost {
+    return Intl.message(
+      "Cost",
+      name: 'itemCustodyCost',
+      desc: '',
+      args: [],
+    );
+  }
+
 }
 
 
