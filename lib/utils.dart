@@ -8,7 +8,7 @@ import 'package:image_cropper/image_cropper.dart';
 
 Future<File> compressFile(File file) async{
   File compressedFile = await FlutterNativeImage.compressImage(file.path,
-    quality: 50,);
+    quality: 60,);
   return compressedFile;
 }
 
