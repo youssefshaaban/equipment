@@ -104,5 +104,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileSaveButton":MessageLookupByLibrary.simpleMessage("حفظ"),
     "saveSuccess":MessageLookupByLibrary.simpleMessage("تم الحفظ بنجاح"),
     "shopName":MessageLookupByLibrary.simpleMessage("إسم المحل"),
+    "versionNumber":MessageLookupByLibrary.simpleMessage("رقم النسخه"),
   };
 }

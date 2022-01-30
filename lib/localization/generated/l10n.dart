@@ -893,6 +893,15 @@ class S {
     );
   }
 
+  String get versionNumber {
+    return Intl.message(
+      "Version Number",
+      name: 'versionNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
 }
 
 

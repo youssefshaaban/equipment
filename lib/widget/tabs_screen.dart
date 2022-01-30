@@ -6,6 +6,7 @@ import 'package:equipment/localization/languages.dart';
 import 'package:equipment/features/home/custody_page.dart';
 import 'package:equipment/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../main.dart';
 class TabsScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class _TabsScreenState extends State<TabsScreen> {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
   }
+
 
 
 

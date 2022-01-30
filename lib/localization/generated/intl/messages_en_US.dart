@@ -101,5 +101,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileSaveButton":MessageLookupByLibrary.simpleMessage("Save"),
     "saveSuccess":MessageLookupByLibrary.simpleMessage("Save success"),
     "shopName":MessageLookupByLibrary.simpleMessage("Shop name"),
+    "versionNumber":MessageLookupByLibrary.simpleMessage("Version Number"),
   };
 }

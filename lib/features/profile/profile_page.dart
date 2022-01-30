@@ -5,6 +5,7 @@ import 'package:equipment/repositery/retrofit/model/user/login_data.dart';
 import 'package:equipment/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -20,11 +21,34 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController password = TextEditingController();
   late User user;
   final _formKey = GlobalKey<FormState>();
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+  );
+
+
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
     _controller.getProfile();
     return Scaffold(
+
       body: Center(child: Obx(() {
         if (_controller.state is DataLoading) {
           return CircularProgressIndicator();
@@ -48,6 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Text('${S.of(context)!.versionNumber}: ${_packageInfo.version}'),
           Container(
             width: 90,
             height: 90,
